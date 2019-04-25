@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Mizuwo Drink Water</string>
+    <string name="main_title">TODAY</string>
+    <string name="main_drank">Intake</string>
+    <string name="main_total">0</string>
+    <string name="main_unit">ml</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+</resources>
