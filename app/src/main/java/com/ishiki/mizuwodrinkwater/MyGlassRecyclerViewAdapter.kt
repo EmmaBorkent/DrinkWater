@@ -8,7 +8,7 @@ import android.widget.TextView
 
 
 import com.ishiki.mizuwodrinkwater.GlassFragment.OnListFragmentInteractionListener
-import com.ishiki.mizuwodrinkwater.dummy.DummyContent.DummyItem
+import com.ishiki.mizuwodrinkwater.dummy.DailyWater.DummyItem
 
 import kotlinx.android.synthetic.main.fragment_glass.view.*
 

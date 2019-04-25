@@ -10,8 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import com.ishiki.mizuwodrinkwater.dummy.DummyContent
-import com.ishiki.mizuwodrinkwater.dummy.DummyContent.DummyItem
+import com.ishiki.mizuwodrinkwater.dummy.DailyWater
+import com.ishiki.mizuwodrinkwater.dummy.DailyWater.DummyItem
 
 /**
  * A fragment representing a list of Items.
@@ -46,7 +46,7 @@ class GlassFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyGlassRecyclerViewAdapter(DummyContent.ITEMS, listener)
+                adapter = MyGlassRecyclerViewAdapter(DailyWater.ITEMS, listener)
             }
         }
         return view

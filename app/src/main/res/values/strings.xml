@@ -4,6 +4,8 @@
     <string name="main_drank">Intake</string>
     <string name="main_total">0</string>
     <string name="main_unit">ml</string>
+    <string name="main_add">+</string>
+    <string name="basic_amount">250 ml</string>
 
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
