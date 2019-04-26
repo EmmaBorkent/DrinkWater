@@ -6,6 +6,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    val drinksToday = mutableListOf<String>()
+
     private var dailyTotal = 0
     private val waterAmount = 250
 
@@ -15,15 +17,13 @@ class MainActivity : AppCompatActivity() {
 
         addButton.setOnClickListener {
             dailyTotalText.text = addWater().toString()
+            drinksToday.add(0, "250 ml")
+            println(drinksToday)
         }
     }
 
     fun addWater(): Int {
         dailyTotal += waterAmount
         return dailyTotal
-    }
-
-    fun addWaterToList() {
-        
     }
 }
