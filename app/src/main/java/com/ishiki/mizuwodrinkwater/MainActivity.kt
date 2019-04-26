@@ -22,4 +22,8 @@ class MainActivity : AppCompatActivity() {
         dailyTotal += waterAmount
         return dailyTotal
     }
+
+    fun addWaterToList() {
+        
+    }
 }

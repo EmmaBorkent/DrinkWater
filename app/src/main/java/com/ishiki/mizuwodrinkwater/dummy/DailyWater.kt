@@ -11,7 +11,7 @@ import java.util.HashMap
  */
 object DailyWater {
 
-    val GLASSES: MutableList<>
+    val todays_intake: MutableList<String> = ArrayList()
 
     /**
      * An array of sample (dummy) items.
