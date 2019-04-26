@@ -21,7 +21,10 @@ class MainActivity : AppCompatActivity() {
         addButton.setOnClickListener {
             dailyTotalText.text = addWater().toString()
             drinksToday.add(0, "250 ml")
-            println(drinksToday)
+        }
+
+        undoButton.setOnClickListener {
+            dailyTotalText.text = removeWater().toString()
         }
 
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drinksToday)
@@ -30,6 +33,11 @@ class MainActivity : AppCompatActivity() {
 
     fun addWater(): Int {
         dailyTotal += waterAmount
+        return dailyTotal
+    }
+
+    fun removeWater(): Int {
+        dailyTotal -= waterAmount
         return dailyTotal
     }
 }

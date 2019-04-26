@@ -74,6 +74,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+    <Button
+            android:id="@+id/undoButton"
+            android:text="@string/main_undo"
+            android:fontFamily="@font/montserrat"
+            android:textSize="18sp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/drinksTodayList"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"/>
+
     <ListView
             android:id="@+id/drinksTodayList"
             android:layout_width="match_parent"
