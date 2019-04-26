@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Adapter
 import android.widget.ArrayAdapter
+import com.ishiki.mizuwodrinkwater.Utilities.EXTRA_DAILY
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -24,8 +25,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         undoButton.setOnClickListener {
-            dailyTotalText.text = removeWater().toString()
-            drinksToday.removeAt(0)
+            if (dailyTotal > 0) {
+                dailyTotalText.text = removeWater().toString()
+                drinksToday.removeAt(0)
+            }
         }
 
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drinksToday)
@@ -38,9 +41,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun removeWater(): Int {
-        if (dailyTotal > 0) {
-            dailyTotal -= waterAmount
-        }
+        dailyTotal -= waterAmount
         return dailyTotal
     }
 }
