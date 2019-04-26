@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         undoButton.setOnClickListener {
             dailyTotalText.text = removeWater().toString()
+            drinksToday.removeAt(0)
         }
 
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drinksToday)
@@ -37,7 +38,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun removeWater(): Int {
-        dailyTotal -= waterAmount
+        if (dailyTotal > 0) {
+            dailyTotal -= waterAmount
+        }
         return dailyTotal
     }
 }
