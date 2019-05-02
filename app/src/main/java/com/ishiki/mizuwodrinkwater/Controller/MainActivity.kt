@@ -7,7 +7,6 @@ import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.Utilities.EXTRA_DAILY
 import com.ishiki.mizuwodrinkwater.Utilities.EXTRA_LIST
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,11 +33,11 @@ class MainActivity : AppCompatActivity() {
             dailyTotalText.text = addWater().toString()
             drinksToday.add(0, "250 ml")
 
-            // Print to check
-            println(drinksToday.toString())
-            for (i in drinksToday) {
-                println(i)
-            }
+//            // Print to check
+//            println(drinksToday.toString())
+//            for (i in drinksToday) {
+//                println(i)
+//            }
         }
 
         undoButton.setOnClickListener {
@@ -71,8 +70,10 @@ class MainActivity : AppCompatActivity() {
 
             val list = getStringArray(EXTRA_LIST)
 
-            // Print to check
             if (list != null) {
+                drinksToday = list.toMutableList()
+
+                // Print to check
                 for (i in list) {
                     println(i)
                 }
