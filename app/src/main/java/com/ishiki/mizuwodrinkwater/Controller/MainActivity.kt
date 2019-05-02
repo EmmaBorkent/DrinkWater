@@ -38,9 +38,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drinksToday)
-        drinksTodayList.adapter = adapter
-
         if (savedInstanceState != null) {
 
             savedInstanceState.run {
@@ -53,6 +50,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drinksToday)
+        drinksTodayList.adapter = adapter
     }
 
     private fun addWater(): Int {
@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity() {
             putInt(EXTRA_DAILY, dailyTotal)
             putStringArray(EXTRA_LIST, drinksToday.toTypedArray())
         }
+
     }
 
 //    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
