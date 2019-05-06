@@ -2,9 +2,7 @@ package com.ishiki.mizuwodrinkwater.Controller
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Button
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.Utilities.EXTRA_DAILY
 import com.ishiki.mizuwodrinkwater.Utilities.EXTRA_LIST
@@ -22,13 +20,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        addButton.setOnClickListener {
-//            dailyTotalText.text = addWater().toString()
-//            drinksToday.add(0, "250 ml")
-//
-//            // Print to check
-//            println(drinksToday.toString())
-//        }
+        addButton.setOnClickListener {
+            dailyTotalText.text = addWater().toString()
+            drinksToday.add(0, "250 ml")
+
+            // Print to check
+            println(drinksToday.toString())
+        }
 
         undoButton.setOnClickListener {
             if (dailyTotal > 0 || drinksToday.isEmpty() == false) {
@@ -36,9 +34,6 @@ class MainActivity : AppCompatActivity() {
                 drinksToday.removeAt(0)
             }
         }
-
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drinksToday)
-        drinksTodayList.adapter = adapter
 
         if (savedInstanceState != null) {
 
@@ -52,21 +47,24 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drinksToday)
+        drinksTodayList.adapter = adapter
     }
 
-    fun addWater(view: View) {
-        dailyTotal += waterAmount
-        dailyTotalText.text = dailyTotal.toString()
-        drinksToday.add(0, "250 ml")
-
-        // Print to check
-        println(drinksToday.toString())
-    }
-
-//    private fun addWater(): Int {
+//    fun addWater(view: View) {
 //        dailyTotal += waterAmount
-//        return dailyTotal
+//        dailyTotalText.text = dailyTotal.toString()
+//        drinksToday.add(0, "250 ml")
+//
+//        // Print to check
+//        println(drinksToday.toString())
 //    }
+
+    private fun addWater(): Int {
+        dailyTotal += waterAmount
+        return dailyTotal
+    }
 
     private fun removeWater(): Int {
         dailyTotal -= waterAmount
