@@ -20,6 +20,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        if (savedInstanceState != null) {
+
+            savedInstanceState.run {
+                dailyTotal = getInt(EXTRA_DAILY)
+                dailyTotalText.text = dailyTotal.toString()
+
+                val list = getStringArray(EXTRA_LIST)
+                if (list != null) {
+                    drinksToday = list.toMutableList<String>()
+                }
+            }
+        }
+
+        // Moet in onCreate
+        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drinksToday)
+        drinksTodayList.adapter = adapter
+
         addButton.setOnClickListener {
             dailyTotalText.text = addWater().toString()
             drinksToday.add(0, "250 ml")
@@ -34,22 +51,6 @@ class MainActivity : AppCompatActivity() {
                 drinksToday.removeAt(0)
             }
         }
-
-        if (savedInstanceState != null) {
-
-            savedInstanceState.run {
-                dailyTotal = getInt(EXTRA_DAILY)
-                dailyTotalText.text = dailyTotal.toString()
-
-                val list = getStringArray(EXTRA_LIST)
-                if (list != null) {
-                    drinksToday = list.toMutableList<String>()
-                }
-            }
-        }
-
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drinksToday)
-        drinksTodayList.adapter = adapter
     }
 
 //    fun addWater(view: View) {

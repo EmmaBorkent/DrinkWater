@@ -61,7 +61,7 @@
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/dailyTotalText" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline" android:onClick="addWater"/>
+            app:layout_constraintEnd_toStartOf="@+id/guideline"/>
 
     <Button
             android:id="@+id/undoButton"
@@ -79,9 +79,12 @@
             android:id="@+id/drinksTodayList"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
             android:background="#2280CBC4"/>
+
     <android.support.constraint.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
                                           android:id="@+id/guideline"
                                           android:orientation="vertical"
