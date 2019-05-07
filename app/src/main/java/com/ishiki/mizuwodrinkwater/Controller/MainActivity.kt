@@ -2,6 +2,7 @@ package com.ishiki.mizuwodrinkwater.Controller
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.ArrayAdapter
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.Utilities.EXTRA_DAILY
@@ -37,21 +38,21 @@ class MainActivity : AppCompatActivity() {
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drinksToday)
         drinksTodayList.adapter = adapter
 
-        addButton.setOnClickListener {
-            dailyTotalText.text = addWater().toString()
-            drinksToday.add(0, "250 ml")
-            adapter.notifyDataSetChanged()
+//        addButton.setOnClickListener {
+//            dailyTotalText.text = addWater().toString()
+//            drinksToday.add(0, "250 ml")
+//            adapter.notifyDataSetChanged()
+//
+//            // Print to check
+//            println(drinksToday.toString())
+//        }
 
-            // Print to check
-            println(drinksToday.toString())
-        }
-
-        undoButton.setOnClickListener {
-            if (dailyTotal > 0 || drinksToday.isEmpty() == false) {
-                dailyTotalText.text = removeWater().toString()
-                drinksToday.removeAt(0)
-            }
-        }
+//        undoButton.setOnClickListener {
+//            if (dailyTotal > 0 || drinksToday.isEmpty() == false) {
+//                dailyTotalText.text = removeWater().toString()
+//                drinksToday.removeAt(0)
+//            }
+//        }
     }
 
 //    fun addWater(view: View) {
@@ -62,6 +63,23 @@ class MainActivity : AppCompatActivity() {
 //        // Print to check
 //        println(drinksToday.toString())
 //    }
+
+    fun addWaterClick(view: View) {
+        dailyTotalText.text = addWater().toString()
+        drinksToday.add(0, "250 ml")
+        adapter.notifyDataSetChanged()
+
+        // Print to check
+        println(drinksToday.toString())
+    }
+
+    fun removeWaterClick(view: View) {
+        if (dailyTotal > 0 || drinksToday.isEmpty() == false) {
+            dailyTotalText.text = removeWater().toString()
+            drinksToday.removeAt(0)
+            adapter.notifyDataSetChanged()
+        }
+    }
 
     private fun addWater(): Int {
         dailyTotal += waterAmount
