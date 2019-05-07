@@ -1,4 +1,4 @@
-package com.ishiki.mizuwodrinkwater.Controller
+package com.ishiki.mizuwodrinkwater.controller
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -21,26 +21,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (savedInstanceState != null) {
+        savedInstanceState?.run {
+            dailyTotal = getInt(EXTRA_DAILY)
+            dailyTotalText.text = dailyTotal.toString()
 
-            savedInstanceState.run {
-                dailyTotal = getInt(EXTRA_DAILY)
-                dailyTotalText.text = dailyTotal.toString()
-
-                val list = getStringArray(EXTRA_LIST)
-                if (list != null) {
-                    drinksToday = list.toMutableList<String>()
-                }
+            val list = getStringArray(EXTRA_LIST)
+            if (list != null) {
+                drinksToday = list.toMutableList()
             }
         }
 
-        // Moet in onCreate
+        // Must be in onCreate
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drinksToday)
         drinksTodayList.adapter = adapter
 
     }
 
-    fun addWaterClick(view: View) {
+    fun addWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
         dailyTotalText.text = addWater().toString()
         drinksToday.add(0, "250 ml")
         adapter.notifyDataSetChanged()
@@ -49,11 +46,14 @@ class MainActivity : AppCompatActivity() {
         println(drinksToday.toString())
     }
 
-    fun removeWaterClick(view: View) {
-        if (dailyTotal > 0 || drinksToday.isEmpty() == false) {
+    fun removeWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
+        if (dailyTotal > 0 || drinksToday.isNotEmpty()) {
             dailyTotalText.text = removeWater().toString()
             drinksToday.removeAt(0)
             adapter.notifyDataSetChanged()
+
+            // Print to check
+            println(drinksToday.toString())
         }
     }
 
