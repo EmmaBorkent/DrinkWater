@@ -57,6 +57,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun setGlassClick(view: View) {}
+
     private fun addWater(): Int {
         dailyTotal += waterAmount
         return dailyTotal

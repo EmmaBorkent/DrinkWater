@@ -64,6 +64,19 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline" android:onClick="addWaterClick"/>
 
     <Button
+            android:id="@+id/setGlass"
+            android:text="@string/set_glass"
+            android:fontFamily="@font/montserrat"
+            android:textSize="18sp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="88dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:onClick="setGlassClick"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
             android:id="@+id/undoButton"
             android:text="@string/main_undo"
             android:fontFamily="@font/montserrat"
