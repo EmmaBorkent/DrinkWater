@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         addButton.setOnClickListener {
             dailyTotalText.text = addWater().toString()
             drinksToday.add(0, "250 ml")
+            adapter.notifyDataSetChanged()
 
             // Print to check
             println(drinksToday.toString())
