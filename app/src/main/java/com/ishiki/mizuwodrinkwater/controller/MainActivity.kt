@@ -6,14 +6,14 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ArrayAdapter
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.services.DataService.drinksToday
+//import com.ishiki.mizuwodrinkwater.services.DataService.drinksToday
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_LIST
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-//    private var drinksToday: MutableList<String> = mutableListOf()
+    private var drinksToday: MutableList<String> = mutableListOf()
     private lateinit var adapter: ArrayAdapter<String>
 
     private var dailyTotal = 0
