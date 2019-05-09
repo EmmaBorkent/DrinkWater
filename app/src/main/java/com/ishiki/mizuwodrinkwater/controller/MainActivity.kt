@@ -1,12 +1,13 @@
 package com.ishiki.mizuwodrinkwater.controller
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ArrayAdapter
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.Utilities.EXTRA_DAILY
-import com.ishiki.mizuwodrinkwater.Utilities.EXTRA_LIST
+import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
+import com.ishiki.mizuwodrinkwater.utilities.EXTRA_LIST
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -57,7 +58,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setGlassClick(view: View) {}
+    fun setGlassClick(@Suppress("UNUSED_PARAMETER") view: View) {
+        val setGlassIntent = Intent(this, SetGlassActivity::class.java)
+        startActivity(setGlassIntent)
+    }
 
     private fun addWater(): Int {
         dailyTotal += waterAmount

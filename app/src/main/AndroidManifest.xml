@@ -9,7 +9,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".controller.SetGlass">
+        <activity android:name=".controller.SetGlassActivity">
         </activity>
         <activity
                 android:name=".controller.MainActivity"
