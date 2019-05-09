@@ -47,17 +47,9 @@ class MainActivity : AppCompatActivity() {
         waterAmount = intent.getIntExtra(EXTRA_AMOUNT, waterAmount)
         mainWaterAmount.text  = waterAmount.toString()
 
-//        if (intent.getStringArrayExtra(EXTRA_LIST) != null) {
-//            val list = intent.getStringArrayExtra(EXTRA_LIST)
-//            drinksToday = list.toMutableList()
-//            adapter.notifyDataSetChanged()
-//        }
-
         // Must be in onCreate
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drinksToday)
         drinksTodayList.adapter = adapter
-
-//        drinksToday = intent.getStringArrayListExtra(EXTRA_LIST)
     }
 
     fun addWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
@@ -82,9 +74,7 @@ class MainActivity : AppCompatActivity() {
 
     fun setGlassClick(@Suppress("UNUSED_PARAMETER") view: View) {
         val setGlassIntent = Intent(this, SetGlassActivity::class.java)
-//        setGlassIntent.putExtra(EXTRA_AMOUNT, waterAmount)
         setGlassIntent.putExtra(EXTRA_DAILY, dailyTotal)
-//        setGlassIntent.putExtra(EXTRA_LIST, drinksToday.toTypedArray())
         startActivity(setGlassIntent)
     }
 
