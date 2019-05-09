@@ -7,17 +7,17 @@ import android.view.View
 import android.widget.ArrayAdapter
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_AMOUNT
-//import com.ishiki.mizuwodrinkwater.services.DataService.drinksToday
+import com.ishiki.mizuwodrinkwater.services.DataService.drinksToday
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_LIST
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private var drinksToday: MutableList<String> = mutableListOf()
-    private lateinit var adapter: ArrayAdapter<String>
     var dailyTotal = 0
     var waterAmount = 250
+//    private var drinksToday: MutableList<String> = mutableListOf()
+    private lateinit var adapter: ArrayAdapter<String>
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
@@ -41,13 +41,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        waterAmount = intent.getIntExtra(EXTRA_AMOUNT, 250)
+        dailyTotal = intent.getIntExtra(EXTRA_DAILY, 0)
+        mainTextDailyTotal.text = dailyTotal.toString()
 
+        waterAmount = intent.getIntExtra(EXTRA_AMOUNT, waterAmount)
         mainWaterAmount.text  = waterAmount.toString()
+
+//        if (intent.getStringArrayExtra(EXTRA_LIST) != null) {
+//            val list = intent.getStringArrayExtra(EXTRA_LIST)
+//            drinksToday = list.toMutableList()
+//            adapter.notifyDataSetChanged()
+//        }
 
         // Must be in onCreate
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drinksToday)
         drinksTodayList.adapter = adapter
+
+//        drinksToday = intent.getStringArrayListExtra(EXTRA_LIST)
     }
 
     fun addWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
@@ -72,7 +82,9 @@ class MainActivity : AppCompatActivity() {
 
     fun setGlassClick(@Suppress("UNUSED_PARAMETER") view: View) {
         val setGlassIntent = Intent(this, SetGlassActivity::class.java)
-        setGlassIntent.putExtra(EXTRA_AMOUNT, waterAmount)
+//        setGlassIntent.putExtra(EXTRA_AMOUNT, waterAmount)
+        setGlassIntent.putExtra(EXTRA_DAILY, dailyTotal)
+//        setGlassIntent.putExtra(EXTRA_LIST, drinksToday.toTypedArray())
         startActivity(setGlassIntent)
     }
 

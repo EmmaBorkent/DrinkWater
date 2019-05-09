@@ -8,7 +8,7 @@ object DataService {
     // Put it back in ActivityMain, because when exiting the app, the list is preserved, but the dailyTotal is not.
     // I have to fix this, but for the time being it is best if the app losses all state when exiting.
     // When putting it back, remember to also put back the import.
-//    var drinksToday: MutableList<String> = mutableListOf()
+    var drinksToday: MutableList<String> = mutableListOf()
 
     val glasses = listOf<Drinks>(
         Drinks("glass", "water01", "250", "ml"),
