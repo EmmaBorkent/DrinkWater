@@ -6,13 +6,14 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ArrayAdapter
 import com.ishiki.mizuwodrinkwater.R
+import com.ishiki.mizuwodrinkwater.services.DataService.drinksToday
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_LIST
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private var drinksToday: MutableList<String> = mutableListOf()
+//    private var drinksToday: MutableList<String> = mutableListOf()
     private lateinit var adapter: ArrayAdapter<String>
 
     private var dailyTotal = 0
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         savedInstanceState?.run {
             dailyTotal = getInt(EXTRA_DAILY)
-            dailyTotalText.text = dailyTotal.toString()
+            mainTextDailyTotal.text = dailyTotal.toString()
 
             val list = getStringArray(EXTRA_LIST)
             if (list != null) {
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun addWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
-        dailyTotalText.text = addWater().toString()
+        mainTextDailyTotal.text = addWater().toString()
         drinksToday.add(0, "250 ml")
         adapter.notifyDataSetChanged()
 
@@ -49,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
     fun removeWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
         if (dailyTotal > 0 || drinksToday.isNotEmpty()) {
-            dailyTotalText.text = removeWater().toString()
+            mainTextDailyTotal.text = removeWater().toString()
             drinksToday.removeAt(0)
             adapter.notifyDataSetChanged()
 
