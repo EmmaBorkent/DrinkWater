@@ -8,19 +8,7 @@
         tools:context=".controller.SetGlassActivity">
 
     <TextView
-            android:id="@+id/setGlassText"
-            android:text="@string/set_glass_text"
-            android:fontFamily="@font/montserrat"
-            android:textSize="18sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center" android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@+id/setGlassTitle" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-    <TextView
-            android:id="@+id/setGlassTitle"
+            android:id="@+id/setGlassTextTitle"
             android:text="@string/set_glass"
             android:fontFamily="@font/julius_sans_one"
             android:textSize="42sp"
@@ -31,45 +19,67 @@
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="32dp"
             app:layout_constraintTop_toTopOf="parent"/>
 
-    <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp" app:srcCompat="@drawable/water01"
-            android:id="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/imageView2" app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintDimensionRatio="w,1:1"
-            android:layout_marginStart="20dp" android:layout_marginEnd="40dp"
-            app:layout_constraintTop_toTopOf="@+id/imageView2" android:contentDescription="@string/glass_500"/>
+    <TextView
+            android:id="@+id/setGlassText"
+            android:text="@string/set_glass_text"
+            android:fontFamily="@font/montserrat"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center" android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/setGlassTextTitle" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-    <ImageView
+    <ImageButton
+            app:srcCompat="@drawable/water01"
+            android:id="@+id/setGlassImageGlass"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/setGlassText"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/setGlassImageBottle"
+            app:layout_constraintDimensionRatio="w,1:1"
+            android:layout_marginEnd="20dp"
+            android:scaleType="centerCrop"
+            android:background="@android:color/transparent" android:contentDescription="@string/glass_250"
+            android:onClick="setGlass250"/>
+
+    <ImageButton
             android:layout_width="0dp"
             android:layout_height="0dp" app:srcCompat="@drawable/water02"
-            android:id="@+id/imageView2"
-            android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@+id/setGlassText" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="40dp" app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toStartOf="@+id/imageView" app:layout_constraintDimensionRatio="w,1:1"
-            android:layout_marginEnd="20dp" android:contentDescription="@string/glass_250"/>
+            android:id="@+id/setGlassImageBottle"
+            app:layout_constraintStart_toEndOf="@+id/setGlassImageGlass" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintDimensionRatio="w,1:1"
+            android:layout_marginStart="20dp" android:layout_marginEnd="40dp"
+            app:layout_constraintTop_toTopOf="@+id/setGlassImageGlass"
+            android:scaleType="centerCrop"
+            android:background="@android:color/transparent" android:contentDescription="@string/glass_500"
+            android:onClick="setGlass500"/>
 
     <TextView
-            android:id="@+id/setGlass250"
+            android:id="@+id/setGlassTextGlass"
             android:text="@string/glass_250"
             android:fontFamily="@font/montserrat"
             android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:layout_constraintStart_toStartOf="@+id/imageView2" app:layout_constraintEnd_toEndOf="@+id/imageView2"/>
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/setGlassImageGlass"
+            app:layout_constraintStart_toStartOf="@+id/setGlassImageGlass" app:layout_constraintEnd_toEndOf="@+id/setGlassImageGlass"/>
 
     <TextView
-            android:id="@+id/setGlass500"
+            android:id="@+id/setGlassTextBottle"
             android:text="@string/glass_500"
             android:fontFamily="@font/montserrat"
             android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="@+id/imageView" app:layout_constraintEnd_toEndOf="@+id/imageView"/>
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/setGlassImageBottle"
+            app:layout_constraintStart_toStartOf="@+id/setGlassImageBottle" app:layout_constraintEnd_toEndOf="@+id/setGlassImageBottle"/>
 
 </android.support.constraint.ConstraintLayout>

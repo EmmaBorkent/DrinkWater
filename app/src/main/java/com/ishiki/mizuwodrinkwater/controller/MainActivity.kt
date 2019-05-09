@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ArrayAdapter
 import com.ishiki.mizuwodrinkwater.R
+import com.ishiki.mizuwodrinkwater.services.DataService
+import com.ishiki.mizuwodrinkwater.utilities.EXTRA_AMOUNT
 //import com.ishiki.mizuwodrinkwater.services.DataService.drinksToday
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_LIST
@@ -17,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: ArrayAdapter<String>
 
     private var dailyTotal = 0
-    private val waterAmount = 250
+    var waterAmount = 250
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +35,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        waterAmount = intent.getIntExtra(EXTRA_AMOUNT, 250)
+
+        mainWaterAmount.text = waterAmount.toString()
+
         // Must be in onCreate
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drinksToday)
         drinksTodayList.adapter = adapter
-
     }
 
     fun addWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
@@ -61,6 +66,7 @@ class MainActivity : AppCompatActivity() {
 
     fun setGlassClick(@Suppress("UNUSED_PARAMETER") view: View) {
         val setGlassIntent = Intent(this, SetGlassActivity::class.java)
+        setGlassIntent.putExtra(EXTRA_AMOUNT, waterAmount)
         startActivity(setGlassIntent)
     }
 
