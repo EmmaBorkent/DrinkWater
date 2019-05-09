@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ArrayAdapter
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.services.DataService
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_AMOUNT
 //import com.ishiki.mizuwodrinkwater.services.DataService.drinksToday
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
@@ -17,9 +16,16 @@ class MainActivity : AppCompatActivity() {
 
     private var drinksToday: MutableList<String> = mutableListOf()
     private lateinit var adapter: ArrayAdapter<String>
-
-    private var dailyTotal = 0
+    var dailyTotal = 0
     var waterAmount = 250
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.run {
+            putInt(EXTRA_DAILY, dailyTotal)
+            putStringArray(EXTRA_LIST, drinksToday.toTypedArray())
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         waterAmount = intent.getIntExtra(EXTRA_AMOUNT, 250)
 
-        mainWaterAmount.text = waterAmount.toString()
+        mainWaterAmount.text  = waterAmount.toString()
 
         // Must be in onCreate
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drinksToday)
@@ -46,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     fun addWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
         mainTextDailyTotal.text = addWater().toString()
-        drinksToday.add(0, "250 ml")
+        drinksToday.add(0,"$waterAmount ml")
         adapter.notifyDataSetChanged()
 
         // Print to check
@@ -78,14 +84,5 @@ class MainActivity : AppCompatActivity() {
     private fun removeWater(): Int {
         dailyTotal -= waterAmount
         return dailyTotal
-    }
-
-    override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
-
-        outState?.run {
-            putInt(EXTRA_DAILY, dailyTotal)
-            putStringArray(EXTRA_LIST, drinksToday.toTypedArray())
-        }
     }
 }
