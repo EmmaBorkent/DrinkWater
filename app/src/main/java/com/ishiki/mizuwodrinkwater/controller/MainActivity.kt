@@ -45,11 +45,19 @@ class MainActivity : AppCompatActivity() {
         mainTextDailyTotal.text = dailyTotal.toString()
 
         waterAmount = intent.getIntExtra(EXTRA_AMOUNT, waterAmount)
-        mainWaterAmount.text  = waterAmount.toString()
+//        mainWaterAmount.text  = waterAmount.toString()
+//        mainWaterAmount.text  = "$waterAmount ml"
+//        val text = getString(R.string.basic_amount, waterAmount)
+//        mainWaterAmount.text = text
+        mainWaterAmount.text = getString(R.string.basic_amount, waterAmount)
 
         // Must be in onCreate
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drinksToday)
         drinksTodayList.adapter = adapter
+
+        if (mainWaterAmount.text == "500 ml") {
+            mainDrinkImage.setBackgroundResource(R.drawable.water02)
+        }
     }
 
     fun addWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
