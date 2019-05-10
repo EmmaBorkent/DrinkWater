@@ -17,7 +17,7 @@ class SetGlassActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_glass)
 
-        dailyTotal = intent.getIntExtra(EXTRA_DAILY, 0)
+        dailyTotal = intent.getIntExtra(EXTRA_DAILY, dailyTotal)
         println("The total is $dailyTotal")
     }
 

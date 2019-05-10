@@ -21,29 +21,29 @@ class MainActivity : AppCompatActivity() {
 //    private var drinksToday: MutableList<String> = mutableListOf()
     private lateinit var adapter: TodayDrinksAdapter
 
-//    override fun onSaveInstanceState(outState: Bundle?) {
-//        super.onSaveInstanceState(outState)
-//        outState?.run {
-//            putInt(EXTRA_DAILY, dailyTotal)
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.run {
+            putInt(EXTRA_DAILY, dailyTotal)
 //            putStringArray(EXTRA_LIST, drinksToday.toTypedArray())
-//        }
-//    }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        savedInstanceState?.run {
-//            dailyTotal = getInt(EXTRA_DAILY)
-//            mainTextDailyTotal.text = dailyTotal.toString()
-//
+        savedInstanceState?.run {
+            dailyTotal = getInt(EXTRA_DAILY)
+            mainTextDailyTotal.text = dailyTotal.toString()
+
 //            val list = getStringArray(EXTRA_LIST)
 //            if (list != null) {
 //                drinksToday = list.toMutableList()
 //            }
-//        }
+        }
 
-        dailyTotal = intent.getIntExtra(EXTRA_DAILY, 0)
+        dailyTotal = intent.getIntExtra(EXTRA_DAILY, dailyTotal)
         mainTextDailyTotal.text = dailyTotal.toString()
 
         waterAmount = intent.getIntExtra(EXTRA_AMOUNT, waterAmount)
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         if (mainWaterAmount.text == "250 ml") {
             drinksToday.add(0, Drinks("glass", "water01", "250", "ml"))
         } else {
-            drinksToday.add(0, Drinks("glass", "water02", "500", "ml"))
+            drinksToday.add(0, Drinks("bottle", "water02", "500", "ml"))
         }
 
         adapter.notifyDataSetChanged()
@@ -85,6 +85,27 @@ class MainActivity : AppCompatActivity() {
 //            println(drinksToday.toString())
         }
     }
+
+//    fun deleteDrinkFromList(view: View) {
+//        mainTextDailyTotal.text = removeWater().toString()
+//
+//        val count = adapter.count
+//        for (i in drinksToday) {
+//            drinksToday.remove(adapter.getItem())
+//        }
+//        if (waterAmount == 250) {
+//            drinksToday.remove(Drinks("glass", "water01", "250", "ml"))
+//        } else {
+//            drinksToday.remove(Drinks("bottle", "water02", "500", "ml"))
+//        }
+////        adapter.notifyDataSetChanged()
+////        drinksTodayList.invalidateViews()
+//    }
+
+//    int count = adapter.getCount();
+//    for (int i = 0; i < count; i++) {
+//        adapter.remove(adapter.getItem(i));
+//    }
 
     fun setGlassClick(@Suppress("UNUSED_PARAMETER") view: View) {
         val setGlassIntent = Intent(this, SetGlassActivity::class.java)
