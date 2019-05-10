@@ -4,12 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.ArrayAdapter
+//import android.widget.ArrayAdapter
 import com.ishiki.mizuwodrinkwater.R
+import com.ishiki.mizuwodrinkwater.adapters.TodayDrinksAdapter
+import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_AMOUNT
 import com.ishiki.mizuwodrinkwater.services.DataService.drinksToday
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
-import com.ishiki.mizuwodrinkwater.utilities.EXTRA_LIST
+//import com.ishiki.mizuwodrinkwater.utilities.EXTRA_LIST
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,42 +19,40 @@ class MainActivity : AppCompatActivity() {
     var dailyTotal = 0
     var waterAmount = 250
 //    private var drinksToday: MutableList<String> = mutableListOf()
-    private lateinit var adapter: ArrayAdapter<String>
+    private lateinit var adapter: TodayDrinksAdapter
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
-        outState?.run {
-            putInt(EXTRA_DAILY, dailyTotal)
-            putStringArray(EXTRA_LIST, drinksToday.toTypedArray())
-        }
-    }
+//    override fun onSaveInstanceState(outState: Bundle?) {
+//        super.onSaveInstanceState(outState)
+//        outState?.run {
+//            putInt(EXTRA_DAILY, dailyTotal)
+//            putStringArray(EXTRA_LIST, drinksToday.toTypedArray())
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        savedInstanceState?.run {
-            dailyTotal = getInt(EXTRA_DAILY)
-            mainTextDailyTotal.text = dailyTotal.toString()
-
-            val list = getStringArray(EXTRA_LIST)
-            if (list != null) {
-                drinksToday = list.toMutableList()
-            }
-        }
+//        savedInstanceState?.run {
+//            dailyTotal = getInt(EXTRA_DAILY)
+//            mainTextDailyTotal.text = dailyTotal.toString()
+//
+//            val list = getStringArray(EXTRA_LIST)
+//            if (list != null) {
+//                drinksToday = list.toMutableList()
+//            }
+//        }
 
         dailyTotal = intent.getIntExtra(EXTRA_DAILY, 0)
         mainTextDailyTotal.text = dailyTotal.toString()
 
         waterAmount = intent.getIntExtra(EXTRA_AMOUNT, waterAmount)
-//        mainWaterAmount.text  = waterAmount.toString()
-//        mainWaterAmount.text  = "$waterAmount ml"
-//        val text = getString(R.string.basic_amount, waterAmount)
-//        mainWaterAmount.text = text
         mainWaterAmount.text = getString(R.string.basic_amount, waterAmount)
 
         // Must be in onCreate
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drinksToday)
+//        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drinksToday)
+//        drinksTodayList.adapter = adapter
+        adapter = TodayDrinksAdapter(this, drinksToday)
         drinksTodayList.adapter = adapter
 
         if (mainWaterAmount.text == "500 ml") {
@@ -62,11 +62,17 @@ class MainActivity : AppCompatActivity() {
 
     fun addWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
         mainTextDailyTotal.text = addWater().toString()
-        drinksToday.add(0,"$waterAmount ml")
+//        drinksToday.add(0,"$waterAmount ml")
+        if (mainWaterAmount.text == "250 ml") {
+            drinksToday.add(0, Drinks("glass", "water01", "250", "ml"))
+        } else {
+            drinksToday.add(0, Drinks("glass", "water02", "500", "ml"))
+        }
+
         adapter.notifyDataSetChanged()
 
         // Print to check
-        println(drinksToday.toString())
+//        println(drinksToday.toString())
     }
 
     fun removeWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
@@ -76,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
 
             // Print to check
-            println(drinksToday.toString())
+//            println(drinksToday.toString())
         }
     }
 
