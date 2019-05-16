@@ -3,20 +3,25 @@ package com.ishiki.mizuwodrinkwater.controller
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.ishiki.mizuwodrinkwater.R
+import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
+import com.ishiki.mizuwodrinkwater.services.DataService
 import com.ishiki.mizuwodrinkwater.services.DataService.bottle
 import com.ishiki.mizuwodrinkwater.services.DataService.glass
 import com.ishiki.mizuwodrinkwater.services.DataService.juice
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CURRENT
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_SET
+import kotlinx.android.synthetic.main.activity_set_glass.*
 
 class SetGlassActivity : AppCompatActivity() {
 
     private var dailyTotal = 0
     private lateinit var currentGlass: Drinks
+    lateinit var adapter: GlassesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +29,11 @@ class SetGlassActivity : AppCompatActivity() {
 
         dailyTotal = intent.getIntExtra(EXTRA_DAILY, dailyTotal)
         currentGlass = intent.getParcelableExtra(EXTRA_CURRENT)
+
+        adapter = GlassesAdapter(this, DataService.drinks)
+        val layoutManager = GridLayoutManager(this, 2)
+        setGlassListView?.layoutManager = layoutManager
+        setGlassListView?.adapter = adapter
 
         // To check if the intent works
         println("Currently using a ${currentGlass.glass}")

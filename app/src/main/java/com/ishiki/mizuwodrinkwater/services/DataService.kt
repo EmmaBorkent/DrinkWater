@@ -14,4 +14,10 @@ object DataService {
     val bottle = Drinks("bottle", "water02", "500", "ml")
     val juice = Drinks("juice", "water03", "150", "ml")
 
+    val drinks = listOf<Drinks>(
+        Drinks("glass", "water01", "250", "ml"),
+        Drinks("bottle", "water02", "500", "ml"),
+        Drinks("juice", "water03", "150", "ml")
+    )
+
 }
