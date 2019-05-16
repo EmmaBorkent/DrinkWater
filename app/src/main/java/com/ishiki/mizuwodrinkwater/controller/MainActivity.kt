@@ -1,6 +1,5 @@
 package com.ishiki.mizuwodrinkwater.controller
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -11,6 +10,7 @@ import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DataService.bottle
 import com.ishiki.mizuwodrinkwater.services.DataService.drinksToday
 import com.ishiki.mizuwodrinkwater.services.DataService.glass
+import com.ishiki.mizuwodrinkwater.services.DataService.juice
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CURRENT
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_SET
@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     private var dailyTotal = 0
     private var currentGlass = glass
     private lateinit var adapter: TodayDrinksAdapter
-    lateinit var context: Context
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
@@ -50,19 +49,26 @@ class MainActivity : AppCompatActivity() {
         adapter = TodayDrinksAdapter(this, drinksToday)
         drinksTodayList.adapter = adapter
 
-        if (mainWaterAmount.text == "500") {
-            mainDrinkImage.setBackgroundResource(R.drawable.water02)
+        when (mainWaterAmount.text) {
+            "500" -> mainDrinkImage.setBackgroundResource(R.drawable.water02)
+            "150" -> mainDrinkImage.setBackgroundResource(R.drawable.water03)
+            else -> mainDrinkImage.setBackgroundResource(R.drawable.water01)
         }
     }
 
     fun addWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
         mainTextDailyTotal.text = addWater().toString()
 
-        if (mainWaterAmount.text == glass.volume) {
-            drinksToday.add(0, glass)
-        } else {
-            drinksToday.add(0, bottle)
+        when (mainWaterAmount.text) {
+            glass.volume -> drinksToday.add(0, glass)
+            bottle.volume -> drinksToday.add(0, bottle)
+            else -> drinksToday.add(0, juice)
         }
+//        if (mainWaterAmount.text == glass.volume) {
+//            drinksToday.add(0, glass)
+//        } else {
+//            drinksToday.add(0, bottle)
+//        }
         adapter.notifyDataSetChanged()
 
         // Print to check

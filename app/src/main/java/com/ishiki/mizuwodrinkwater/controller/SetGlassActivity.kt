@@ -8,6 +8,7 @@ import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DataService.bottle
 import com.ishiki.mizuwodrinkwater.services.DataService.glass
+import com.ishiki.mizuwodrinkwater.services.DataService.juice
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CURRENT
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_SET
@@ -50,5 +51,17 @@ class SetGlassActivity : AppCompatActivity() {
         glass500Intent.putExtra(EXTRA_DAILY, dailyTotal)
         glass500Intent.putExtra(EXTRA_SET, currentGlass)
         startActivity(glass500Intent)
+    }
+
+    fun setGlassJuice(@Suppress("UNUSED_PARAMETER") view: View) {
+        currentGlass = juice
+
+        // Print to check
+        println("Changed to ${currentGlass.glass}")
+
+        val glassJuiceIntent = Intent(this, MainActivity::class.java)
+        glassJuiceIntent.putExtra(EXTRA_DAILY, dailyTotal)
+        glassJuiceIntent.putExtra(EXTRA_SET, currentGlass)
+        startActivity(glassJuiceIntent)
     }
 }

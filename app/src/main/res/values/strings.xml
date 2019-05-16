@@ -6,6 +6,7 @@
     <string name="main_unit">ml</string>
     <string name="main_add">+</string>
     <string name="basic_amount">%1$d</string>
+    <string name="glass_150">150</string>
     <string name="glass_250">250</string>
     <string name="glass_500">500</string>
     <string name="main_undo">undo</string>

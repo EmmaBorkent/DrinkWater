@@ -12,5 +12,6 @@ object DataService {
 
     val glass = Drinks("glass", "water01", "250", "ml")
     val bottle = Drinks("bottle", "water02", "500", "ml")
+    val juice = Drinks("juice", "water03", "150", "ml")
 
 }

@@ -8,6 +8,45 @@
         tools:context=".controller.SetGlassActivity">
 
     <TextView
+            android:id="@+id/mainTextUnit9"
+            android:text="@string/main_unit"
+            android:fontFamily="@font/montserrat"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="@+id/setGlassTextJuice"
+            app:layout_constraintBottom_toBottomOf="@+id/setGlassTextJuice"
+            app:layout_constraintStart_toEndOf="@+id/setGlassTextJuice"
+            android:layout_marginStart="8dp"/>
+
+    <TextView
+            android:id="@+id/mainTextUnit8"
+            android:text="@string/main_unit"
+            android:fontFamily="@font/montserrat"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="@+id/setGlassTextBottle"
+            app:layout_constraintBottom_toBottomOf="@+id/setGlassTextBottle"
+            app:layout_constraintStart_toEndOf="@+id/setGlassTextBottle"
+            android:layout_marginStart="8dp"/>
+
+    <TextView
+            android:id="@+id/mainTextUnit7"
+            android:text="@string/main_unit"
+            android:fontFamily="@font/montserrat"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@+id/setGlassTextGlass"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/setGlassTextGlass"
+            app:layout_constraintTop_toTopOf="@+id/setGlassTextGlass"/>
+
+    <TextView
             android:id="@+id/setGlassTextTitle"
             android:text="@string/set_glass"
             android:fontFamily="@font/julius_sans_one"
@@ -33,7 +72,7 @@
             app:layout_constraintTop_toBottomOf="@+id/setGlassTextTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"/>
 
@@ -46,17 +85,14 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
-            app:layout_constraintTop_toBottomOf="@+id/setGlassText"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/setGlassImageBottle"
-            app:layout_constraintBottom_toTopOf="@id/setGlassTextGlass"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintDimensionRatio="w,1:1"
-            android:layout_marginStart="40dp"
+            app:layout_constraintEnd_toStartOf="@+id/setGlassImageBottle"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintHorizontal_chainStyle="packed"/>
+            app:layout_constraintTop_toBottomOf="@+id/setGlassText"
+            app:layout_constraintDimensionRatio="1:1"
+            android:layout_marginStart="64dp"
+            />
 
     <ImageButton
             android:id="@+id/setGlassImageBottle"
@@ -67,15 +103,14 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
-            app:layout_constraintTop_toTopOf="@+id/setGlassImageGlass"
             app:layout_constraintStart_toEndOf="@+id/setGlassImageGlass"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/setGlassTextBottle"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintDimensionRatio="w,1:1"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="16dp"/>
+            app:layout_constraintEnd_toStartOf="@+id/setGlassImageJuice"
+            app:layout_constraintTop_toTopOf="@+id/setGlassImageGlass"
+            app:layout_constraintDimensionRatio="1:1"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintBottom_toBottomOf="@+id/setGlassImageGlass"/>
 
     <TextView
             android:id="@+id/setGlassTextGlass"
@@ -85,11 +120,14 @@
             android:textAlignment="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/setGlassImageGlass"
             app:layout_constraintStart_toStartOf="@+id/setGlassImageGlass"
             app:layout_constraintEnd_toEndOf="@+id/setGlassImageGlass"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/setGlassImageGlass"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.4"/>
 
     <TextView
             android:id="@+id/setGlassTextBottle"
@@ -99,10 +137,47 @@
             android:textAlignment="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/setGlassImageBottle"
             app:layout_constraintStart_toStartOf="@+id/setGlassImageBottle"
             app:layout_constraintEnd_toEndOf="@+id/setGlassImageBottle"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/setGlassImageBottle"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.4"/>
+
+    <TextView
+            android:id="@+id/setGlassTextJuice"
+            android:text="@string/glass_150"
+            android:fontFamily="@font/montserrat"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/setGlassImageJuice"
+            app:layout_constraintStart_toStartOf="@+id/setGlassImageJuice"
+            app:layout_constraintEnd_toEndOf="@+id/setGlassImageJuice"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.4"/>
+
+    <ImageButton
+            android:id="@+id/setGlassImageJuice"
+            app:srcCompat="@drawable/water03"
+            android:contentDescription="@string/glass_250"
+            android:background="@android:color/transparent"
+            android:onClick="setGlassJuice"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toEndOf="@+id/setGlassImageBottle"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/setGlassImageBottle"
+            app:layout_constraintBottom_toBottomOf="@+id/setGlassImageBottle"
+            app:layout_constraintDimensionRatio="1:1"
+            android:layout_marginEnd="64dp"/>
 
 </android.support.constraint.ConstraintLayout>
