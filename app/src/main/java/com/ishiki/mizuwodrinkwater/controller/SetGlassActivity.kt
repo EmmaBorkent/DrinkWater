@@ -18,7 +18,6 @@ class SetGlassActivity : AppCompatActivity() {
         setContentView(R.layout.activity_set_glass)
 
         dailyTotal = intent.getIntExtra(EXTRA_DAILY, dailyTotal)
-        println("The total is $dailyTotal")
     }
 
     fun setGlass250(@Suppress("UNUSED_PARAMETER") view: View) {
