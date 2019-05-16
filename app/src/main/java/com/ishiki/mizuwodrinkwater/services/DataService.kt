@@ -13,8 +13,4 @@ object DataService {
     val glass = Drinks("glass", "water01", "250", "ml")
     val bottle = Drinks("bottle", "water02", "500", "ml")
 
-//    val glasses = listOf<Drinks>(
-//        Drinks("glass", "water01", "250", "ml"),
-//        Drinks("bottle", "water02", "500", "ml")
-//    )
 }

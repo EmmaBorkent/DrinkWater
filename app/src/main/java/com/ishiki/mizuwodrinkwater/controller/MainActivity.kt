@@ -1,5 +1,6 @@
 package com.ishiki.mizuwodrinkwater.controller
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private var dailyTotal = 0
     private var currentGlass = glass
     private lateinit var adapter: TodayDrinksAdapter
+    lateinit var context: Context
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         adapter = TodayDrinksAdapter(this, drinksToday)
         drinksTodayList.adapter = adapter
 
-        if (mainWaterAmount.text == "500 ml") {
+        if (mainWaterAmount.text == "500") {
             mainDrinkImage.setBackgroundResource(R.drawable.water02)
         }
     }
