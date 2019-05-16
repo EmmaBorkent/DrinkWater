@@ -8,6 +8,19 @@
         android:layout_height="match_parent"
         tools:context=".controller.MainActivity">
 
+    <TextView
+            android:id="@+id/mainTextUnit3"
+            android:text="@string/main_unit"
+            android:fontFamily="@font/montserrat"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@+id/mainWaterAmount"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/mainWaterAmount"
+            app:layout_constraintTop_toTopOf="@+id/mainWaterAmount"/>
+
     <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,11 +44,11 @@
             android:layout_height="90dp"
             android:onClick="setGlassClick"
             android:scaleType="centerInside"
-            app:layout_constraintStart_toStartOf="@+id/mainWaterAmount"
-            app:layout_constraintEnd_toEndOf="@+id/mainWaterAmount"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toTopOf="@+id/mainWaterAmount"
-            app:layout_constraintHorizontal_bias="1.0"/>
+            app:layout_constraintStart_toStartOf="@+id/mainWaterAmount"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/mainTextUnit3"/>
 
     <TextView
             android:text="@string/glass_250"
@@ -49,7 +62,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.8"/>
+            app:layout_constraintHorizontal_bias="0.7"/>
 
     <TextView
             android:id="@+id/mainTextToday"

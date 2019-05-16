@@ -24,6 +24,7 @@ class TodayDrinksAdapter(val context: Context, val drinksToday: MutableList<Drin
             holder = ViewHolder()
             holder.glassImage = drinksView.findViewById(R.id.drinkListImage)
             holder.glassVolume = drinksView.findViewById(R.id.drinkListText)
+            holder.glassUnit = drinksView.findViewById(R.id.drinkListUnit)
             drinksView.tag = holder
         } else {
             holder = convertView.tag as ViewHolder
@@ -31,9 +32,13 @@ class TodayDrinksAdapter(val context: Context, val drinksToday: MutableList<Drin
         }
 
         val drink = drinksToday[position]
-        val resourceId = context.resources.getIdentifier("water02", "drawable", context.packageName)
+//        val resourceId = context.resources.getIdentifier("water02", "drawable", context.packageName)
+//        holder.glassImage?.setImageResource(resourceId)
+        val image = drink.image
+        val resourceId = context.resources.getIdentifier(image, "drawable", context.packageName)
         holder.glassImage?.setImageResource(resourceId)
         holder.glassVolume?.text = drink.volume
+        holder.glassUnit?.text = drink.unit
         return drinksView
     }
 
@@ -52,5 +57,6 @@ class TodayDrinksAdapter(val context: Context, val drinksToday: MutableList<Drin
     private class ViewHolder {
         var glassImage: ImageView? = null
         var glassVolume: TextView? = null
+        var glassUnit: TextView? = null
     }
 }
