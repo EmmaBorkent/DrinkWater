@@ -6,17 +6,19 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.TodayDrinksAdapter
+import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DataService.bottle
-import com.ishiki.mizuwodrinkwater.utilities.EXTRA_AMOUNT
 import com.ishiki.mizuwodrinkwater.services.DataService.drinksToday
 import com.ishiki.mizuwodrinkwater.services.DataService.glass
+import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CURRENT
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
+import com.ishiki.mizuwodrinkwater.utilities.EXTRA_SET
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private var dailyTotal = 0
-    private var waterAmount = 250
+    private var currentGlass = glass
     private lateinit var adapter: TodayDrinksAdapter
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -38,8 +40,10 @@ class MainActivity : AppCompatActivity() {
         dailyTotal = intent.getIntExtra(EXTRA_DAILY, dailyTotal)
         mainTextDailyTotal.text = dailyTotal.toString()
 
-        waterAmount = intent.getIntExtra(EXTRA_AMOUNT, waterAmount)
-        mainWaterAmount.text = getString(R.string.basic_amount, waterAmount)
+        if (intent.getParcelableExtra<Drinks>(EXTRA_SET) != null) {
+            currentGlass = intent.getParcelableExtra(EXTRA_SET)
+        }
+        mainWaterAmount.text = currentGlass.volume
 
         adapter = TodayDrinksAdapter(this, drinksToday)
         drinksTodayList.adapter = adapter
@@ -51,35 +55,38 @@ class MainActivity : AppCompatActivity() {
 
     fun addWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
         mainTextDailyTotal.text = addWater().toString()
-        if (mainWaterAmount.text == "250 ml") {
-//            drinksToday.add(0, Drinks("glass", "water01", "250", "ml"))
+
+        if (mainWaterAmount.text == glass.volume) {
             drinksToday.add(0, glass)
         } else {
-//            drinksToday.add(0, Drinks("bottle", "water02", "500", "ml"))
             drinksToday.add(0, bottle)
         }
         adapter.notifyDataSetChanged()
+
+        // Print to check
+        println("Added ${currentGlass.volume} ${currentGlass.unit}. List now contains ${drinksToday.size} items.")
     }
 
     fun removeWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
         if (dailyTotal > 0 || drinksToday.isNotEmpty()) {
-//            mainTextDailyTotal.text = removeWater().toString()
             val volume = drinksToday[0].volume
             dailyTotal -= volume.toInt()
             mainTextDailyTotal.text = dailyTotal.toString()
             drinksToday.removeAt(0)
             adapter.notifyDataSetChanged()
         }
+        println("Removed last input. List now contains ${drinksToday.size} items.")
     }
 
     fun setGlassClick(@Suppress("UNUSED_PARAMETER") view: View) {
         val setGlassIntent = Intent(this, SetGlassActivity::class.java)
         setGlassIntent.putExtra(EXTRA_DAILY, dailyTotal)
+        setGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
         startActivity(setGlassIntent)
     }
 
     private fun addWater(): Int {
-        dailyTotal += waterAmount
+        dailyTotal += currentGlass.volume.toInt()
         return dailyTotal
     }
 }

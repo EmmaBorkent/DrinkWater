@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
                                              android:layout_width="match_parent"
                                              android:layout_height="wrap_content">
+
+    <TextView
+            android:text="@string/main_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/drinkListUnit"
+            android:fontFamily="@font/montserrat"
+            android:textSize="24sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/drinkListButtonDelete"
+            app:layout_constraintStart_toEndOf="@+id/drinkListText"
+            android:layout_marginStart="16dp"
+            app:layout_constraintHorizontal_bias="0.0"/>
 
     <ImageView
             android:layout_width="64dp"
@@ -15,7 +32,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintEnd_toStartOf="@+id/drinkListText"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             android:contentDescription="@string/drink_list_image"/>
@@ -56,4 +73,5 @@
             android:contentDescription="@string/drink_list_delete_button"
             android:visibility="invisible"
             />
+
 </android.support.constraint.ConstraintLayout>
