@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".controller.CustomGlass">
+
+    <TextView
+            android:id="@+id/customTitel"
+            android:text="@string/create_glass"
+            android:fontFamily="@font/julius_sans_one"
+            android:textSize="42sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="center"/>
+
+    <TextView
+            android:id="@+id/customText"
+            android:text="@string/custom_text"
+            android:fontFamily="@font/montserrat"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/customTitel"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"/>
+
+    <ImageView
+            android:layout_width="224dp"
+            android:layout_height="224dp"
+            app:srcCompat="@drawable/water01"
+            android:id="@+id/customGlassImage"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.4"
+            android:contentDescription="@string/custom_image"
+            />
+
+    <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/ic_keyboard_arrow_right"
+            android:id="@+id/customArrowRight"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintStart_toEndOf="@+id/customGlassImage"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="@+id/customGlassImage"
+            app:layout_constraintBottom_toBottomOf="@+id/customGlassImage"
+            android:contentDescription="@string/custom_right"/>
+
+    <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/ic_keyboard_arrow_left"
+            android:id="@+id/customArrowLeft"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/customGlassImage"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toTopOf="@+id/customGlassImage"
+            app:layout_constraintBottom_toBottomOf="@+id/customGlassImage"
+            android:contentDescription="@string/custom_left"/>
+
+    <EditText
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/customVolumeInput"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/customGlassImage"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.45"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            android:fontFamily="@font/montserrat"
+            android:autofillHints="@string/glass_250"
+            android:hint="@string/glass_250"/>
+
+    <TextView
+            android:id="@+id/mainTextUnit4"
+            android:text="@string/main_unit"
+            android:fontFamily="@font/montserrat"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/customVolumeInput"
+            app:layout_constraintTop_toTopOf="@+id/customVolumeInput"
+            app:layout_constraintStart_toEndOf="@+id/customVolumeInput"
+            android:layout_marginStart="8dp"/>
+
+    <Button
+            android:id="@+id/setCustomGlassButton"
+            android:text="@string/create_glass"
+            android:fontFamily="@font/montserrat"
+            android:textSize="18sp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="setCustomGlass"/>
+
+</android.support.constraint.ConstraintLayout>

@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.view.View
 import android.widget.Toast
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
@@ -60,5 +61,10 @@ class SetGlassActivity : AppCompatActivity() {
 
         // To check if the intent works
         println("Currently using a ${currentGlass.glass}")
+    }
+
+    fun createCustomClass(@Suppress("UNUSED_PARAMETER") view: View) {
+        val customGlassIntent = Intent(this, CustomGlass::class.java)
+        startActivity(customGlassIntent)
     }
 }
