@@ -11,7 +11,7 @@ import android.widget.TextView
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
 
-class TodayDrinksAdapter(val context: Context, val drinksToday: MutableList<Drinks>) : BaseAdapter() {
+class TodayDrinksAdapter(private val context: Context, private val drinksToday: MutableList<Drinks>) : BaseAdapter() {
 
     @SuppressLint("InflateParams")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -32,8 +32,6 @@ class TodayDrinksAdapter(val context: Context, val drinksToday: MutableList<Drin
         }
 
         val drink = drinksToday[position]
-//        val resourceId = context.resources.getIdentifier("water02", "drawable", context.packageName)
-//        holder.glassImage?.setImageResource(resourceId)
         val image = drink.image
         val resourceId = context.resources.getIdentifier(image, "drawable", context.packageName)
         holder.glassImage?.setImageResource(resourceId)
