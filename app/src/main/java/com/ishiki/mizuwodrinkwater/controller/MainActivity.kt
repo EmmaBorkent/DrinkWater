@@ -43,6 +43,9 @@ class MainActivity : AppCompatActivity() {
 
         if (intent.getParcelableExtra<Drinks>(EXTRA_SET) != null) {
             currentGlass = intent.getParcelableExtra(EXTRA_SET)
+
+            // Print to check
+            println(currentGlass.glass)
         }
         mainWaterAmount.text = currentGlass.volume
 

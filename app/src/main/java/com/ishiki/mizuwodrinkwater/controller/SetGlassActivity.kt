@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
+import android.widget.Toast
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
@@ -30,7 +31,23 @@ class SetGlassActivity : AppCompatActivity() {
         dailyTotal = intent.getIntExtra(EXTRA_DAILY, dailyTotal)
         currentGlass = intent.getParcelableExtra(EXTRA_CURRENT)
 
-        adapter = GlassesAdapter(this, DataService.drinks)
+        adapter = GlassesAdapter(this, DataService.drinks) {
+            // Here goes the code that you want to happen when you click on it
+            drink ->
+            println(drink.glass)
+
+            when (drink.glass) {
+                "glass" -> currentGlass = glass
+                "bottle" -> currentGlass = bottle
+                "juice" -> currentGlass = juice
+                else -> Toast.makeText(this, "No Glass Was Selected", Toast.LENGTH_LONG).show()
+            }
+
+            val setGlassIntent = Intent(this, MainActivity::class.java)
+            setGlassIntent.putExtra(EXTRA_DAILY, dailyTotal)
+            setGlassIntent.putExtra(EXTRA_SET, currentGlass)
+            startActivity(setGlassIntent)
+        }
         val layoutManager = GridLayoutManager(this, 2)
         setGlassListView?.layoutManager = layoutManager
         setGlassListView?.adapter = adapter

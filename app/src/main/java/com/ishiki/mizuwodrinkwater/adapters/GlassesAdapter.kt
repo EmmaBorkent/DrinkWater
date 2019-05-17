@@ -11,11 +11,11 @@ import android.widget.TextView
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
 
-class GlassesAdapter(val context: Context, val drinks: List<Drinks>) : RecyclerView.Adapter<GlassesAdapter.GlassHolder>() {
+class GlassesAdapter(val context: Context, val drinks: List<Drinks>, val itemClick: (Drinks) -> Unit) : RecyclerView.Adapter<GlassesAdapter.GlassHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): GlassHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.set_glass_list, p0, false)
-        return GlassHolder(view)
+        return GlassHolder(view, itemClick)
     }
 
     override fun getItemCount(): Int {
@@ -26,7 +26,7 @@ class GlassesAdapter(val context: Context, val drinks: List<Drinks>) : RecyclerV
         p0.bindGlass(drinks[p1], context)
     }
 
-    inner class GlassHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class GlassHolder(itemView: View, val itemClick: (Drinks) -> Unit) : RecyclerView.ViewHolder(itemView) {
         val drinkImage = itemView.findViewById<ImageView>(R.id.setGlassListImage)
         val drinkVolume = itemView.findViewById<TextView>(R.id.setGlassListVolume)
         val drinkUnit = itemView.findViewById<TextView>(R.id.setGlassListUnit)
@@ -36,6 +36,7 @@ class GlassesAdapter(val context: Context, val drinks: List<Drinks>) : RecyclerV
             drinkImage.setImageResource(resourceId)
             drinkVolume.text = drink.volume
             drinkUnit.text = drink.unit
+            itemView.setOnClickListener { itemClick(drink) }
         }
     }
 }
