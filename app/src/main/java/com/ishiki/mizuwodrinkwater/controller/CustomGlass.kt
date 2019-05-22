@@ -11,6 +11,8 @@ import kotlinx.android.synthetic.main.activity_custom_glass.*
 
 class CustomGlass : AppCompatActivity() {
 
+    lateinit var name: String
+
     private lateinit var currentGlass: Drinks
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +46,7 @@ class CustomGlass : AppCompatActivity() {
             number = 10
         }
 
-        val name = "water0$number"
+        name = "water0$number"
 
         val resourceId = resources.getIdentifier(name, "drawable", packageName)
         customGlassImage.setImageResource(resourceId)
@@ -54,6 +56,10 @@ class CustomGlass : AppCompatActivity() {
     }
 
     fun setCustomGlass(@Suppress("UNUSED_PARAMETER") view: View) {
+
+        println("I add a custom drink $name")
+//        drinks.add(Drinks(name,"250 ml", "ml"))
+
         val setCustomGlassIntent = Intent(this, SetGlassActivity::class.java)
         setCustomGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
         startActivity(setCustomGlassIntent)

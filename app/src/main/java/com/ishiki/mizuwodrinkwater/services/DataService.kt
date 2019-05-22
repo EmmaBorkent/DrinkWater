@@ -10,16 +10,15 @@ object DataService {
     // When putting it back, remember to also put back the import.
     var drinksToday: MutableList<Drinks> = mutableListOf()
 
-//    val glass = Drinks("glass", "water01", "250", "ml")
-//    val bottle = Drinks("bottle", "water02", "500", "ml")
-//    val juice = Drinks("juice", "water03", "150", "ml")
+//    val drinks = listOf(
+//        Drinks("water01", "250", "ml"),
+//        Drinks("water02", "500", "ml"),
+//        Drinks("water03", "150", "ml")
+//    )
 
-    val drinks = listOf(
+    val drinks = mutableListOf<Drinks>(
         Drinks("water01", "250", "ml"),
         Drinks("water02", "500", "ml"),
         Drinks("water03", "150", "ml")
     )
-
-//    val drinks = listOf<Drinks>(glass, bottle, juice)
-
 }
