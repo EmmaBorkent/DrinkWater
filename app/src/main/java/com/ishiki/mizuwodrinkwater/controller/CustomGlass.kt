@@ -5,23 +5,23 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.ishiki.mizuwodrinkwater.R
+import com.ishiki.mizuwodrinkwater.model.Drinks
+import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CURRENT
 import kotlinx.android.synthetic.main.activity_custom_glass.*
-import kotlin.random.Random
 
 class CustomGlass : AppCompatActivity() {
+
+    private lateinit var currentGlass: Drinks
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_custom_glass)
+
+        currentGlass = intent.getParcelableExtra(EXTRA_CURRENT)
     }
 
-    fun setCustomGlass(@Suppress("UNUSED_PARAMETER") view: View) {
-        val setCustomGlassIntent = Intent(this, SetGlassActivity::class.java)
-        startActivity(setCustomGlassIntent)
-    }
-
-    var number = 1
-    fun nextImage(view: View) {
+    private var number = 1
+    fun nextImage(@Suppress("UNUSED_PARAMETER") view: View) {
         if (number < 10) {
             number += 1
         } else {
@@ -37,7 +37,7 @@ class CustomGlass : AppCompatActivity() {
         println(number)
     }
 
-    fun prevImage(view: View) {
+    fun prevImage(@Suppress("UNUSED_PARAMETER") view: View) {
         if (number > 1) {
             number -= 1
         } else {
@@ -51,5 +51,11 @@ class CustomGlass : AppCompatActivity() {
 
         // Print to check
         println(number)
+    }
+
+    fun setCustomGlass(@Suppress("UNUSED_PARAMETER") view: View) {
+        val setCustomGlassIntent = Intent(this, SetGlassActivity::class.java)
+        setCustomGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
+        startActivity(setCustomGlassIntent)
     }
 }

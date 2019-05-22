@@ -118,7 +118,7 @@
             android:layout_marginStart="8dp"/>
 
     <Button
-            android:id="@+id/setCustomGlassButton"
+            android:id="@+id/customCreateGlassButton"
             android:text="@string/create_glass"
             android:fontFamily="@font/montserrat"
             android:textSize="18sp"

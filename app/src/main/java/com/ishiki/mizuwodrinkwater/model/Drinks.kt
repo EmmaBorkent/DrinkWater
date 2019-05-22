@@ -5,16 +5,15 @@ import android.os.Parcelable
 
 // Use this when you want to use different glass sizes
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class Drinks(val glass: String, val image: String, val volume: String, val unit: String) : Parcelable {
+class Drinks(val image: String, val volume: String, val unit: String) : Parcelable {
+
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(glass)
         parcel.writeString(image)
         parcel.writeString(volume)
         parcel.writeString(unit)
@@ -33,4 +32,5 @@ class Drinks(val glass: String, val image: String, val volume: String, val unit:
             return arrayOfNulls(size)
         }
     }
+
 }

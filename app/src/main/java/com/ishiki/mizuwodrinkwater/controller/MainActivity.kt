@@ -7,10 +7,8 @@ import android.view.View
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.TodayDrinksAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
-import com.ishiki.mizuwodrinkwater.services.DataService.bottle
+import com.ishiki.mizuwodrinkwater.services.DataService.drinks
 import com.ishiki.mizuwodrinkwater.services.DataService.drinksToday
-import com.ishiki.mizuwodrinkwater.services.DataService.glass
-import com.ishiki.mizuwodrinkwater.services.DataService.juice
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CURRENT
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_SET
@@ -19,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private var dailyTotal = 0
-    private var currentGlass = glass
+    private var currentGlass = drinks[0]
     private lateinit var adapter: TodayDrinksAdapter
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -45,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             currentGlass = intent.getParcelableExtra(EXTRA_SET)
 
             // Print to check
-            println(currentGlass.glass)
+            println(currentGlass.image)
         }
         mainWaterAmount.text = currentGlass.volume
 
@@ -63,9 +61,12 @@ class MainActivity : AppCompatActivity() {
         mainTextDailyTotal.text = addWater().toString()
 
         when (mainWaterAmount.text) {
-            glass.volume -> drinksToday.add(0, glass)
-            bottle.volume -> drinksToday.add(0, bottle)
-            else -> drinksToday.add(0, juice)
+            drinks[0].volume -> drinksToday.add(0, drinks[0])
+            drinks[1].volume -> drinksToday.add(0, drinks[1])
+//            glass.volume -> drinksToday.add(0, glass)
+//            bottle.volume -> drinksToday.add(0, bottle)
+            else -> drinksToday.add(0, drinks[2])
+//                drinksToday.add(0, juice)
         }
         adapter.notifyDataSetChanged()
 

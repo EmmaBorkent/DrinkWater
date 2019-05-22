@@ -10,10 +10,7 @@ import android.widget.Toast
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
-import com.ishiki.mizuwodrinkwater.services.DataService
-import com.ishiki.mizuwodrinkwater.services.DataService.bottle
-import com.ishiki.mizuwodrinkwater.services.DataService.glass
-import com.ishiki.mizuwodrinkwater.services.DataService.juice
+import com.ishiki.mizuwodrinkwater.services.DataService.drinks
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CURRENT
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_SET
@@ -32,14 +29,14 @@ class SetGlassActivity : AppCompatActivity() {
         dailyTotal = intent.getIntExtra(EXTRA_DAILY, dailyTotal)
         currentGlass = intent.getParcelableExtra(EXTRA_CURRENT)
 
-        adapter = GlassesAdapter(this, DataService.drinks) { drink ->
+        adapter = GlassesAdapter(this, drinks) { drink ->
             // Here goes the code that you want to happen when you click on it
-            println(drink.glass)
+            println(drink.image)
 
-            when (drink.glass) {
-                "glass" -> currentGlass = glass
-                "bottle" -> currentGlass = bottle
-                "juice" -> currentGlass = juice
+            when (drink.image) {
+                "water01" -> currentGlass = drinks[0]
+                "water02" -> currentGlass = drinks[1]
+                "water03" -> currentGlass = drinks[2]
                 else -> Toast.makeText(this, "No Glass Was Selected", Toast.LENGTH_LONG).show()
             }
 
@@ -60,11 +57,12 @@ class SetGlassActivity : AppCompatActivity() {
         setGlassListView?.adapter = adapter
 
         // To check if the intent works
-        println("Currently using a ${currentGlass.glass}")
+        println("Currently using a ${currentGlass.image}")
     }
 
     fun createCustomClass(@Suppress("UNUSED_PARAMETER") view: View) {
         val customGlassIntent = Intent(this, CustomGlass::class.java)
+        customGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
         startActivity(customGlassIntent)
     }
 }
