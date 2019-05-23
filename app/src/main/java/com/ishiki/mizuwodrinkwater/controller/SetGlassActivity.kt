@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
-import android.widget.Toast
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
@@ -33,12 +32,8 @@ class SetGlassActivity : AppCompatActivity() {
             // Here goes the code that you want to happen when you click on it
             println("Selected ${drink.image}")
 
-            when (drink.image) {
-                "water01" -> currentGlass = drinks[0]
-                "water02" -> currentGlass = drinks[1]
-                "water03" -> currentGlass = drinks[2]
-                else -> Toast.makeText(this, "No Glass Was Selected", Toast.LENGTH_LONG).show()
-            }
+            currentGlass = drink
+            println("CurrentGlass is ${currentGlass.image}")
 
             val setGlassIntent = Intent(this, MainActivity::class.java)
             setGlassIntent.putExtra(EXTRA_DAILY, dailyTotal)
@@ -62,8 +57,9 @@ class SetGlassActivity : AppCompatActivity() {
 
     fun createCustomClass(@Suppress("UNUSED_PARAMETER") view: View) {
         // Print to check
-        println("Into intent on SetGlassActivity is ${currentGlass.image}")
+        println("Into Intent on SetGlassActivity is ${currentGlass.image}")
         val customGlassIntent = Intent(this, CustomGlass::class.java)
+        customGlassIntent.putExtra(EXTRA_DAILY, dailyTotal)
         customGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
         startActivity(customGlassIntent)
     }

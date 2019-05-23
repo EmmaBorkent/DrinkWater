@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         if (intent.getParcelableExtra<Drinks>(EXTRA_SET) != null) {
             currentGlass = intent.getParcelableExtra(EXTRA_SET)
 
-            // Print to check if intent workd
+            // Print to check if intent works
             println("Intent in MainActivity ${currentGlass.image}")
         }
         mainWaterAmount.text = currentGlass.volume

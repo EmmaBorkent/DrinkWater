@@ -9,18 +9,22 @@ import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DataService.drinks
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CURRENT
+import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
 import kotlinx.android.synthetic.main.activity_custom_glass.*
 
 class CustomGlass : AppCompatActivity() {
 
+    private var dailyTotal = 0
     var name = drinks[0].image
     private var number = 1
+    private lateinit var newDrink: Drinks
     private lateinit var currentGlass: Drinks
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_custom_glass)
 
+        dailyTotal = intent.getIntExtra(EXTRA_DAILY, dailyTotal)
         currentGlass = intent.getParcelableExtra(EXTRA_CURRENT)
         // To check if the intent works
         println("Intent in CustomGlassActivity ${currentGlass.image}")
@@ -49,7 +53,6 @@ class CustomGlass : AppCompatActivity() {
         }
 
         name = "water0$number"
-
         val resourceId = resources.getIdentifier(name, "drawable", packageName)
         customGlassImage.setImageResource(resourceId)
 
@@ -60,17 +63,17 @@ class CustomGlass : AppCompatActivity() {
     fun setCustomGlass(@Suppress("UNUSED_PARAMETER") view: View) {
 
         val volume = customVolumeInput.text.toString()
-        
+
         if (volume.isNotEmpty()) {
-            currentGlass = Drinks(name, volume, "ml")
-            drinks.add(0, currentGlass)
+            newDrink = Drinks(name, volume, "ml")
+            drinks.add(0, newDrink)
 
             // Print to check
-            println("Added a custom drink ${currentGlass.image}")
-            println("With volume ${currentGlass.volume}")
+            println("Added a custom drink ${newDrink.image}, with volume ${newDrink.volume}")
             println("List now contains ${drinks.size} items")
 
             val setCustomGlassIntent = Intent(this, SetGlassActivity::class.java)
+            setCustomGlassIntent.putExtra(EXTRA_DAILY, dailyTotal)
             setCustomGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
             startActivity(setCustomGlassIntent)
         } else {
