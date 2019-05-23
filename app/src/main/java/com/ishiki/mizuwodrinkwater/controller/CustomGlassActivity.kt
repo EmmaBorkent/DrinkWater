@@ -7,14 +7,15 @@ import android.view.View
 import android.widget.Toast
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
+import com.ishiki.mizuwodrinkwater.services.DataService.dailyTotal
 import com.ishiki.mizuwodrinkwater.services.DataService.drinks
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CURRENT
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
 import kotlinx.android.synthetic.main.activity_custom_glass.*
 
-class CustomGlass : AppCompatActivity() {
+class CustomGlassActivity : AppCompatActivity() {
 
-    private var dailyTotal = 0
+//    private var dailyTotal = 0
     var name = "water01"
     private var number = 1
     private lateinit var newDrink: Drinks
@@ -24,7 +25,7 @@ class CustomGlass : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_custom_glass)
 
-        dailyTotal = intent.getIntExtra(EXTRA_DAILY, dailyTotal)
+//        dailyTotal = intent.getIntExtra(EXTRA_DAILY, dailyTotal)
         currentGlass = intent.getParcelableExtra(EXTRA_CURRENT)
         // To check if the intent works
         println("Intent in CustomGlassActivity ${currentGlass.image}")
@@ -73,7 +74,7 @@ class CustomGlass : AppCompatActivity() {
             println("List now contains ${drinks.size} items")
 
             val setCustomGlassIntent = Intent(this, SetGlassActivity::class.java)
-            setCustomGlassIntent.putExtra(EXTRA_DAILY, dailyTotal)
+//            setCustomGlassIntent.putExtra(EXTRA_DAILY, dailyTotal)
             setCustomGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
             startActivity(setCustomGlassIntent)
         } else {

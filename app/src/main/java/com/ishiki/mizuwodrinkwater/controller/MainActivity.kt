@@ -7,6 +7,7 @@ import android.view.View
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.TodayDrinksAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
+import com.ishiki.mizuwodrinkwater.services.DataService.dailyTotal
 import com.ishiki.mizuwodrinkwater.services.DataService.drinks
 import com.ishiki.mizuwodrinkwater.services.DataService.drinksToday
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CURRENT
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private var dailyTotal = 0
+//    private var dailyTotal = 0
     private var currentGlass = drinks[0]
     private lateinit var adapter: TodayDrinksAdapter
 
@@ -81,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
     fun setGlassClick(@Suppress("UNUSED_PARAMETER") view: View) {
         val setGlassIntent = Intent(this, SetGlassActivity::class.java)
-        setGlassIntent.putExtra(EXTRA_DAILY, dailyTotal)
+//        setGlassIntent.putExtra(EXTRA_DAILY, dailyTotal)
         setGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
         startActivity(setGlassIntent)
     }
