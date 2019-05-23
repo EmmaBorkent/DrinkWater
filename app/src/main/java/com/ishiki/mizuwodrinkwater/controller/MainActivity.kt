@@ -60,10 +60,7 @@ class MainActivity : AppCompatActivity() {
         when (mainWaterAmount.text) {
             drinks[0].volume -> drinksToday.add(0, drinks[0])
             drinks[1].volume -> drinksToday.add(0, drinks[1])
-//            glass.volume -> drinksToday.add(0, glass)
-//            bottle.volume -> drinksToday.add(0, bottle)
             else -> drinksToday.add(0, drinks[2])
-//                drinksToday.add(0, juice)
         }
         adapter.notifyDataSetChanged()
 

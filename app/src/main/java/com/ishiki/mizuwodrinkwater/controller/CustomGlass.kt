@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DataService.drinks
@@ -58,15 +59,23 @@ class CustomGlass : AppCompatActivity() {
 
     fun setCustomGlass(@Suppress("UNUSED_PARAMETER") view: View) {
 
-        currentGlass = Drinks(name, "250", "ml")
-        drinks.add(0, currentGlass)
+        val volume = customVolumeInput.text.toString()
+        
+        if (volume.isNotEmpty()) {
+            currentGlass = Drinks(name, volume, "ml")
+            drinks.add(0, currentGlass)
 
-        // Print to check
-        println("Added a custom drink ${currentGlass.image}")
-        println("List now contains ${drinks.size} items")
+            // Print to check
+            println("Added a custom drink ${currentGlass.image}")
+            println("With volume ${currentGlass.volume}")
+            println("List now contains ${drinks.size} items")
 
-        val setCustomGlassIntent = Intent(this, SetGlassActivity::class.java)
-        setCustomGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
-        startActivity(setCustomGlassIntent)
+            val setCustomGlassIntent = Intent(this, SetGlassActivity::class.java)
+            setCustomGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
+            startActivity(setCustomGlassIntent)
+        } else {
+            val toast = Toast.makeText(this, "Please enter a volume for the glass", Toast.LENGTH_SHORT)
+            toast.show()
+        }
     }
 }

@@ -61,6 +61,8 @@ class SetGlassActivity : AppCompatActivity() {
     }
 
     fun createCustomClass(@Suppress("UNUSED_PARAMETER") view: View) {
+        // Print to check
+        println("Into intent on SetGlassActivity is ${currentGlass.image}")
         val customGlassIntent = Intent(this, CustomGlass::class.java)
         customGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
         startActivity(customGlassIntent)
