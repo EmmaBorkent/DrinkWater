@@ -31,7 +31,7 @@ class SetGlassActivity : AppCompatActivity() {
 
         adapter = GlassesAdapter(this, drinks) { drink ->
             // Here goes the code that you want to happen when you click on it
-            println(drink.image)
+            println("Selected ${drink.image}")
 
             when (drink.image) {
                 "water01" -> currentGlass = drinks[0]
@@ -57,7 +57,7 @@ class SetGlassActivity : AppCompatActivity() {
         setGlassListView?.adapter = adapter
 
         // To check if the intent works
-        println("Currently using a ${currentGlass.image}")
+        println("Intent in SetGlassActivity ${currentGlass.image}")
     }
 
     fun createCustomClass(@Suppress("UNUSED_PARAMETER") view: View) {

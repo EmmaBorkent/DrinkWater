@@ -42,19 +42,16 @@ class MainActivity : AppCompatActivity() {
         if (intent.getParcelableExtra<Drinks>(EXTRA_SET) != null) {
             currentGlass = intent.getParcelableExtra(EXTRA_SET)
 
-            // Print to check
-            println(currentGlass.image)
+            // Print to check if intent workd
+            println("Intent in MainActivity ${currentGlass.image}")
         }
         mainWaterAmount.text = currentGlass.volume
 
         adapter = TodayDrinksAdapter(this, drinksToday)
         drinksTodayList.adapter = adapter
 
-        when (mainWaterAmount.text) {
-            "500" -> mainDrinkImage.setBackgroundResource(R.drawable.water02)
-            "150" -> mainDrinkImage.setBackgroundResource(R.drawable.water03)
-            else -> mainDrinkImage.setBackgroundResource(R.drawable.water01)
-        }
+        val resourceId = resources.getIdentifier(currentGlass.image, "drawable", packageName)
+        mainDrinkImage.setBackgroundResource(resourceId)
     }
 
     fun addWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
@@ -71,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         adapter.notifyDataSetChanged()
 
         // Print to check
-        println("Added ${currentGlass.volume} ${currentGlass.unit}. List now contains ${drinksToday.size} items.")
+        println("Added ${currentGlass.image}. List now contains ${drinksToday.size} items.")
     }
 
     fun removeWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
