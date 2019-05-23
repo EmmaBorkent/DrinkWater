@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_custom_glass.*
 class CustomGlass : AppCompatActivity() {
 
     private var dailyTotal = 0
-    var name = drinks[0].image
+    var name = "water01"
     private var number = 1
     private lateinit var newDrink: Drinks
     private lateinit var currentGlass: Drinks
