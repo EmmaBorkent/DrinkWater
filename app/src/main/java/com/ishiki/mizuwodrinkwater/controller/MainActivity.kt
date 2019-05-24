@@ -3,9 +3,10 @@ package com.ishiki.mizuwodrinkwater.controller
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.adapters.TodayDrinksAdapter
+import com.ishiki.mizuwodrinkwater.adapters.TodayDrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DataService.dailyTotal
 import com.ishiki.mizuwodrinkwater.services.DataService.drinks
@@ -17,9 +18,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-//    private var dailyTotal = 0
     private var currentGlass = drinks[0]
-    private lateinit var adapter: TodayDrinksAdapter
+    private lateinit var adapter: TodayDrinksRecyclerAdapter
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
@@ -48,8 +48,11 @@ class MainActivity : AppCompatActivity() {
         }
         mainWaterAmount.text = currentGlass.volume
 
-        adapter = TodayDrinksAdapter(this, drinksToday)
+        adapter = TodayDrinksRecyclerAdapter(this, drinksToday)
         drinksTodayList.adapter = adapter
+        val layoutManager = LinearLayoutManager(this)
+        drinksTodayList?.layoutManager = layoutManager
+        drinksTodayList?.setHasFixedSize(true)
 
         val resourceId = resources.getIdentifier(currentGlass.image, "drawable", packageName)
         mainDrinkImage.setBackgroundResource(resourceId)
@@ -68,6 +71,15 @@ class MainActivity : AppCompatActivity() {
         // Print to check
         println("Added ${currentGlass.image}. List now contains ${drinksToday.size} items.")
     }
+
+//    fun deleteDrink(@Suppress("UNUSED_PARAMETER") view: View) {
+//        println("Delete Me")
+//    }
+
+//    fun deleteItem(drinks: Drinks) {
+//        drinksToday.remove(drinks)
+//        adapter.notifyDataSetChanged()
+//    }
 
     fun removeWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
         if (dailyTotal > 0 || drinksToday.isNotEmpty()) {

@@ -9,10 +9,8 @@ import android.view.View
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
-import com.ishiki.mizuwodrinkwater.services.DataService.dailyTotal
 import com.ishiki.mizuwodrinkwater.services.DataService.drinks
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CURRENT
-import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_SET
 import kotlinx.android.synthetic.main.activity_set_glass.*
 
@@ -50,6 +48,7 @@ class SetGlassActivity : AppCompatActivity() {
 
         val layoutManager = GridLayoutManager(this, spanCount)
         setGlassListView?.layoutManager = layoutManager
+        setGlassListView?.setHasFixedSize(true)
         setGlassListView?.adapter = adapter
 
         // To check if the intent works

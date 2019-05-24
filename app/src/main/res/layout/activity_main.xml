@@ -130,7 +130,7 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.6"/>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
             android:id="@+id/drinksTodayList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
