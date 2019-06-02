@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import android.widget.Toast
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.TodayDrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.services.DrinkTypes.currentGlass
@@ -65,6 +66,9 @@ class MainActivity : AppCompatActivity() {
         DrinksToday.addDrink()
         adapter.notifyDataSetChanged()
         mainTextDailyTotal.text = dailyTotal.toString()
+        if (dailyTotal == goal) {
+            goalReached()
+        }
     }
 
     fun setGlassClick(@Suppress("UNUSED_PARAMETER") view: View) {
@@ -74,5 +78,13 @@ class MainActivity : AppCompatActivity() {
         startActivity(setGlassIntent)
     }
 
-    fun setGoal(view: View) {}
+    fun setGoal(@Suppress("UNUSED_PARAMETER") view: View) {
+        val setGoalIntent = Intent(this, GoalActivity::class.java)
+        startActivity(setGoalIntent)
+    }
+
+    fun goalReached() {
+        val toast = Toast.makeText(this, "Congratulations! You reached your daily goal!", Toast.LENGTH_LONG)
+        toast.show()
+    }
 }

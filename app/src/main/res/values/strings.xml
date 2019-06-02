@@ -30,4 +30,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string name="goal_title">set goal</string>
+    <string name="goal_text">Set your daily goal</string>
 </resources>
