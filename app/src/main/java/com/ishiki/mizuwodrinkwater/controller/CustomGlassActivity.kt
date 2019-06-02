@@ -26,7 +26,7 @@ class CustomGlassActivity : AppCompatActivity() {
 //        dailyTotal = intent.getIntExtra(EXTRA_DAILY, dailyTotal)
 //        currentGlass = intent.getParcelableExtra(EXTRA_CURRENT)
         // To check if the intent works
-        println("Intent in CustomGlassActivity ${currentGlass.image}")
+//        println("Intent in CustomGlassActivity ${currentGlass.image}")
     }
 
     fun nextImage(@Suppress("UNUSED_PARAMETER") view: View) {

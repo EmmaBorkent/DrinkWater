@@ -42,24 +42,21 @@ class MainActivity : AppCompatActivity() {
 //            // Print to check if intent works
 //            println("Intent in MainActivity ${currentGlass.image}")
 //        }
+
+        val resourceId = resources.getIdentifier(currentGlass.image, "drawable", packageName)
+        mainDrinkImage.setBackgroundResource(resourceId)
         mainWaterAmount.text = currentGlass.volume
+        mainTextDailyTotal.text = dailyTotal.toString()
 
         adapter = TodayDrinksRecyclerAdapter(this, DrinksToday.drinksTodayList, object : TodayDrinksRecyclerAdapter.OnItemClickListener {
             override fun onItemClick(dailyTotal: Int) {
                 mainTextDailyTotal.text = dailyTotal.toString()
             }
         })
-
-//        , object : ItemClickInterfaces() {} {
-//            override fun itemClick() {}
-//        })
         drinksTodayList.adapter = adapter
         val layoutManager = LinearLayoutManager(this)
         drinksTodayList?.layoutManager = layoutManager
         drinksTodayList?.setHasFixedSize(true)
-
-        val resourceId = resources.getIdentifier(currentGlass.image, "drawable", packageName)
-        mainDrinkImage.setBackgroundResource(resourceId)
     }
 
     fun addWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
