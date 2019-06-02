@@ -60,12 +60,7 @@ class MainActivity : AppCompatActivity() {
 
     fun addWaterClick(@Suppress("UNUSED_PARAMETER") view: View) {
         mainTextDailyTotal.text = addWater().toString()
-
-        when (mainWaterAmount.text) {
-            drinks[0].volume -> drinksToday.add(0, drinks[0])
-            drinks[1].volume -> drinksToday.add(0, drinks[1])
-            else -> drinksToday.add(0, drinks[2])
-        }
+        DrinksToday.addDrink()
         adapter.notifyDataSetChanged()
 
         // Print to check
