@@ -13,11 +13,9 @@ import kotlinx.android.synthetic.main.activity_custom_glass.*
 
 class CustomGlassActivity : AppCompatActivity() {
 
-//    private var dailyTotal = 0
     var name = "water01"
     private var number = 1
     private lateinit var newDrink: Drinks
-    private lateinit var currentGlass: Drinks
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

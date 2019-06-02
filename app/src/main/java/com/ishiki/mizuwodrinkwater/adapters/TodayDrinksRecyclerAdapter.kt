@@ -19,7 +19,6 @@ class TodayDrinksRecyclerAdapter(private val context: Context, private val today
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): Holder {
         val view = LayoutInflater.from(context).inflate(R.layout.today_drinks_list, p0, false)
-//        this.itemClickListener = itemClickListener
         return Holder(view)
     }
 
@@ -29,16 +28,9 @@ class TodayDrinksRecyclerAdapter(private val context: Context, private val today
 
     override fun onBindViewHolder(p0: Holder, p1: Int) {
         p0.bindDrinks(todayDrinks[p1])
-
-//        if (null != OnItemClickListener) {
-//            itemClickListener.onItemClick(TodayDrinksRecyclerAdapter)
-//        }
-//        p0.bindDrinks(todayDrinks[p1], context)
-//        if (null != callback) callback.onItemClick(dailyTotalTextView)
     }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        fun bindDrinks(drinks: Drinks, context: Context, callback: OnItemClickListener)
         fun bindDrinks(drinks: Drinks) {
             val resourceId = context.resources.getIdentifier(drinks.image, "drawable", context.packageName)
             itemView.drinkListImage.setImageResource(resourceId)
@@ -49,14 +41,9 @@ class TodayDrinksRecyclerAdapter(private val context: Context, private val today
                 val position = adapterPosition
                 DrinksToday.removeDrink(position)
                 dailyTotal -= drinks.volume.toInt()
-//                val dailyTotalTextView = itemView.findViewById<TextView>(R.id.mainTextDailyTotal)
-//                dailyTotalTextView.text = dailyTotal.toString()
 
                 notifyDataSetChanged()
                 onItemClickListener.onItemClick(dailyTotal)
-
-                // Print to check
-                println("Delete Me at $position")
             }
         }
     }
