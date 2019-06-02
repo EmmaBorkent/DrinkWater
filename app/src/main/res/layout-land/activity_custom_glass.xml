@@ -41,17 +41,18 @@
     <ImageView
             android:id="@+id/customGlassImage"
             android:contentDescription="@string/custom_image"
-            android:layout_width="224dp"
-            android:layout_height="224dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="32dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="40dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/customText"
             app:layout_constraintEnd_toStartOf="@id/guidelineCustomGlassActivity"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias="0.4"
+            app:layout_constraintDimensionRatio="1:1"
             app:srcCompat="@drawable/water01"/>
 
     <ImageButton
