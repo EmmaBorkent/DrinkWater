@@ -2,6 +2,7 @@
     <string name="app_name">Mizuwo Drink Water</string>
 
     <string name="main_title">TODAY</string>
+    <string name="main_text">Tap the image to change the glass</string>
     <string name="main_drank">Total</string>
     <string name="main_total">0</string>
     <string name="main_unit">ml</string>
@@ -10,7 +11,9 @@
     <string name="glass_150">150</string>
     <string name="glass_250">250</string>
     <string name="glass_500">500</string>
-    <string name="main_undo">undo</string>
+    <string name="main_goal">goal</string>
+    <string name="main_goal_start_amount">2000</string>
+    <string name="main_button_set_goal">Set Goal</string>
 
     <string name="set_glass">CHANGE GLASS</string>
     <string name="set_glass_text">Pick a glass to add to your daily total</string>

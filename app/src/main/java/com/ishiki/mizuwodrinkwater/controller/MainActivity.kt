@@ -10,6 +10,7 @@ import com.ishiki.mizuwodrinkwater.adapters.TodayDrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.services.DrinkTypes.currentGlass
 import com.ishiki.mizuwodrinkwater.services.DrinksToday
 import com.ishiki.mizuwodrinkwater.services.DrinksToday.dailyTotal
+import com.ishiki.mizuwodrinkwater.services.DrinksToday.goal
 //import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CURRENT
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
 import kotlinx.android.synthetic.main.activity_main.*
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         mainDrinkImage.setBackgroundResource(resourceId)
         mainWaterAmount.text = currentGlass.volume
         mainTextDailyTotal.text = dailyTotal.toString()
+        mainTextGoalNumber.text = goal.toString()
 
         adapter = TodayDrinksRecyclerAdapter(this, DrinksToday.drinksTodayList, object : TodayDrinksRecyclerAdapter.OnItemClickListener {
             override fun onItemClick(dailyTotal: Int) {
@@ -71,4 +73,6 @@ class MainActivity : AppCompatActivity() {
 //        setGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
         startActivity(setGlassIntent)
     }
+
+    fun setGoal(view: View) {}
 }
