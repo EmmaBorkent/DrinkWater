@@ -7,10 +7,8 @@ import android.view.View
 import android.widget.Toast
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
-import com.ishiki.mizuwodrinkwater.services.DataService.dailyTotal
-import com.ishiki.mizuwodrinkwater.services.DataService.drinks
-import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CURRENT
-import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
+import com.ishiki.mizuwodrinkwater.services.DrinkTypes.drinks
+//import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CURRENT
 import kotlinx.android.synthetic.main.activity_custom_glass.*
 
 class CustomGlassActivity : AppCompatActivity() {
@@ -26,7 +24,7 @@ class CustomGlassActivity : AppCompatActivity() {
         setContentView(R.layout.activity_custom_glass)
 
 //        dailyTotal = intent.getIntExtra(EXTRA_DAILY, dailyTotal)
-        currentGlass = intent.getParcelableExtra(EXTRA_CURRENT)
+//        currentGlass = intent.getParcelableExtra(EXTRA_CURRENT)
         // To check if the intent works
         println("Intent in CustomGlassActivity ${currentGlass.image}")
     }
@@ -75,7 +73,7 @@ class CustomGlassActivity : AppCompatActivity() {
 
             val setCustomGlassIntent = Intent(this, SetGlassActivity::class.java)
 //            setCustomGlassIntent.putExtra(EXTRA_DAILY, dailyTotal)
-            setCustomGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
+//            setCustomGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
             startActivity(setCustomGlassIntent)
         } else {
             val toast = Toast.makeText(this, "Please enter a volume for the glass", Toast.LENGTH_SHORT)
