@@ -1,11 +1,13 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Mizuwo Drink Water</string>
 
+    <string name="main_unit">ml</string>
+    <string name="goal_weight">kg</string>
+
     <string name="main_title">TODAY</string>
     <string name="main_text">Tap the image to change the glass</string>
     <string name="main_drank">Total</string>
     <string name="main_total">0</string>
-    <string name="main_unit">ml</string>
     <string name="main_add">+</string>
     <string name="basic_amount">%1$d</string>
     <string name="glass_150">150</string>
@@ -33,4 +35,7 @@
 
     <string name="goal_title">set goal</string>
     <string name="goal_text">Set your daily goal</string>
+    <string name="goal_enter_weight_text">Enter your weight to calculate your daily goal</string>
+    <string name="goal_calculate">Calculate</string>
+    <string name="goal_enter_goal">Or enter your own daily goal, or adjust as you\'de like</string>
 </resources>

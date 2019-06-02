@@ -16,9 +16,22 @@ class GoalActivity : AppCompatActivity() {
         setContentView(R.layout.activity_goal)
     }
 
-    fun setGoal(view: View) {
+    fun calculateGoal(@Suppress("UNUSED_PARAMETER") view: View) {
+        val weight = goalWeightInput.text.toString()
 
-        val goal = goalInput.text.toString()
+        if (weight.isNotEmpty()) {
+            val calculateGoal = weight.toInt()*32.56
+            DrinksToday.goal = calculateGoal.toInt()
+        } else {
+            val toast = Toast.makeText(this, "Please enter your weight to calculate your daily goal",
+                Toast.LENGTH_SHORT)
+            toast.show()
+        }
+    }
+
+    fun setGoal(@Suppress("UNUSED_PARAMETER") view: View) {
+
+        val goal = goalWeightInput.text.toString()
 
         if (goal.isNotEmpty()) {
             DrinksToday.goal = goal.toInt()
