@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".controller.CustomGlassActivity">
+
+    <TextView
+            android:id="@+id/customTitel"
+            android:text="@string/create_glass"
+            android:fontFamily="@font/julius_sans_one"
+            android:textSize="42sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+
+    <TextView
+            android:id="@+id/customText"
+            android:text="@string/custom_text"
+            android:fontFamily="@font/montserrat"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            app:layout_constraintTop_toBottomOf="@+id/customTitel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+
+    <ImageView
+            android:id="@+id/customGlassImage"
+            android:contentDescription="@string/custom_image"
+            android:layout_width="224dp"
+            android:layout_height="224dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/customText"
+            app:layout_constraintEnd_toStartOf="@id/guidelineCustomGlassActivity"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.4"
+            app:srcCompat="@drawable/water01"/>
+
+    <ImageButton
+            android:id="@+id/customArrowRight"
+            android:contentDescription="@string/custom_right"
+            android:onClick="nextImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintStart_toEndOf="@+id/customGlassImage"
+            app:layout_constraintTop_toTopOf="@+id/customGlassImage"
+            app:layout_constraintEnd_toStartOf="@id/guidelineCustomGlassActivity"
+            app:layout_constraintBottom_toBottomOf="@+id/customGlassImage"
+            app:srcCompat="@drawable/ic_keyboard_arrow_right"/>
+
+    <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/ic_keyboard_arrow_left"
+            android:id="@+id/customArrowLeft"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/customGlassImage"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toTopOf="@+id/customGlassImage"
+            app:layout_constraintBottom_toBottomOf="@+id/customGlassImage"
+            android:contentDescription="@string/custom_left"
+            android:onClick="prevImage"/>
+
+    <EditText
+            android:id="@+id/customVolumeInput"
+            android:inputType="number"
+            android:ems="10"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            android:fontFamily="@font/montserrat"
+            android:autofillHints="@string/glass_250"
+            android:hint="@string/glass_250"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintEnd_toStartOf="@+id/mainTextUnit4"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="@+id/guidelineCustomGlassActivity"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/customCreateGlassButton"/>
+
+    <TextView
+            android:id="@+id/mainTextUnit4"
+            android:text="@string/main_unit"
+            android:fontFamily="@font/montserrat"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBaseline_toBaselineOf="@id/customVolumeInput"
+            app:layout_constraintStart_toEndOf="@+id/customVolumeInput"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/customCreateGlassButton"
+            app:layout_constraintHorizontal_bias="0.5"/>
+
+    <Button
+            android:id="@+id/customCreateGlassButton"
+            android:text="@string/create_glass"
+            android:onClick="setCustomGlass"
+            android:fontFamily="@font/montserrat"
+            android:textSize="18sp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintStart_toStartOf="@id/customVolumeInput"
+            app:layout_constraintEnd_toEndOf="@id/mainTextUnit4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"/>
+
+    <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guidelineCustomGlassActivity"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6019152"/>
+
+</android.support.constraint.ConstraintLayout>
