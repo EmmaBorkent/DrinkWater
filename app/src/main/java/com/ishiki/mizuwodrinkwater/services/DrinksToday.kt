@@ -6,7 +6,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 object DrinksToday {
 
-    var goal = 2500
+    var goal = 2000
     var dailyTotal = 0
     var drinksTodayList: MutableList<Drinks> = mutableListOf()
 

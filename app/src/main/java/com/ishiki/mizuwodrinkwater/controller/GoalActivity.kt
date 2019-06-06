@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.services.DrinksToday
+import com.ishiki.mizuwodrinkwater.services.DrinksToday.goal
 import kotlinx.android.synthetic.main.activity_goal.*
 
 class GoalActivity : AppCompatActivity() {
@@ -20,8 +20,8 @@ class GoalActivity : AppCompatActivity() {
         val weight = goalWeightInput.text.toString()
 
         if (weight.isNotEmpty()) {
-            val calculateGoal = weight.toInt()*32.56
-            DrinksToday.goal = calculateGoal.toInt()
+            goal = weight.toInt() * 33
+            goalInput.setText(goal.toString())
         } else {
             val toast = Toast.makeText(this, "Please enter your weight to calculate your daily goal",
                 Toast.LENGTH_SHORT)
@@ -30,16 +30,13 @@ class GoalActivity : AppCompatActivity() {
     }
 
     fun setGoal(@Suppress("UNUSED_PARAMETER") view: View) {
+        val setGoalIntent = Intent(this, MainActivity::class.java)
 
-        val goal = goalWeightInput.text.toString()
-
-        if (goal.isNotEmpty()) {
-            DrinksToday.goal = goal.toInt()
-
-            val setGoalIntent = Intent(this, MainActivity::class.java)
+        if (goalInput.text.isNotEmpty()) {
+            goal = goalInput.text.toString().toInt()
             startActivity(setGoalIntent)
         } else {
-            val toast = Toast.makeText(this, "Please enter a daily goal", Toast.LENGTH_SHORT)
+            val toast = Toast.makeText(this, "Please enter or calculate your daily goal", Toast.LENGTH_SHORT)
             toast.show()
         }
     }

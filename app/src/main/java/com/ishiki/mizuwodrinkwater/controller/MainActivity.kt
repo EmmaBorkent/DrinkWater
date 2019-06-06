@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         DrinksToday.addDrink()
         adapter.notifyDataSetChanged()
         mainTextDailyTotal.text = dailyTotal.toString()
-        if (dailyTotal == goal) {
+        if (dailyTotal >= goal) {
             goalReached()
         }
     }
@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(setGoalIntent)
     }
 
-    fun goalReached() {
+    private fun goalReached() {
         val toast = Toast.makeText(this, "Congratulations! You reached your daily goal!", Toast.LENGTH_LONG)
         toast.show()
     }

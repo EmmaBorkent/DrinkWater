@@ -8,7 +8,7 @@
         tools:context=".controller.GoalActivity">
 
     <EditText
-            android:id="@+id/goalInput2"
+            android:id="@+id/goalInput"
             android:layout_width="112dp"
             android:layout_height="wrap_content"
             android:inputType="number"
@@ -22,9 +22,9 @@
             android:textAlignment="center"
             android:fontFamily="@font/montserrat"
             android:autofillHints="@string/main_goal_start_amount"
-            android:hint="@string/main_goal_start_amount"
             android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@+id/goalTextEnterWeightText"/>
+            app:layout_constraintTop_toBottomOf="@+id/goalTextEnterWeightText"
+            />
 
     <TextView
             android:id="@+id/mainTextUnit8"
@@ -34,9 +34,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="@+id/goalInput2"
-            app:layout_constraintTop_toTopOf="@+id/goalInput2"
-            app:layout_constraintStart_toEndOf="@+id/goalInput2"
+            app:layout_constraintBottom_toBottomOf="@+id/goalInput"
+            app:layout_constraintTop_toTopOf="@+id/goalInput"
+            app:layout_constraintStart_toEndOf="@+id/goalInput"
             android:layout_marginStart="4dp"
             android:hint="@string/main_goal_start_amount"/>
 
@@ -85,7 +85,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@+id/goalInput2"/>
+            app:layout_constraintTop_toBottomOf="@+id/goalInput"/>
 
     <Button
             android:id="@+id/goalCalculate"
