@@ -6,6 +6,7 @@
 
     <string name="main_title">TODAY</string>
     <string name="main_text">Tap the image to change the glass</string>
+    <string name="main_text_2">Tap GOAL to change the daily goal</string>
     <string name="main_drank">Total</string>
     <string name="main_total">0</string>
     <string name="main_add">+</string>
