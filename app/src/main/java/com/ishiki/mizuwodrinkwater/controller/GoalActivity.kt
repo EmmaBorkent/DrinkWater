@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.ishiki.mizuwodrinkwater.R
+import com.ishiki.mizuwodrinkwater.services.DrinksToday
 import com.ishiki.mizuwodrinkwater.services.DrinksToday.goal
+import com.ishiki.mizuwodrinkwater.utilities.DAILY_GOAL
 import kotlinx.android.synthetic.main.activity_goal.*
 
 class GoalActivity : AppCompatActivity() {
@@ -34,6 +36,7 @@ class GoalActivity : AppCompatActivity() {
 
         if (goalInput.text.isNotEmpty()) {
             goal = goalInput.text.toString().toInt()
+            DrinksToday.sharedPreferences!!.edit().putInt(DAILY_GOAL, goal).apply()
             startActivity(setGoalIntent)
         } else {
             val toast = Toast.makeText(this, "Please enter or calculate your daily goal", Toast.LENGTH_SHORT)

@@ -8,11 +8,14 @@ import android.view.View
 import android.widget.Toast
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.TodayDrinksRecyclerAdapter
+import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinkTypes.currentGlass
 import com.ishiki.mizuwodrinkwater.services.DrinksToday
 import com.ishiki.mizuwodrinkwater.services.DrinksToday.dailyTotal
 import com.ishiki.mizuwodrinkwater.services.DrinksToday.goal
-//import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CURRENT
+import com.ishiki.mizuwodrinkwater.services.DrinksToday.sharedPreferences
+import com.ishiki.mizuwodrinkwater.services.ObjectSerializer
+import com.ishiki.mizuwodrinkwater.utilities.DAILY_GOAL
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_DAILY
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -27,23 +30,32 @@ class MainActivity : AppCompatActivity() {
 //        }
 //    }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        savedInstanceState?.run {
-//            dailyTotal = getInt(EXTRA_DAILY)
-//            mainTextDailyTotal.text = dailyTotal.toString()
-//        }
+        sharedPreferences = this.getSharedPreferences("com.ishiki.mizuwodrinkwater", 0)
+        goal = sharedPreferences!!.getInt(DAILY_GOAL, goal)
+        dailyTotal = sharedPreferences!!.getInt("dailyTotal", dailyTotal)
 
-//        dailyTotal = intent.getIntExtra(EXTRA_DAILY, dailyTotal)
+        DrinksToday.drinksTodayList.clear()
 
-//        if (intent.getParcelableExtra<Drinks>(EXTRA_SET) != null) {
-//            currentGlass = intent.getParcelableExtra(EXTRA_SET)
-//
-//            // Print to check if intent works
-//            println("Intent in MainActivity ${currentGlass.image}")
-//        }
+        val image = ObjectSerializer.deserialize(sharedPreferences?.getString("image",
+            ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<String>
+        val volume = ObjectSerializer.deserialize(sharedPreferences?.getString("volume",
+            ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<String>
+        val unit = ObjectSerializer.deserialize(sharedPreferences?.getString("unit",
+            ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<String>
+
+        if (image.size > 0 && volume.size > 0 && unit.size > 0) {
+            if (image.size == volume.size && image.size == unit.size) {
+
+                for ((i) in image.withIndex()) {
+                    DrinksToday.drinksTodayList.add(Drinks(image[i], volume[i], unit[i]))
+                }
+            }
+        }
 
         val resourceId = resources.getIdentifier(currentGlass.image, "drawable", packageName)
         mainDrinkImage.setBackgroundResource(resourceId)

@@ -14,7 +14,7 @@ import com.ishiki.mizuwodrinkwater.services.DrinksToday.dailyTotal
 import kotlinx.android.synthetic.main.today_drinks_list.view.*
 
 class TodayDrinksRecyclerAdapter(private val context: Context, private val todayDrinks: MutableList<Drinks>,
-                                 private var onItemClickListener: OnItemClickListener) :
+                                 private var onItemClickListener : OnItemClickListener) :
     RecyclerView.Adapter<TodayDrinksRecyclerAdapter.Holder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): Holder {
@@ -41,6 +41,7 @@ class TodayDrinksRecyclerAdapter(private val context: Context, private val today
                 val position = adapterPosition
                 DrinksToday.removeDrink(position)
                 dailyTotal -= drinks.volume.toInt()
+                DrinksToday.sharedPreferences!!.edit().putInt("dailyTotal", dailyTotal).apply()
 
                 notifyDataSetChanged()
                 onItemClickListener.onItemClick(dailyTotal)
