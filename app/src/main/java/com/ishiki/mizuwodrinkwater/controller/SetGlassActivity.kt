@@ -25,28 +25,30 @@ class SetGlassActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_glass)
 
-        drinks.clear()
+        if (DrinksToday.sharedPreferences!!.contains("imageCustom")) {
+            drinks.clear()
 
-//        currentGlass = intent.getParcelableExtra(EXTRA_CURRENT)
+            val image = ObjectSerializer.deserialize(
+                DrinksToday.sharedPreferences?.getString("imageCustom",
+                    ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<String>
+            val volume = ObjectSerializer.deserialize(
+                DrinksToday.sharedPreferences?.getString("volumeCustom",
+                    ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<String>
+            val unit = ObjectSerializer.deserialize(
+                DrinksToday.sharedPreferences?.getString("unitCustom",
+                    ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<String>
 
-        val image = ObjectSerializer.deserialize(
-            DrinksToday.sharedPreferences?.getString("imageCustom",
-                ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<String>
-        val volume = ObjectSerializer.deserialize(
-            DrinksToday.sharedPreferences?.getString("volumeCustom",
-                ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<String>
-        val unit = ObjectSerializer.deserialize(
-            DrinksToday.sharedPreferences?.getString("unitCustom",
-                ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<String>
+            if (image.size > 0 && volume.size > 0 && unit.size > 0) {
+                if (image.size == volume.size && image.size == unit.size) {
 
-        if (image.size > 0 && volume.size > 0 && unit.size > 0) {
-            if (image.size == volume.size && image.size == unit.size) {
-
-                for ((i) in image.withIndex()) {
-                    drinks.add(Drinks(image[i], volume[i], unit[i]))
+                    for ((i) in image.withIndex()) {
+                        drinks.add(Drinks(image[i], volume[i], unit[i]))
+                    }
                 }
             }
         }
+
+//        currentGlass = intent.getParcelableExtra(EXTRA_CURRENT)
 
         adapter = GlassesAdapter(this, drinks) { drink ->
             // Here goes the code that you want to happen when you click on it
