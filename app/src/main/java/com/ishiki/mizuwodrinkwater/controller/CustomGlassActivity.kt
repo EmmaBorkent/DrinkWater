@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
+import com.ishiki.mizuwodrinkwater.services.DrinkTypes
 import com.ishiki.mizuwodrinkwater.services.DrinkTypes.drinks
 //import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CURRENT
 import kotlinx.android.synthetic.main.activity_custom_glass.*
@@ -64,6 +65,7 @@ class CustomGlassActivity : AppCompatActivity() {
         if (volume.isNotEmpty()) {
             newDrink = Drinks(name, volume, "ml")
             drinks.add(0, newDrink)
+            DrinkTypes.serializeCustomDrinksList()
 
             // Print to check
             println("Added a custom drink ${newDrink.image}, with volume ${newDrink.volume}")

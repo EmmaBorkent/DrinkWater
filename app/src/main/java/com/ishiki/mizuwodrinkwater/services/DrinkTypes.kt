@@ -1,6 +1,7 @@
 package com.ishiki.mizuwodrinkwater.services
 
 import com.ishiki.mizuwodrinkwater.model.Drinks
+import com.ishiki.mizuwodrinkwater.services.DrinksToday.sharedPreferences
 
 object DrinkTypes {
 
@@ -11,4 +12,20 @@ object DrinkTypes {
     )
 
     var currentGlass = drinks[0]
+
+    fun serializeCustomDrinksList() {
+        val image: ArrayList<String> = ArrayList()
+        val volume: ArrayList<String> = ArrayList()
+        val unit: ArrayList<String> = ArrayList()
+
+        for (drinks: Drinks in drinks) {
+            image.add(drinks.image)
+            volume.add(drinks.volume)
+            unit.add(drinks.unit)
+        }
+
+        sharedPreferences?.edit()?.putString("imageCustom", ObjectSerializer.serialize(image))?.apply()
+        sharedPreferences?.edit()?.putString("volumeCustom", ObjectSerializer.serialize(volume))?.apply()
+        sharedPreferences?.edit()?.putString("unitCustom", ObjectSerializer.serialize(unit))?.apply()
+    }
 }

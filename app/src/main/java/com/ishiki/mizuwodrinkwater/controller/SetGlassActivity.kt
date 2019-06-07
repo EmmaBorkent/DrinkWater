@@ -8,20 +8,45 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
+import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinkTypes.currentGlass
 import com.ishiki.mizuwodrinkwater.services.DrinkTypes.drinks
+import com.ishiki.mizuwodrinkwater.services.DrinkTypes.serializeCustomDrinksList
 import com.ishiki.mizuwodrinkwater.services.DrinksToday
+import com.ishiki.mizuwodrinkwater.services.ObjectSerializer
 import kotlinx.android.synthetic.main.activity_set_glass.*
 
 class SetGlassActivity : AppCompatActivity() {
 
     private lateinit var adapter: GlassesAdapter
 
+    @Suppress("UNCHECKED_CAST")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_glass)
 
+        drinks.clear()
+
 //        currentGlass = intent.getParcelableExtra(EXTRA_CURRENT)
+
+        val image = ObjectSerializer.deserialize(
+            DrinksToday.sharedPreferences?.getString("imageCustom",
+                ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<String>
+        val volume = ObjectSerializer.deserialize(
+            DrinksToday.sharedPreferences?.getString("volumeCustom",
+                ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<String>
+        val unit = ObjectSerializer.deserialize(
+            DrinksToday.sharedPreferences?.getString("unitCustom",
+                ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<String>
+
+        if (image.size > 0 && volume.size > 0 && unit.size > 0) {
+            if (image.size == volume.size && image.size == unit.size) {
+
+                for ((i) in image.withIndex()) {
+                    drinks.add(Drinks(image[i], volume[i], unit[i]))
+                }
+            }
+        }
 
         adapter = GlassesAdapter(this, drinks) { drink ->
             // Here goes the code that you want to happen when you click on it
