@@ -38,6 +38,11 @@ class MainActivity : AppCompatActivity() {
         sharedPreferences = this.getSharedPreferences("com.ishiki.mizuwodrinkwater", 0)
         goal = sharedPreferences!!.getInt(DAILY_GOAL, goal)
         dailyTotal = sharedPreferences!!.getInt("dailyTotal", dailyTotal)
+        currentGlass = Drinks(
+            sharedPreferences?.getString("currentGlassImage", currentGlass.image).toString(),
+            sharedPreferences?.getString("currentGlassVolume", currentGlass.volume).toString(),
+            sharedPreferences?.getString("currentGlassUnit", currentGlass.unit).toString()
+        )
 
         DrinksToday.drinksTodayList.clear()
 

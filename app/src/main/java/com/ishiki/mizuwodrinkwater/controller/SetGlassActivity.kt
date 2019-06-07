@@ -10,14 +10,11 @@ import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
 import com.ishiki.mizuwodrinkwater.services.DrinkTypes.currentGlass
 import com.ishiki.mizuwodrinkwater.services.DrinkTypes.drinks
-//import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CURRENT
-//import com.ishiki.mizuwodrinkwater.utilities.EXTRA_SET
+import com.ishiki.mizuwodrinkwater.services.DrinksToday
 import kotlinx.android.synthetic.main.activity_set_glass.*
 
 class SetGlassActivity : AppCompatActivity() {
 
-//    private var dailyTotal = 0
-//    private lateinit var currentGlass: Drinks
     private lateinit var adapter: GlassesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +28,9 @@ class SetGlassActivity : AppCompatActivity() {
             println("Selected ${drink.image}")
 
             currentGlass = drink
-            println("CurrentGlass is ${currentGlass.image}")
+            DrinksToday.sharedPreferences!!.edit().putString("currentGlassImage", currentGlass.image).apply()
+            DrinksToday.sharedPreferences!!.edit().putString("currentGlassVolume", currentGlass.volume).apply()
+            DrinksToday.sharedPreferences!!.edit().putString("currentGlassUnit", currentGlass.unit).apply()
 
             val setGlassIntent = Intent(this, MainActivity::class.java)
 //            setGlassIntent.putExtra(EXTRA_DAILY, dailyTotal)
@@ -49,9 +48,6 @@ class SetGlassActivity : AppCompatActivity() {
         setGlassListView?.layoutManager = layoutManager
         setGlassListView?.setHasFixedSize(true)
         setGlassListView?.adapter = adapter
-
-        // To check if the intent works
-        println("Intent in SetGlassActivity ${currentGlass.image}")
     }
 
     fun createCustomClass(@Suppress("UNUSED_PARAMETER") view: View) {
