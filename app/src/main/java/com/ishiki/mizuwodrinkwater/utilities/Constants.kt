@@ -15,5 +15,6 @@ const val TABLE_NAME: String = "drinks"
 
 // Drinks table column names
 const val KEY_ID: String = "id"
-const val KEY_DRINK_IMAGE = ""
-const val KEY_DRINK_VOLUME = ""
+const val KEY_DRINK_IMAGE: String = "drink_name"
+const val KEY_DRINK_VOLUME: String = "drink_volume"
+const val KEY_DRINK_TIME: String = "drink_time"
