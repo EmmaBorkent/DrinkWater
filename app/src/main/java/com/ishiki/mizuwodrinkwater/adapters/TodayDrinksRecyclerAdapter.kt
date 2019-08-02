@@ -5,9 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-//import android.widget.TextView
 import com.ishiki.mizuwodrinkwater.R
-//import com.ishiki.mizuwodrinkwater.controller.OnDeleteListener
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksToday
 import com.ishiki.mizuwodrinkwater.services.DrinksToday.dailyTotal
@@ -15,7 +13,7 @@ import kotlinx.android.synthetic.main.today_drinks_list.view.*
 
 class TodayDrinksRecyclerAdapter(private val context: Context, private val todayDrinks: MutableList<Drinks>,
                                  private var onItemClickListener : OnItemClickListener) :
-    androidx.recyclerview.widget.RecyclerView.Adapter<TodayDrinksRecyclerAdapter.Holder>() {
+    RecyclerView.Adapter<TodayDrinksRecyclerAdapter.Holder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): Holder {
         val view = LayoutInflater.from(context).inflate(R.layout.today_drinks_list, p0, false)
@@ -30,17 +28,17 @@ class TodayDrinksRecyclerAdapter(private val context: Context, private val today
         p0.bindDrinks(todayDrinks[p1])
     }
 
-    inner class Holder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+    inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindDrinks(drinks: Drinks) {
             val resourceId = context.resources.getIdentifier(drinks.image, "drawable", context.packageName)
             itemView.drinkListImage.setImageResource(resourceId)
-            itemView.drinkListText.text = drinks.volume
-            itemView.drinkListUnit.text = drinks.unit
+            itemView.drinkListText.text = drinks.volume.toString()
+//            itemView.drinkListUnit.text = drinks.unit
 
             itemView.drinkListButtonDelete.setOnClickListener {
                 val position = adapterPosition
                 DrinksToday.removeDrink(position)
-                dailyTotal -= drinks.volume.toInt()
+                dailyTotal -= drinks.volume
                 DrinksToday.sharedPreferences!!.edit().putInt("dailyTotal", dailyTotal).apply()
 
                 notifyDataSetChanged()

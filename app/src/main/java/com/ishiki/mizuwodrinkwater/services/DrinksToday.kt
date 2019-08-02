@@ -13,7 +13,7 @@ object DrinksToday {
     var drinksTodayList: MutableList<Drinks> = mutableListOf()
 
     fun addDrink() {
-        dailyTotal += currentGlass.volume.toInt()
+        dailyTotal += currentGlass.volume
         sharedPreferences!!.edit().putInt("dailyTotal", dailyTotal).apply()
         drinksTodayList.add(0, currentGlass)
         serializeDrinksTodayList()
@@ -31,8 +31,8 @@ object DrinksToday {
 
         for (drinks: Drinks in drinksTodayList) {
             image.add(drinks.image)
-            volume.add(drinks.volume)
-            unit.add(drinks.unit)
+            volume.add(drinks.volume.toString())
+//            unit.add(drinks.unit)
         }
 
         sharedPreferences?.edit()?.putString("image", ObjectSerializer.serialize(image))?.apply()
