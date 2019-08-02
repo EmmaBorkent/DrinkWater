@@ -1,14 +1,12 @@
-package com.ishiki.mizuwodrinkwater.controller
+package com.ishiki.mizuwodrinkwater.activities
 
-import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.services.DrinksToday
 import com.ishiki.mizuwodrinkwater.services.DrinksToday.goal
-import com.ishiki.mizuwodrinkwater.utilities.DAILY_GOAL
 import kotlinx.android.synthetic.main.activity_goal.*
 
 class GoalActivity : AppCompatActivity() {
@@ -31,16 +29,16 @@ class GoalActivity : AppCompatActivity() {
         }
     }
 
-    fun setGoal(@Suppress("UNUSED_PARAMETER") view: View) {
-        val setGoalIntent = Intent(this, MainActivity::class.java)
-
-        if (goalInput.text.isNotEmpty()) {
-            goal = goalInput.text.toString().toInt()
-            DrinksToday.sharedPreferences!!.edit().putInt(DAILY_GOAL, goal).apply()
-            startActivity(setGoalIntent)
-        } else {
-            val toast = Toast.makeText(this, "Please enter or calculate your daily goal", Toast.LENGTH_SHORT)
-            toast.show()
-        }
-    }
+//    fun setGoal(@Suppress("UNUSED_PARAMETER") view: View) {
+//        val setGoalIntent = Intent(this, MainActivity::class.java)
+//
+//        if (goalInput.text.isNotEmpty()) {
+//            goal = goalInput.text.toString().toInt()
+//            DrinksToday.sharedPreferences!!.edit().putInt(DAILY_GOAL, goal).apply()
+//            startActivity(setGoalIntent)
+//        } else {
+//            val toast = Toast.makeText(this, "Please enter or calculate your daily goal", Toast.LENGTH_SHORT)
+//            toast.show()
+//        }
+//    }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/today"
+            android:title="@string/bottom_menu_today"
+            android:icon="@drawable/ic_menu_user" />
+
+    <item
+            android:id="@+id/history"
+            android:title="@string/bottom_menu_history"
+            android:icon="@drawable/ic_menu_calendar" />
+
+    <item
+            android:id="@+id/goal"
+            android:title="@string/bottom_menu_goal"
+            android:icon="@drawable/ic_menu_plane" />
+
+    <item
+            android:id="@+id/glasses"
+            android:title="@string/bottom_menu_glasses"
+            android:icon="@drawable/ic_menu_cup" />
+
+</menu>

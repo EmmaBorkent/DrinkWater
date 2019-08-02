@@ -1,7 +1,7 @@
-package com.ishiki.mizuwodrinkwater.controller
+package com.ishiki.mizuwodrinkwater.activities
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -9,7 +9,6 @@ import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinkTypes
 import com.ishiki.mizuwodrinkwater.services.DrinkTypes.drinks
-//import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CURRENT
 import kotlinx.android.synthetic.main.activity_custom_glass.*
 
 class CustomGlassActivity : AppCompatActivity() {

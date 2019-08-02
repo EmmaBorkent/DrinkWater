@@ -1,7 +1,7 @@
 package com.ishiki.mizuwodrinkwater.adapters
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.today_drinks_list.view.*
 
 class TodayDrinksRecyclerAdapter(private val context: Context, private val todayDrinks: MutableList<Drinks>,
                                  private var onItemClickListener : OnItemClickListener) :
-    RecyclerView.Adapter<TodayDrinksRecyclerAdapter.Holder>() {
+    androidx.recyclerview.widget.RecyclerView.Adapter<TodayDrinksRecyclerAdapter.Holder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): Holder {
         val view = LayoutInflater.from(context).inflate(R.layout.today_drinks_list, p0, false)
@@ -30,7 +30,7 @@ class TodayDrinksRecyclerAdapter(private val context: Context, private val today
         p0.bindDrinks(todayDrinks[p1])
     }
 
-    inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class Holder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
         fun bindDrinks(drinks: Drinks) {
             val resourceId = context.resources.getIdentifier(drinks.image, "drawable", context.packageName)
             itemView.drinkListImage.setImageResource(resourceId)
