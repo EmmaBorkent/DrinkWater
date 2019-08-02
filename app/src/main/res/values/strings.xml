@@ -47,4 +47,7 @@
     <string name="bottom_menu_goal">Goal</string>
     <string name="bottom_menu_glasses">Glasses</string>
 
+    // Popup
+    <string name="popup_select_button">Select</string>
+    
 </resources>

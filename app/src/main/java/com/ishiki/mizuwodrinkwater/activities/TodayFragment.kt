@@ -1,19 +1,26 @@
 package com.ishiki.mizuwodrinkwater.activities
 
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.TodayDrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.services.DrinksToday
 import kotlinx.android.synthetic.main.fragment_today.*
+import kotlinx.android.synthetic.main.popup_add_drink.*
+import kotlinx.android.synthetic.main.popup_add_drink.view.*
+import kotlinx.android.synthetic.main.popup_add_drink.view.popupSelectButton
 
 class TodayFragment : Fragment() {
 
     private lateinit var adapter: TodayDrinksRecyclerAdapter
+    private lateinit var dialogBuilder: AlertDialog.Builder
+    private lateinit var dialog: AlertDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,14 +87,19 @@ class TodayFragment : Fragment() {
 //            startActivity(setGlassIntent)
 //        }
 
-        mainButtonAdd?.setOnClickListener {
-            DrinksToday.addDrink()
-            adapter.notifyDataSetChanged()
-            mainTextDailyTotal.text = DrinksToday.dailyTotal.toString()
-            if (DrinksToday.dailyTotal >= DrinksToday.goal) {
-                goalReached()
-            }
+        todayAddButton.setOnClickListener {
+
+
         }
+
+//        mainButtonAdd?.setOnClickListener {
+//            DrinksToday.addDrink()
+//            adapter.notifyDataSetChanged()
+//            mainTextDailyTotal.text = DrinksToday.dailyTotal.toString()
+//            if (DrinksToday.dailyTotal >= DrinksToday.goal) {
+//                goalReached()
+//            }
+//        }
 
 //        mainButtonSetGoal.setOnClickListener {
 //            val setGoalIntent = Intent(context, GoalActivity::class.java)
@@ -95,10 +107,24 @@ class TodayFragment : Fragment() {
 //        }
     }
 
-    private fun goalReached() {
-        val toast = Toast.makeText(context, "Congratulations! You reached your daily goal!",
-            Toast.LENGTH_LONG)
-        toast.show()
+    private fun createPopup() {
+        val view = layoutInflater.inflate(R.layout.popup_add_drink, null)
+        val drinkImage = view.popupGlassImage
+        val drinkVolume = view.popupVolume
+
+        dialogBuilder = AlertDialog.Builder(activity!!.applicationContext).setView(view)
+        dialog = dialogBuilder.create()
+        dialog.show()
+
+        popupSelectButton.setOnClickListener {
+
+        }
     }
+
+//    private fun goalReached() {
+//        val toast = Toast.makeText(context, "Congratulations! You reached your daily goal!",
+//            Toast.LENGTH_LONG)
+//        toast.show()
+//    }
 
 }
