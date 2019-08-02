@@ -61,9 +61,9 @@ class TodayFragment : Fragment() {
 
 //        val resourceId = resources.getIdentifier(DrinkTypes.currentGlass.image, "drawable")
 //        mainDrinkImage?.setBackgroundResource(resourceId)
-        mainWaterAmount?.text = DrinkTypes.currentGlass.volume
-        mainTextDailyTotal?.text = DrinksToday.dailyTotal.toString()
-        mainTextGoalNumber?.text = DrinksToday.goal.toString()
+//        mainWaterAmount?.text = DrinkTypes.currentGlass.volume
+//        mainTextDailyTotal?.text = DrinksToday.dailyTotal.toString()
+//        mainTextGoalNumber?.text = DrinksToday.goal.toString()
 
         adapter = TodayDrinksRecyclerAdapter(MainActivity(), DrinksToday.drinksTodayList, object :
             TodayDrinksRecyclerAdapter.OnItemClickListener {
