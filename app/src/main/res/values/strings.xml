@@ -18,8 +18,8 @@
     <string name="main_goal_start_amount">2000</string>
     <string name="main_button_set_goal">Set Goal</string>
 
-    <string name="set_glass">CHANGE GLASS</string>
-    <string name="set_glass_text">Pick a glass to add to your daily total</string>
+    <string name="set_glass">GLASSES</string>
+    <string name="set_glass_text">These are your customized glasses</string>
     <string name="add_glass">Add a Glass</string>
     <string name="drink_list_image">Drink List Image</string>
     <string name="drink_list_delete_button">Drink List Delete Button</string>
