@@ -6,6 +6,7 @@ import android.os.Parcelable
 // Use this when you want to use different glass sizes
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class Drinks(val image: String, val volume: String, val unit: String) : Parcelable {
+    // LET OP unit veranderd naar ID in verband met database
 
     constructor(parcel: Parcel) : this(
         parcel.readString(),
