@@ -14,7 +14,7 @@ class GlassesAdapter(private val glassesList: ArrayList<Drinks>, private val con
     RecyclerView.Adapter<GlassesAdapter.GlassHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GlassHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.glasses_list, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.glasses_list_item, parent, false)
         return GlassHolder(view)
     }
 

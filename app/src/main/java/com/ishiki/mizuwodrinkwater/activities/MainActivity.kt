@@ -54,10 +54,10 @@ class MainActivity : AppCompatActivity() {
 //                    Toast.makeText(this, "Clicked GLASSES on Bottom App Bar", Toast.LENGTH_SHORT).show()
 
                     // Create a drink
-                    val createDrink = Drinks()
-                    createDrink.image = "water02"
-                    createDrink.volume = 500
-                    saveToDatabase(createDrink)
+//                    val createDrink = Drinks()
+//                    createDrink.image = "water02"
+//                    createDrink.volume = 500
+//                    saveToDatabase(createDrink)
 
                 }
 

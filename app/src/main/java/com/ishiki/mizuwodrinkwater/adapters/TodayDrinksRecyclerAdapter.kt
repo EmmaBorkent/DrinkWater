@@ -8,16 +8,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
-import com.ishiki.mizuwodrinkwater.services.DrinksToday
-import com.ishiki.mizuwodrinkwater.services.DrinksToday.dailyTotal
-import kotlinx.android.synthetic.main.today_drinks_list.view.*
+import kotlinx.android.synthetic.main.drinks_list_item.view.*
 
 class TodayDrinksRecyclerAdapter(private val context: Context, private val todayDrinks: MutableList<Drinks>,
                                  private var onItemClickListener : OnItemClickListener) :
     RecyclerView.Adapter<TodayDrinksRecyclerAdapter.Holder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): Holder {
-        val view = LayoutInflater.from(context).inflate(R.layout.today_drinks_list, p0, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.drinks_list_item, p0, false)
         return Holder(view)
     }
 
@@ -32,11 +30,11 @@ class TodayDrinksRecyclerAdapter(private val context: Context, private val today
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindDrinks(drinks: Drinks) {
             val resourceId = context.resources.getIdentifier(drinks.image, "drawable", context.packageName)
-            itemView.drinkListImage.setImageResource(resourceId)
-            itemView.drinkListText.text = drinks.volume.toString()
+            itemView.drinks_list_item_image.setImageResource(resourceId)
+            itemView.drinks_list_item_volume.text = drinks.volume.toString()
 //            itemView.drinkListUnit.text = drinks.unit
 
-            itemView.drinkListButtonDelete.setOnClickListener {
+            itemView.drinks_list_item_delete_button.setOnClickListener {
 //                val position = adapterPosition
 //                DrinksToday.removeDrink(position)
 //                dailyTotal -= drinks.volume
