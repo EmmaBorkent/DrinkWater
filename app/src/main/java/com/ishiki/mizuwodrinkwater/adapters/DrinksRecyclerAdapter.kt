@@ -4,9 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
@@ -38,6 +36,10 @@ class DrinksRecyclerAdapter(private val drinksList: ArrayList<Drinks>,
                 as TextView
         private val drinkTime = itemView.findViewById(R.id.drinks_list_item_time)
                 as TextView
+        private val drinkEdit = itemView.findViewById(R.id.drinks_list_item_edit_button)
+                as ImageButton
+        private val drinkDelete = itemView.findViewById(R.id.drinks_list_item_delete_button)
+                as ImageButton
 
         fun bindDrinks(drinks: Drinks) {
             val resourceId = context.resources.getIdentifier(drinks.image, "drawable",
@@ -45,8 +47,12 @@ class DrinksRecyclerAdapter(private val drinksList: ArrayList<Drinks>,
             drinkImage.setImageResource(resourceId)
             drinkVolume.text = drinks.volume.toString()
             drinkTime.text = drinks.showHumanDate(drinks.time)
-
-            itemView.drinks_list_item_delete_button.setOnClickListener {
+            drinkEdit.setImageResource(android.R.drawable.ic_menu_edit)
+            drinkEdit.setOnClickListener {
+                Toast.makeText(context, "Clicked Edit Button", Toast.LENGTH_SHORT).show()
+            }
+            drinkDelete.setImageResource(android.R.drawable.ic_menu_delete)
+            drinkDelete.setOnClickListener {
                 Toast.makeText(context, "Clicked Delete Button", Toast.LENGTH_SHORT).show()
             }
         }
