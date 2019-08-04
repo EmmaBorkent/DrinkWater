@@ -49,15 +49,12 @@
         
         app:layout_constraintTop_toTopOf="@+id/drinks_list_item_volume" />
     
-    <ImageButton
+    <Button
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:id="@+id/drinks_list_item_delete_button"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/drink_list_delete_button"
-        android:scaleType="fitXY"
-        android:tint="#FA6A75"
-        app:srcCompat="@android:drawable/ic_menu_delete"
+        android:background="@drawable/ic_drinks_list_item_delete_button"
         
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,15 +65,12 @@
 
         android:layout_margin="16dp" />
     
-    <ImageButton
+    <Button
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:id="@+id/drinks_list_item_edit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/drink_list_edit_button"
-        android:scaleType="fitXY"
-        android:background="@android:color/transparent"
-        android:tint="@android:color/holo_green_dark"
-        app:srcCompat="@android:drawable/ic_menu_edit"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/ic_drinks_list_item_edit_button"
         
         app:layout_constraintEnd_toStartOf="@id/drinks_list_item_delete_button"
         app:layout_constraintTop_toTopOf="@id/drinks_list_item_delete_button"
