@@ -1,41 +1,44 @@
 package com.ishiki.mizuwodrinkwater.adapters
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
 
-class GlassesAdapter(private val context: Context, private val drinks: MutableList<Drinks>, private val itemClick: (Drinks) -> Unit) : androidx.recyclerview.widget.RecyclerView.Adapter<GlassesAdapter.GlassHolder>() {
+class GlassesAdapter(private val glassesList: ArrayList<Drinks>, private val context: Context) :
+    RecyclerView.Adapter<GlassesAdapter.GlassHolder>() {
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): GlassHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.set_glass_list, p0, false)
-        return GlassHolder(view, itemClick)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GlassHolder {
+        val view = LayoutInflater.from(context).inflate(R.layout.glasses_list, parent, false)
+        return GlassHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return drinks.count()
+        return glassesList.size
     }
 
-    override fun onBindViewHolder(p0: GlassHolder, p1: Int) {
-        p0.bindGlass(drinks[p1], context)
+    override fun onBindViewHolder(holder: GlassHolder, position: Int) {
+        holder.bindViews(glassesList[position])
     }
 
-    inner class GlassHolder(itemView: View, val itemClick: (Drinks) -> Unit) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
-        private val drinkImage = itemView.findViewById<ImageView>(R.id.setGlassListImage)
-        private val drinkVolume = itemView.findViewById<TextView>(R.id.setGlassListVolume)
-        private val drinkUnit = itemView.findViewById<TextView>(R.id.setGlassListUnit)
 
-        fun bindGlass(drink: Drinks, context: Context) {
-            val resourceId = context.resources.getIdentifier(drink.image, "drawable", context.packageName)
-            drinkImage.setImageResource(resourceId)
-            drinkVolume.text = drink.volume
-            drinkUnit.text = drink.unit
-            itemView.setOnClickListener { itemClick(drink) }
+    inner class GlassHolder(itemView: View) :
+        RecyclerView.ViewHolder(itemView) {
+
+        private val image = itemView.findViewById(R.id.glasses_list_image) as ImageView
+        private val volume = itemView.findViewById(R.id.glasses_list_volume) as TextView
+
+        fun bindViews(drinks: Drinks) {
+            val resourceId = context.resources.getIdentifier(drinks.image, "drawable", context.packageName)
+            image.setImageResource(resourceId)
+            volume.text = drinks.volume.toString()
         }
+
     }
+
 }

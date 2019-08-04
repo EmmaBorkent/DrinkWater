@@ -8,7 +8,7 @@
         tools:context=".activities.SetGlassActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/setGlassButton"
+            android:id="@+id/glassesAddButton"
             android:onClick="createCustomClass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/setGlassText"
-            android:id="@+id/setGlassListView"
-            app:layout_constraintBottom_toTopOf="@+id/setGlassButton"/>
+            android:id="@+id/glassesRecyclerView"
+            app:layout_constraintBottom_toTopOf="@+id/glassesAddButton"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

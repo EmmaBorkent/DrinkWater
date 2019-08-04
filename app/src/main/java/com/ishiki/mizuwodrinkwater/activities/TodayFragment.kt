@@ -87,10 +87,9 @@ class TodayFragment : Fragment() {
 //            startActivity(setGlassIntent)
 //        }
 
-        todayAddButton.setOnClickListener {
-
-
-        }
+//        todayAddButton.setOnClickListener {
+//            Toast.makeText(context?.applicationContext, "Clicked FAB on Today Fragment", Toast.LENGTH_LONG).show()
+//        }
 
 //        mainButtonAdd?.setOnClickListener {
 //            DrinksToday.addDrink()
@@ -109,8 +108,8 @@ class TodayFragment : Fragment() {
 
     private fun createPopup() {
         val view = layoutInflater.inflate(R.layout.popup_add_drink, null)
-        val drinkImage = view.popupGlassImage
-        val drinkVolume = view.popupVolume
+//        val drinkImage = view.popupGlassImage
+//        val drinkVolume = view.popupVolume
 
         dialogBuilder = AlertDialog.Builder(activity!!.applicationContext).setView(view)
         dialog = dialogBuilder.create()

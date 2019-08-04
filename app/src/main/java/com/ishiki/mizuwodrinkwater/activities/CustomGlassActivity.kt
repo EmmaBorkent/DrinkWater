@@ -8,7 +8,7 @@ import android.widget.Toast
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinkTypes
-import com.ishiki.mizuwodrinkwater.services.DrinkTypes.drinks
+//import com.ishiki.mizuwodrinkwater.services.DrinkTypes.drinks
 import kotlinx.android.synthetic.main.activity_custom_glass.*
 
 class CustomGlassActivity : AppCompatActivity() {
@@ -57,26 +57,26 @@ class CustomGlassActivity : AppCompatActivity() {
         println("The drink is $name")
     }
 
-    fun setCustomGlass(@Suppress("UNUSED_PARAMETER") view: View) {
-
-        val volume = customVolumeInput.text.toString()
-
-        if (volume.isNotEmpty()) {
-            newDrink = Drinks(name, volume, "ml")
-            drinks.add(0, newDrink)
-            DrinkTypes.serializeCustomDrinksList()
-
-            // Print to check
-            println("Added a custom drink ${newDrink.image}, with volume ${newDrink.volume}")
-            println("List now contains ${drinks.size} items")
-
-            val setCustomGlassIntent = Intent(this, SetGlassActivity::class.java)
-//            setCustomGlassIntent.putExtra(EXTRA_DAILY, dailyTotal)
-//            setCustomGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
-            startActivity(setCustomGlassIntent)
-        } else {
-            val toast = Toast.makeText(this, "Please enter a volume for the glass", Toast.LENGTH_SHORT)
-            toast.show()
-        }
-    }
+//    fun setCustomGlass(@Suppress("UNUSED_PARAMETER") view: View) {
+//
+//        val volume = customVolumeInput.text.toString()
+//
+//        if (volume.isNotEmpty()) {
+//            newDrink = Drinks(name, volume, "ml")
+//            drinks.add(0, newDrink)
+//            DrinkTypes.serializeCustomDrinksList()
+//
+//            // Print to check
+//            println("Added a custom drink ${newDrink.image}, with volume ${newDrink.volume}")
+//            println("List now contains ${drinks.size} items")
+//
+//            val setCustomGlassIntent = Intent(this, SetGlassActivity::class.java)
+////            setCustomGlassIntent.putExtra(EXTRA_DAILY, dailyTotal)
+////            setCustomGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
+//            startActivity(setCustomGlassIntent)
+//        } else {
+//            val toast = Toast.makeText(this, "Please enter a volume for the glass", Toast.LENGTH_SHORT)
+//            toast.show()
+//        }
+//    }
 }

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksToday
@@ -36,13 +37,14 @@ class TodayDrinksRecyclerAdapter(private val context: Context, private val today
 //            itemView.drinkListUnit.text = drinks.unit
 
             itemView.drinkListButtonDelete.setOnClickListener {
-                val position = adapterPosition
-                DrinksToday.removeDrink(position)
-                dailyTotal -= drinks.volume
-                DrinksToday.sharedPreferences!!.edit().putInt("dailyTotal", dailyTotal).apply()
-
-                notifyDataSetChanged()
-                onItemClickListener.onItemClick(dailyTotal)
+//                val position = adapterPosition
+//                DrinksToday.removeDrink(position)
+//                dailyTotal -= drinks.volume
+//                DrinksToday.sharedPreferences!!.edit().putInt("dailyTotal", dailyTotal).apply()
+//
+//                notifyDataSetChanged()
+//                onItemClickListener.onItemClick(dailyTotal)
+                Toast.makeText(context, "No functionality right now", Toast.LENGTH_SHORT).show()
             }
         }
     }
