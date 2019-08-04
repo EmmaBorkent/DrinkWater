@@ -6,6 +6,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
+import com.ishiki.mizuwodrinkwater.utilities.DATABASE_NAME
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -28,7 +29,16 @@ class MainActivity : AppCompatActivity() {
                 glassesAddButton.show()
 
                 glassesAddButton.setOnClickListener {
-                    Toast.makeText(this, "Clicked TODAY on Bottom App Bar", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this, "Clicked TODAY on Bottom App Bar", Toast.LENGTH_SHORT).show()
+
+                    // Create a drink
+                    val createDrink = Drinks()
+                    createDrink.image = "water02"
+                    createDrink.volume = 500
+                    saveToDatabase(createDrink)
+
+//                    TodayFragment.adapter.notifyDataSetChanged()
+
                 }
 
                 println("Opened TODAY from itemId")
@@ -51,14 +61,7 @@ class MainActivity : AppCompatActivity() {
                 glassesAddButton.show()
 
                 glassesAddButton.setOnClickListener {
-//                    Toast.makeText(this, "Clicked GLASSES on Bottom App Bar", Toast.LENGTH_SHORT).show()
-
-                    // Create a drink
-//                    val createDrink = Drinks()
-//                    createDrink.image = "water02"
-//                    createDrink.volume = 500
-//                    saveToDatabase(createDrink)
-
+                    Toast.makeText(this, "Clicked GLASSES on Bottom App Bar", Toast.LENGTH_SHORT).show()
                 }
 
                 println("Opened GLASSES from itemId")

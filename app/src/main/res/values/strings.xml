@@ -49,5 +49,6 @@
 
     // Popup
     <string name="popup_select_button">Select</string>
-    
+    <string name="drinks_list_item_time">time</string>
+
 </resources>

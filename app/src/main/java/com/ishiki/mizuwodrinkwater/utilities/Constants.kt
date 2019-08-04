@@ -10,7 +10,7 @@ const val DAILY_GOAL = "daily_goal"
 
 // Database Constants
 const val DATABASE_VERSION: Int = 1
-const val DATABASE_NAME: String = "drinkWater.db"
+const val DATABASE_NAME: String = "mizuwo_drink_water.db"
 const val TABLE_NAME: String = "drinks"
 
 // Drinks table column names

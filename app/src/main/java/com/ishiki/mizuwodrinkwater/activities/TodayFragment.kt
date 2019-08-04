@@ -7,12 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
+import com.ishiki.mizuwodrinkwater.adapters.DrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
-import kotlinx.android.synthetic.main.fragment_glasses.*
 import kotlinx.android.synthetic.main.fragment_today.*
 import kotlinx.android.synthetic.main.popup_add_drink.*
 
@@ -22,7 +23,7 @@ class TodayFragment : Fragment() {
     private lateinit var glassesList: ArrayList<Drinks>
     private lateinit var glassListItem: ArrayList<Drinks>
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var adapter: GlassesAdapter
+    lateinit var adapter: DrinksRecyclerAdapter
     private lateinit var dialogBuilder: AlertDialog.Builder
     private lateinit var dialog: AlertDialog
 
@@ -125,9 +126,9 @@ class TodayFragment : Fragment() {
         glassesList.reverse()
         glassListItem = ArrayList()
 
-        layoutManager = GridLayoutManager(context!!.applicationContext, 2)
+        layoutManager = LinearLayoutManager(context!!.applicationContext)
         drinksTodayList.layoutManager = layoutManager
-        adapter = GlassesAdapter(glassListItem, context!!.applicationContext)
+        adapter = DrinksRecyclerAdapter(glassListItem, context!!.applicationContext)
         drinksTodayList.adapter = adapter
 
         glassesList = dbHandler.readAllDrinks()
