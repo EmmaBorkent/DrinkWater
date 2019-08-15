@@ -1,6 +1,7 @@
 package com.ishiki.mizuwodrinkwater.activities
 
 import android.os.Bundle
+import android.sax.RootElement
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_glasses.*
 
 class GlassesFragment : Fragment(), OnItemClickListener {
 
-    override fun onItemClicked(view: View) {
+    override fun onItemClicked(view: View, position: Int) {
         (activity as MainActivity).editGlass()
     }
 
@@ -37,7 +38,7 @@ class GlassesFragment : Fragment(), OnItemClickListener {
 
         layoutManager = GridLayoutManager(context!!.applicationContext, 2)
         glasses_recycler_view.layoutManager = layoutManager
-        adapter = GlassesAdapter(DrinkTypes.glasses, context!!.applicationContext, this)
+        adapter = GlassesAdapter(DrinkTypes.glasses, view!!.rootView.context, this)
         glasses_recycler_view.adapter = adapter
 
 //        showItems()

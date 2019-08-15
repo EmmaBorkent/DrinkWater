@@ -1,17 +1,21 @@
 package com.ishiki.mizuwodrinkwater.adapters
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
+import com.ishiki.mizuwodrinkwater.activities.MainActivity
+import com.ishiki.mizuwodrinkwater.activities.PopupEditGlassFragment
 import com.ishiki.mizuwodrinkwater.model.Drinks
+import com.ishiki.mizuwodrinkwater.services.CreateDialog
 import com.ishiki.mizuwodrinkwater.services.OnItemClickListener
 
 class GlassesAdapter(private val glassesList: ArrayList<Drinks>, private val context: Context,
@@ -31,29 +35,63 @@ class GlassesAdapter(private val glassesList: ArrayList<Drinks>, private val con
         holder.bindViews(glassesList[position])
     }
 
-    inner class GlassHolder(itemView: View/*, context: Context, list: ArrayList<Drinks>*/,
-                            listener: OnItemClickListener) :
-        RecyclerView.ViewHolder(itemView) {
-
+    inner class GlassHolder(
+        itemView: View/*,
+        context: Context,
+        list: ArrayList<Drinks>*/,
 //        private val mContext = context
 //        private val mList = list
-        private val mListener = listener
+        private val listener: OnItemClickListener) : RecyclerView.ViewHolder(itemView) {
 
+        lateinit var dialog: Dialog
+
+        private val glassesListItem: ConstraintLayout = itemView.findViewById(R.id.glasses_list_item) as ConstraintLayout
         private val image = itemView.findViewById(R.id.glasses_list_image) as ImageView
         private val volume = itemView.findViewById(R.id.glasses_list_volume) as TextView
         private val edit = itemView.findViewById(R.id.glasses_list_edit_button) as Button
 
+
+
         fun bindViews(drinks: Drinks) {
+//            dialog.setContentView(R.layout.popup_edit_glass)
+
+//            (context as MainActivity).editGlass()
+
+            val builder = Dialog(context)
+            builder.setContentView(R.layout.popup_edit_glass)
+            val popupImage: ImageView = builder.findViewById(R.id.popup_image) as ImageView
+            val popupArrowLeft: ImageButton = builder.findViewById(R.id.popup_arrow_left) as ImageButton
+            val popArrowRight: ImageButton = builder.findViewById(R.id.popup_arrow_right) as ImageButton
+            // changed type to textView, but I don't know if this will work, as it is a editText
+            val popVolumeInput: TextView = builder.findViewById(R.id.popup_volume_input) as TextView
+//            val popupUnit: TextView = builder.findViewById(R.id.popup_unit) as TextView
+            val popupImageResource = context.resources.getIdentifier(drinks.image, "drawable",
+                context.packageName)
+            popupImage.setImageResource(popupImageResource)
+            popupArrowLeft.setOnClickListener {  }
+            popArrowRight.setOnClickListener {  }
+            popVolumeInput.text = drinks.volume.toString()
+
             val resourceId = context.resources.getIdentifier(drinks.image, "drawable", context.packageName)
             image.setImageResource(resourceId)
             volume.text = drinks.volume.toString()
             edit.setOnClickListener {
-                mListener.onItemClicked(itemView)
+
+//                (context as MainActivity).supportFragmentManager
+
+                Toast.makeText(context, "Clicked Edit Button", Toast.LENGTH_SHORT).show()
+                builder.show()
+//                listener.onItemClicked(itemView, adapterPosition)
             }
         }
 
-        fun onClick(view: View) {
-            mListener.onItemClicked(view)
+//        fun editGlass() {
+//            val popupFragment = PopupEditGlassFragment()
+//            popupFragment.show(supportFragmentManager, "edit glass")
+//        }
+
+        fun onClick(view: View, position: Int) {
+            listener.onItemClicked(view, position)
         }
 
         @SuppressLint("InflateParams")

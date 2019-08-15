@@ -1,10 +1,13 @@
 package com.ishiki.mizuwodrinkwater.activities
 
+import android.app.Dialog
 import android.os.Bundle
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import com.ishiki.mizuwodrinkwater.R
+import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
+import com.ishiki.mizuwodrinkwater.services.CreateDialog
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -103,6 +106,8 @@ open class MainActivity : AppCompatActivity() {
 //    }
 
     fun editGlass() {
+
+//        builder.show()
         val popupFragment = PopupEditGlassFragment()
         popupFragment.show(supportFragmentManager, "edit glass")
     }
