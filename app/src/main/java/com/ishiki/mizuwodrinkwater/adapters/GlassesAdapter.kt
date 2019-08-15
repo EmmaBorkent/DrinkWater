@@ -43,14 +43,12 @@ class GlassesAdapter(private val glassesList: ArrayList<Drinks>, private val con
 //        private val mList = list
         private val listener: OnItemClickListener) : RecyclerView.ViewHolder(itemView) {
 
-        lateinit var dialog: Dialog
+//        lateinit var dialog: Dialog
+//        private val glassesListItem: ConstraintLayout = itemView.findViewById(R.id.glasses_list_item) as ConstraintLayout
 
-        private val glassesListItem: ConstraintLayout = itemView.findViewById(R.id.glasses_list_item) as ConstraintLayout
         private val image = itemView.findViewById(R.id.glasses_list_image) as ImageView
         private val volume = itemView.findViewById(R.id.glasses_list_volume) as TextView
         private val edit = itemView.findViewById(R.id.glasses_list_edit_button) as Button
-
-
 
         fun bindViews(drinks: Drinks) {
 //            dialog.setContentView(R.layout.popup_edit_glass)
@@ -59,17 +57,19 @@ class GlassesAdapter(private val glassesList: ArrayList<Drinks>, private val con
 
             val builder = Dialog(context)
             builder.setContentView(R.layout.popup_edit_glass)
+
             val popupImage: ImageView = builder.findViewById(R.id.popup_image) as ImageView
             val popupArrowLeft: ImageButton = builder.findViewById(R.id.popup_arrow_left) as ImageButton
             val popArrowRight: ImageButton = builder.findViewById(R.id.popup_arrow_right) as ImageButton
-            // changed type to textView, but I don't know if this will work, as it is a editText
             val popVolumeInput: TextView = builder.findViewById(R.id.popup_volume_input) as TextView
-//            val popupUnit: TextView = builder.findViewById(R.id.popup_unit) as TextView
+
             val popupImageResource = context.resources.getIdentifier(drinks.image, "drawable",
                 context.packageName)
             popupImage.setImageResource(popupImageResource)
-            popupArrowLeft.setOnClickListener {  }
-            popArrowRight.setOnClickListener {  }
+            popupArrowLeft.setImageResource(R.drawable.ic_keyboard_arrow_left)
+            popArrowRight.setImageResource(R.drawable.ic_keyboard_arrow_right)
+//            popupArrowLeft.setOnClickListener {  }
+//            popArrowRight.setOnClickListener {  }
             popVolumeInput.text = drinks.volume.toString()
 
             val resourceId = context.resources.getIdentifier(drinks.image, "drawable", context.packageName)
@@ -79,7 +79,7 @@ class GlassesAdapter(private val glassesList: ArrayList<Drinks>, private val con
 
 //                (context as MainActivity).supportFragmentManager
 
-                Toast.makeText(context, "Clicked Edit Button", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, "Clicked Edit Button", Toast.LENGTH_SHORT).show()
                 builder.show()
 //                listener.onItemClicked(itemView, adapterPosition)
             }
