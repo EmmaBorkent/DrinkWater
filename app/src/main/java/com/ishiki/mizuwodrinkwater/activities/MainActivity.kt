@@ -1,18 +1,11 @@
 package com.ishiki.mizuwodrinkwater.activities
 
-import android.app.AlertDialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.model.Drinks
-import com.ishiki.mizuwodrinkwater.utilities.DATABASE_NAME
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
-import com.ishiki.mizuwodrinkwater.services.OnItemClickListener
 import kotlinx.android.synthetic.main.activity_main.*
 
 open class MainActivity : AppCompatActivity() {
@@ -26,7 +19,7 @@ open class MainActivity : AppCompatActivity() {
 
     private lateinit var dbHandler: DrinksDatabaseHandler
 
-    val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
         when (item.itemId) {
             R.id.today -> {
@@ -50,7 +43,6 @@ open class MainActivity : AppCompatActivity() {
             R.id.glasses -> {
                 replaceFragment(GlassesFragment())
                 glassesAddButton.show()
-
                 glassesAddButton.setOnClickListener {
 
                     replaceFragment(CreateGlassFragment())
@@ -67,7 +59,6 @@ open class MainActivity : AppCompatActivity() {
 
     }
 
-//    @Suppress("UNCHECKED_CAST")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -90,18 +81,15 @@ open class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    fun homeFragment() {
+    private fun homeFragment() {
         replaceFragment(TodayFragment())
         glassesAddButton.show()
 
         glassesAddButton.setOnClickListener {
 
-//            editGlass()
             Toast.makeText(this, "Clicked Add on Home Fragment", Toast.LENGTH_SHORT).show()
 
-
-
-            // Create a drink
+                // Create a drink
 //                    val createDrink = Drinks()
 //                    createDrink.image = "water02"
 //                    createDrink.volume = 500
@@ -110,12 +98,8 @@ open class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveToDatabase(drinks: Drinks) {
-        dbHandler.createDrink(drinks)
-    }
-
-//    fun addGlass(view: View) {
-//        Toast.makeText(this, "Clicked FAB on Glasses Fragment", Toast.LENGTH_LONG).show()
+//    private fun saveToDatabase(drinks: Drinks) {
+//        dbHandler.createDrink(drinks)
 //    }
 
     fun editGlass() {

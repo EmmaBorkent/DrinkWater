@@ -1,6 +1,5 @@
 package com.ishiki.mizuwodrinkwater.activities
 
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +10,6 @@ import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinkTypes
 import kotlinx.android.synthetic.main.activity_custom_glass.*
-
 
 class CreateGlassFragment : Fragment() {
 
@@ -78,7 +76,7 @@ class CreateGlassFragment : Fragment() {
 
     }
 
-    //    fun setCustomGlass(@Suppress("UNUSED_PARAMETER") view: View) {
+//    fun setCustomGlass(@Suppress("UNUSED_PARAMETER") view: View) {
 //
 //        val volume = customVolumeInput.text.toString()
 //

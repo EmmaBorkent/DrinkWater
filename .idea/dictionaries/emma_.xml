@@ -2,8 +2,11 @@
   <dictionary name="emma_">
     <words>
       <w>ishiki</w>
+      <w>kotlinx</w>
+      <w>lateinit</w>
       <w>mizuwo</w>
       <w>mizuwodrinkwater</w>
+      <w>recyclerview</w>
     </words>
   </dictionary>
 </component>

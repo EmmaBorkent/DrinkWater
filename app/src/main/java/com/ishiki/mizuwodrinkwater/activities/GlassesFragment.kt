@@ -5,12 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
-import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinkTypes
 import com.ishiki.mizuwodrinkwater.services.OnItemClickListener
 import kotlinx.android.synthetic.main.fragment_glasses.*
@@ -21,7 +18,7 @@ class GlassesFragment : Fragment(), OnItemClickListener {
         (activity as MainActivity).editGlass()
     }
 
-    //    private lateinit var dbHandler: DrinksDatabaseHandler
+//    private lateinit var dbHandler: DrinksDatabaseHandler
 //    private lateinit var glassesList: ArrayList<Drinks>
 //    private lateinit var glassListItem: ArrayList<Drinks>
     private lateinit var layoutManager: GridLayoutManager
@@ -35,23 +32,6 @@ class GlassesFragment : Fragment(), OnItemClickListener {
         return inflater.inflate(R.layout.fragment_glasses, container, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-//        glassesAddButton.setOnClickListener {
-//
-//        }
-
-//        setGlassButton.setOnClickListener {
-//            // Print to check
-//            println("Into Intent on SetGlassActivity is ${DrinkTypes.currentGlass.image}")
-//            val customGlassIntent = Intent(context, CustomGlassActivity::class.java)
-////        customGlassIntent.putExtra(EXTRA_DAILY, dailyTotal)
-////        customGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
-//            startActivity(customGlassIntent)
-//        }
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -62,7 +42,6 @@ class GlassesFragment : Fragment(), OnItemClickListener {
 
 //        showItems()
     }
-
 
 //    private fun showItems() {
 //
@@ -90,7 +69,14 @@ class GlassesFragment : Fragment(), OnItemClickListener {
 //        adapter.notifyDataSetChanged()
 //
 //    }
-
-
+//
+//    setGlassButton.setOnClickListener {
+//        // Print to check
+//        println("Into Intent on SetGlassActivity is ${DrinkTypes.currentGlass.image}")
+//        val customGlassIntent = Intent(context, CustomGlassActivity::class.java)
+////        customGlassIntent.putExtra(EXTRA_DAILY, dailyTotal)
+////        customGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
+//        startActivity(customGlassIntent)
+//    }
 
 }

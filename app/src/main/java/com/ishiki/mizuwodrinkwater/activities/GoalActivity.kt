@@ -1,34 +1,33 @@
 package com.ishiki.mizuwodrinkwater.activities
-
-
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.view.View
-import android.widget.Toast
-import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.services.DrinksToday.goal
-import kotlinx.android.synthetic.main.activity_goal.*
-
-class GoalActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_goal)
-    }
-
-    fun calculateGoal(@Suppress("UNUSED_PARAMETER") view: View) {
-        val weight = goalWeightInput.text.toString()
-
-        if (weight.isNotEmpty()) {
-            goal = weight.toInt() * 33
-            goalInput.setText(goal.toString())
-        } else {
-            val toast = Toast.makeText(this, "Please enter your weight to calculate your daily goal",
-                Toast.LENGTH_SHORT)
-            toast.show()
-        }
-    }
-
+//
+//import androidx.appcompat.app.AppCompatActivity
+//import android.os.Bundle
+//import android.view.View
+//import android.widget.Toast
+//import com.ishiki.mizuwodrinkwater.R
+//import com.ishiki.mizuwodrinkwater.services.DrinksToday.goal
+//import kotlinx.android.synthetic.main.activity_goal.*
+//
+//class GoalActivity : AppCompatActivity() {
+//
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        setContentView(R.layout.activity_goal)
+//    }
+//
+//    fun calculateGoal(@Suppress("UNUSED_PARAMETER") view: View) {
+//        val weight = goalWeightInput.text.toString()
+//
+//        if (weight.isNotEmpty()) {
+//            goal = weight.toInt() * 33
+//            goalInput.setText(goal.toString())
+//        } else {
+//            val toast = Toast.makeText(this, "Please enter your weight to calculate your daily goal",
+//                Toast.LENGTH_SHORT)
+//            toast.show()
+//        }
+//    }
+//
 //    fun setGoal(@Suppress("UNUSED_PARAMETER") view: View) {
 //        val setGoalIntent = Intent(this, MainActivity::class.java)
 //
@@ -41,4 +40,4 @@ class GoalActivity : AppCompatActivity() {
 //            toast.show()
 //        }
 //    }
-}
+//}

@@ -1,4 +1,4 @@
-//package com.ishiki.mizuwodrinkwater.activities
+package com.ishiki.mizuwodrinkwater.activities
 //
 //import android.content.Intent
 //import android.content.res.Configuration

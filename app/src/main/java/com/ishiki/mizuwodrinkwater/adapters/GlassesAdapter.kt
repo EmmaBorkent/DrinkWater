@@ -1,11 +1,7 @@
 package com.ishiki.mizuwodrinkwater.adapters
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,15 +9,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.activities.MainActivity
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.OnItemClickListener
-import java.lang.IllegalStateException
 
 class GlassesAdapter(private val glassesList: ArrayList<Drinks>, private val context: Context,
                      private val listener: OnItemClickListener) :
@@ -29,7 +20,7 @@ class GlassesAdapter(private val glassesList: ArrayList<Drinks>, private val con
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GlassHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.glasses_list_item, parent, false)
-        return GlassHolder(view, context, glassesList, listener)
+        return GlassHolder(view, /*context, glassesList,*/ listener)
     }
 
     override fun getItemCount(): Int {
@@ -40,12 +31,12 @@ class GlassesAdapter(private val glassesList: ArrayList<Drinks>, private val con
         holder.bindViews(glassesList[position])
     }
 
-    inner class GlassHolder(itemView: View, context: Context, list: ArrayList<Drinks>,
+    inner class GlassHolder(itemView: View/*, context: Context, list: ArrayList<Drinks>*/,
                             listener: OnItemClickListener) :
         RecyclerView.ViewHolder(itemView) {
 
-        private val mContext = context
-        private val mList = list
+//        private val mContext = context
+//        private val mList = list
         private val mListener = listener
 
         private val image = itemView.findViewById(R.id.glasses_list_image) as ImageView
@@ -57,14 +48,6 @@ class GlassesAdapter(private val glassesList: ArrayList<Drinks>, private val con
             image.setImageResource(resourceId)
             volume.text = drinks.volume.toString()
             edit.setOnClickListener {
-                Toast.makeText(context, "Clicked Edit Button", Toast.LENGTH_SHORT).show()
-
-
-//                val mPosition: Int = adapterPosition
-//                val glass = mList[mPosition]
-//                editGlass(glass)
-
-                // Not sure if itemView is correct here...
                 mListener.onItemClicked(itemView)
             }
         }

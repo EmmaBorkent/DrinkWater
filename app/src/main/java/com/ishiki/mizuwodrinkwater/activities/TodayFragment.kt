@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
@@ -13,7 +12,6 @@ import com.ishiki.mizuwodrinkwater.adapters.DrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
 import kotlinx.android.synthetic.main.fragment_today.*
-import kotlinx.android.synthetic.main.popup_edit_glass.*
 
 class TodayFragment : Fragment() {
 
@@ -22,8 +20,6 @@ class TodayFragment : Fragment() {
     private lateinit var glassListItem: ArrayList<Drinks>
     private lateinit var layoutManager: RecyclerView.LayoutManager
     lateinit var adapter: DrinksRecyclerAdapter
-    private lateinit var dialogBuilder: AlertDialog.Builder
-    private lateinit var dialog: AlertDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
