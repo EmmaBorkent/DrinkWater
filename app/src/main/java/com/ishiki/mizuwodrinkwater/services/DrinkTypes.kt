@@ -1,9 +1,15 @@
 package com.ishiki.mizuwodrinkwater.services
 
-//import com.ishiki.mizuwodrinkwater.model.Drinks
+import com.ishiki.mizuwodrinkwater.model.Drinks
 //import com.ishiki.mizuwodrinkwater.services.DrinksToday.sharedPreferences
 
 object DrinkTypes {
+
+    val glasses = arrayListOf<Drinks>(
+        Drinks("water01", 250),
+        Drinks("water02", 500),
+        Drinks("water03", 150)
+    )
 
 //    val drinks = mutableListOf<Drinks>(
 //        Drinks("water01", "250", "ml"),

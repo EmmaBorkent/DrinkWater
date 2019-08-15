@@ -10,8 +10,10 @@ import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
 
+//private val onItemClickListener: AdapterView.OnItemClickListener
 class DrinksRecyclerAdapter(private val drinksList: ArrayList<Drinks>,
-                            private val context: Context) :
+                            private val context: Context
+                            ) :
         RecyclerView.Adapter<DrinksRecyclerAdapter.DrinksHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DrinksHolder {
@@ -31,8 +33,8 @@ class DrinksRecyclerAdapter(private val drinksList: ArrayList<Drinks>,
     inner class DrinksHolder(itemView: View, context: Context, list: ArrayList<Drinks>) :
             RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
-        val mContext = context
-        val mList = list
+        private val mContext = context
+        private val mList = list
 
         private val drinkImage = itemView.findViewById(R.id.drinks_list_item_image)
                 as ImageView
@@ -91,23 +93,8 @@ class DrinksRecyclerAdapter(private val drinksList: ArrayList<Drinks>,
 
     }
 
-    // TodayDrinksRecyclerAdapter
-    // Hieruit nodig de binding van de layout
-//    inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-//        fun bindDrinks(drinks: Drinks) {
-//            val resourceId = context.resources.getIdentifier(drinks.image, "drawable", context.packageName)
-//            itemView.drinks_list_item_image.setImageResource(resourceId)
-//            itemView.drinks_list_item_volume.text = drinks.volume.toString()
-//
-//            itemView.drinks_list_item_delete_button.setOnClickListener {
-//                Toast.makeText(context, "No functionality right now", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
-//
 //    interface OnItemClickListener {
-//        fun onItemClick(dailyTotal: Int)
+//        fun onItemClick(adapter: DrinksRecyclerAdapter)
 //    }
 
 }

@@ -1,16 +1,21 @@
 package com.ishiki.mizuwodrinkwater.activities
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.utilities.DATABASE_NAME
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
+import com.ishiki.mizuwodrinkwater.services.OnItemClickListener
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+open class MainActivity : AppCompatActivity() {
 
 //    override fun onSaveInstanceState(outState: Bundle?) {
 //        super.onSaveInstanceState(outState)
@@ -21,24 +26,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var dbHandler: DrinksDatabaseHandler
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+    val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
         when (item.itemId) {
             R.id.today -> {
-                replaceFragment(TodayFragment())
-                glassesAddButton.show()
-
-                glassesAddButton.setOnClickListener {
-//                    Toast.makeText(this, "Clicked TODAY on Bottom App Bar", Toast.LENGTH_SHORT).show()
-
-                    // Create a drink
-                    val createDrink = Drinks()
-                    createDrink.image = "water02"
-                    createDrink.volume = 500
-                    saveToDatabase(createDrink)
-
-                }
-
+//                replaceFragment(TodayFragment())
+                homeFragment()
                 println("Opened TODAY from itemId")
                 return@OnNavigationItemSelectedListener true
             }
@@ -59,7 +52,11 @@ class MainActivity : AppCompatActivity() {
                 glassesAddButton.show()
 
                 glassesAddButton.setOnClickListener {
-                    Toast.makeText(this, "Clicked GLASSES on Bottom App Bar", Toast.LENGTH_SHORT).show()
+
+                    replaceFragment(CreateGlassFragment())
+                    glassesAddButton.hide()
+
+//                    Toast.makeText(this, "Clicked GLASSES on Bottom App Bar", Toast.LENGTH_SHORT).show()
                 }
 
                 println("Opened GLASSES from itemId")
@@ -80,17 +77,37 @@ class MainActivity : AppCompatActivity() {
             val getIntent = intent.extras?.getInt("loadFragment")
             bottomNavigation.selectedItemId = getIntent!!
         } else {
-            replaceFragment(TodayFragment())
+            homeFragment()
         }
 
         dbHandler = DrinksDatabaseHandler(this)
 
     }
 
-    private fun replaceFragment(fragment: androidx.fragment.app.Fragment) {
+    fun replaceFragment(fragment: androidx.fragment.app.Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment)
         fragmentTransaction.commit()
+    }
+
+    fun homeFragment() {
+        replaceFragment(TodayFragment())
+        glassesAddButton.show()
+
+        glassesAddButton.setOnClickListener {
+
+//            editGlass()
+            Toast.makeText(this, "Clicked Add on Home Fragment", Toast.LENGTH_SHORT).show()
+
+
+
+            // Create a drink
+//                    val createDrink = Drinks()
+//                    createDrink.image = "water02"
+//                    createDrink.volume = 500
+//                    saveToDatabase(createDrink)
+
+        }
     }
 
     private fun saveToDatabase(drinks: Drinks) {
@@ -100,5 +117,10 @@ class MainActivity : AppCompatActivity() {
 //    fun addGlass(view: View) {
 //        Toast.makeText(this, "Clicked FAB on Glasses Fragment", Toast.LENGTH_LONG).show()
 //    }
+
+    fun editGlass() {
+        val popupFragment = PopupEditGlassFragment()
+        popupFragment.show(supportFragmentManager, "edit glass")
+    }
 
 }

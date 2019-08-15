@@ -6,16 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.DrinksRecyclerAdapter
-import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
 import kotlinx.android.synthetic.main.fragment_today.*
-import kotlinx.android.synthetic.main.popup_add_drink.*
+import kotlinx.android.synthetic.main.popup_edit_glass.*
 
 class TodayFragment : Fragment() {
 
@@ -128,15 +126,27 @@ class TodayFragment : Fragment() {
 
         layoutManager = LinearLayoutManager(context!!.applicationContext)
         drinksTodayList.layoutManager = layoutManager
+//        adapter = DrinksRecyclerAdapter(glassListItem, context!!.applicationContext, object : DrinksRecyclerAdapter.OnItemClickListener {
+//            override fun onItemClick(adapter: DrinksRecyclerAdapter) {
+//                adapter.notifyDataSetChanged()
+//            }
+//        })
+
         adapter = DrinksRecyclerAdapter(glassListItem, context!!.applicationContext)
+//        adapter = DrinksRecyclerAdapter(glassListItem, context!!.applicationContext, object : DrinksRecyclerAdapter.OnItemClickListener {
+//            override fun onItemClick() {
+//                mainTextDailyTotal.text = dailyTotal.toString()
+//            }
+//        })
+
         drinksTodayList.adapter = adapter
 
         glassesList = dbHandler.readAllDrinks()
 
         for (i in glassesList.iterator()) {
-            val drink = Drinks()
-            drink.image = i.image
-            drink.volume = i.volume
+            val drink = Drinks(i.image, i.volume)
+//            drink.image =
+//            drink.volume =
 
             glassListItem.add(drink)
         }
@@ -145,19 +155,32 @@ class TodayFragment : Fragment() {
 
     }
 
-    private fun createPopup() {
-        val view = layoutInflater.inflate(R.layout.popup_add_drink, null)
-//        val drinkImage = view.popupGlassImage
-//        val drinkVolume = view.popupVolume
-
-        dialogBuilder = AlertDialog.Builder(activity!!.applicationContext).setView(view)
-        dialog = dialogBuilder.create()
-        dialog.show()
-
-        popupSelectButton.setOnClickListener {
-
-        }
+    fun addDrink() {
+        // Create a drink
+        val createDrink = Drinks("water02", 500)
+//        createDrink.image =
+//        createDrink.volume =
+        saveToDatabase(createDrink)
+        adapter.notifyDataSetChanged()
     }
+
+    private fun saveToDatabase(drinks: Drinks) {
+        dbHandler.createDrink(drinks)
+    }
+
+//    private fun createPopup() {
+//        val view = layoutInflater.inflate(R.layout.popup_edit_glass, null)
+////        val drinkImage = view.popupGlassImage
+////        val drinkVolume = view.popupVolume
+//
+//        dialogBuilder = AlertDialog.Builder(activity!!.applicationContext).setView(view)
+//        dialog = dialogBuilder.create()
+//        dialog.show()
+//
+//        popupSelectButton.setOnClickListener {
+//
+//        }
+//    }
 
 //    private fun goalReached() {
 //        val toast = Toast.makeText(context, "Congratulations! You reached your daily goal!",

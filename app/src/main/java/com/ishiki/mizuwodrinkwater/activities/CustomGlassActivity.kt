@@ -15,7 +15,7 @@ class CustomGlassActivity : AppCompatActivity() {
 
     var name = "water01"
     private var number = 1
-    private lateinit var newDrink: Drinks
+//    private lateinit var newDrink: Drinks
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,35 +27,35 @@ class CustomGlassActivity : AppCompatActivity() {
 //        println("Intent in CustomGlassActivity ${currentGlass.image}")
     }
 
-    fun nextImage(@Suppress("UNUSED_PARAMETER") view: View) {
-        if (number < 10) {
-            number += 1
-        } else {
-            number = 1
-        }
+//    fun nextImage(@Suppress("UNUSED_PARAMETER") view: View) {
+//        if (number < 10) {
+//            number += 1
+//        } else {
+//            number = 1
+//        }
+//
+//        name = "water0$number"
+//        val resourceId = resources.getIdentifier(name, "drawable", packageName)
+//        customGlassImage.setImageResource(resourceId)
+//
+//        // Print to check
+//        println("The drink is $name")
+//    }
 
-        name = "water0$number"
-        val resourceId = resources.getIdentifier(name, "drawable", packageName)
-        customGlassImage.setImageResource(resourceId)
-
-        // Print to check
-        println("The drink is $name")
-    }
-
-    fun prevImage(@Suppress("UNUSED_PARAMETER") view: View) {
-        if (number > 1) {
-            number -= 1
-        } else {
-            number = 10
-        }
-
-        name = "water0$number"
-        val resourceId = resources.getIdentifier(name, "drawable", packageName)
-        customGlassImage.setImageResource(resourceId)
-
-        // Print to check
-        println("The drink is $name")
-    }
+//    fun prevImage(@Suppress("UNUSED_PARAMETER") view: View) {
+//        if (number > 1) {
+//            number -= 1
+//        } else {
+//            number = 10
+//        }
+//
+//        name = "water0$number"
+//        val resourceId = resources.getIdentifier(name, "drawable", packageName)
+//        customGlassImage.setImageResource(resourceId)
+//
+//        // Print to check
+//        println("The drink is $name")
+//    }
 
 //    fun setCustomGlass(@Suppress("UNUSED_PARAMETER") view: View) {
 //

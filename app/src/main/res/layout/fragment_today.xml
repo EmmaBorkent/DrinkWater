@@ -82,36 +82,18 @@
             android:layout_height="wrap_content"
             android:id="@+id/guideline2"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.64"
+            app:layout_constraintGuide_percent="0.55"
         />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/drinksTodayList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/colorAccent"
             
             app:layout_constraintTop_toBottomOf="@id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-        />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/todayAddButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            app:fabSize="auto"
-            app:srcCompat="@drawable/ic_action_add"
-            app:backgroundTint="@color/colorAccent"
-            
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/guideline2"
-
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="24dp"
         />
 
         <TextView

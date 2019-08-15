@@ -13,15 +13,30 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        android:layout_marginTop="32dp"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="32dp"
         android:layout_marginStart="32dp"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="32dp"
         app:layout_constraintDimensionRatio="1:1"
         android:focusableInTouchMode="false"
         android:clickable="false"
+    />
+
+    <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/glasses_list_edit_button"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/ic_drinks_list_item_edit_button"
+
+            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            android:layout_margin="16dp"
     />
 
     <TextView

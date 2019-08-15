@@ -59,7 +59,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/setGlassText"
-            android:id="@+id/glassesRecyclerView"
+            android:id="@+id/glasses_recycler_view"
             app:layout_constraintBottom_toTopOf="@+id/glassesAddButton"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

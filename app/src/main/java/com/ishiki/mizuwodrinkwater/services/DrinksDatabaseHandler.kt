@@ -56,9 +56,10 @@ class DrinksDatabaseHandler(context: Context) :
         )
 
         cursor?.moveToFirst()
-        val drink = Drinks()
-        drink.image = cursor.getString(cursor.getColumnIndex(KEY_DRINK_IMAGE))
-        drink.volume = cursor.getInt(cursor.getColumnIndex(KEY_DRINK_VOLUME))
+        val drink = Drinks(cursor.getString(cursor.getColumnIndex(KEY_DRINK_IMAGE)),
+            cursor.getInt(cursor.getColumnIndex(KEY_DRINK_VOLUME)))
+//        drink.image =
+//        drink.volume =
         drink.time = cursor.getLong(cursor.getColumnIndex(KEY_DRINK_TIME))
 
         cursor.close()
@@ -73,10 +74,11 @@ class DrinksDatabaseHandler(context: Context) :
 
         if (cursor.moveToFirst()) {
             do {
-                val drink = Drinks()
+                val drink = Drinks(cursor.getString(cursor.getColumnIndex(KEY_DRINK_IMAGE)),
+                    cursor.getInt(cursor.getColumnIndex(KEY_DRINK_VOLUME)))
                 drink.id = cursor.getInt(cursor.getColumnIndex(KEY_ID))
-                drink.image = cursor.getString(cursor.getColumnIndex(KEY_DRINK_IMAGE))
-                drink.volume = cursor.getInt(cursor.getColumnIndex(KEY_DRINK_VOLUME))
+//                drink.image =
+//                drink.volume =
                 drink.time = cursor.getLong(cursor.getColumnIndex(KEY_DRINK_TIME))
 
                 list.add(drink)
