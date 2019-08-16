@@ -52,32 +52,62 @@
     
     <EditText
         android:id="@+id/popup_volume_input"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserrat"
+        android:importantForAutofill="no"
         android:inputType="number"
         android:text="@string/glass_250"
-        android:fontFamily="@font/montserrat"
-        android:textSize="18sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="@+id/popup_image"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/popup_image"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/popup_image"
         app:layout_constraintHorizontal_bias="0.4"
-        android:layout_marginBottom="16dp"
-        android:importantForAutofill="no"/>
+        app:layout_constraintStart_toStartOf="@+id/popup_image"
+        app:layout_constraintTop_toBottomOf="@+id/popup_image" />
     
     <TextView
         android:id="@+id/popup_unit"
-        android:text="@string/main_unit"
-        android:fontFamily="@font/montserrat"
-        android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/popup_volume_input"
         android:layout_marginStart="8dp"
-        app:layout_constraintTop_toTopOf="@+id/popup_volume_input"
-        app:layout_constraintBottom_toBottomOf="@+id/popup_volume_input"/>
+        android:fontFamily="@font/montserrat"
+        android:text="@string/main_unit"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/popup_volume_input"
+        app:layout_constraintStart_toEndOf="@+id/popup_volume_input"
+        app:layout_constraintTop_toTopOf="@+id/popup_volume_input" />
+    
+    <ImageButton
+        android:id="@+id/popup_delete_button"
+        app:srcCompat="@drawable/ic_drinks_list_item_delete_button"
+        android:contentDescription="@string/popup_delete_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/popup_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="16dp"
+    />
+    
+    <ImageButton
+        android:id="@+id/popup_save_button"
+        app:srcCompat="@drawable/ic_003_check"
+        android:contentDescription="@string/popup_save_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        
+        app:layout_constraintTop_toBottomOf="@id/popup_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        
+        android:layout_margin="16dp"
+    />
     
 </androidx.constraintlayout.widget.ConstraintLayout>

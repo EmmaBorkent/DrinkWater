@@ -3,8 +3,15 @@
 
     <string name="main_unit">ml</string>
     <string name="goal_weight">kg</string>
+    
+    // Bottom Navigation Menu
+    <string name="bottom_menu_today">Home</string>
+    <string name="bottom_menu_history">History</string>
+    <string name="bottom_menu_goal">Goal</string>
+    <string name="bottom_menu_glasses">Glasses</string>
 
-    <string name="main_title">TODAY</string>
+    // Home Fragment
+    <string name="main_title">HOME</string>
     <string name="main_text">Tap the image to change the glass</string>
     <string name="main_text_2">Tap GOAL to change the daily goal</string>
     <string name="main_drank">Total</string>
@@ -17,7 +24,19 @@
     <string name="main_goal">goal</string>
     <string name="main_goal_start_amount">2000</string>
     <string name="main_button_set_goal">Set Goal</string>
+    
+    // History Fragment
+    <string name="history_title">TODAY</string>
+    
+    // Goal Fragment
+    <string name="goal_title">GOAL</string>
+    <string name="goal_text">Calculate your daily goal</string>
+    <string name="goal_enter_weight_text">To calculate your daily goal, enter your weight</string>
+    <string name="goal_calculate">Calculate</string>
+    <string name="goal_enter_goal">Or enter your own daily goal, or adjust as you\'de like</string>
+    <string name="goal_current_goal">Your current goal is</string>
 
+    // Glasses Fragment
     <string name="set_glass">GLASSES</string>
     <string name="set_glass_text">These are your customized glasses</string>
     <string name="add_glass">Add a Glass</string>
@@ -25,35 +44,16 @@
     <string name="drink_list_delete_button">Drink List Delete Button</string>
     <string name="drink_list_edit_button">Drink List Edit Button</string>
 
+    // Create Glass Fragment
     <string name="create_glass">CREATE GLASS</string>
     <string name="custom_text">Choose your own glass style and volume</string>
     <string name="custom_image">Set custom glass image</string>
     <string name="custom_left">Left Arrow</string>
     <string name="custom_right">Right Arrow</string>
 
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-
-    <string name="goal_title">Goal</string>
-    <string name="goal_text">Calculate your daily goal</string>
-    <string name="goal_enter_weight_text">To calculate your daily goal, enter your weight</string>
-    <string name="goal_calculate">Calculate</string>
-    <string name="goal_enter_goal">Or enter your own daily goal, or adjust as you\'de like</string>
-    <string name="goal_current_goal">Your current goal is</string>
-
-    // Bottom Navigation Menu
-    <string name="bottom_menu_today">Home</string>
-    <string name="bottom_menu_history">History</string>
-    <string name="bottom_menu_goal">Goal</string>
-    <string name="bottom_menu_glasses">Glasses</string>
-
-    // Popup
+    // Edit Glass Popup Dialog
     <string name="popup_save_button">Save</string>
-    <string name="popup_cancel_button">Cancle</string>
+    <string name="popup_delete_button">Cancle</string>
     <string name="drinks_list_item_time">time</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

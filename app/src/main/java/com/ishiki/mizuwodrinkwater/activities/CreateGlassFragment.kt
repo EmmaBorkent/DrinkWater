@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.ishiki.mizuwodrinkwater.R
+import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinkTypes
+import com.ishiki.mizuwodrinkwater.services.LeftAndRightArrow
 import kotlinx.android.synthetic.main.activity_custom_glass.*
 
 class CreateGlassFragment : Fragment() {
@@ -28,6 +30,10 @@ class CreateGlassFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        create_glass_arrow_right.setOnClickListener {
+//            LeftAndRightArrow(context!!.applicationContext).nameToResourceId(customGlassImage)
+//        }
+
         create_glass_arrow_right.setOnClickListener {
             if (number < 10) {
                 number += 1
@@ -36,12 +42,17 @@ class CreateGlassFragment : Fragment() {
             }
 
             name = "water0$number"
+            
             val resourceId = resources.getIdentifier(name, "drawable", context!!.packageName)
             customGlassImage.setImageResource(resourceId)
 
             // Print to check
             println("The drink is $name")
         }
+
+//        create_glass_arrow_left.setOnClickListener {
+//            LeftAndRightArrow(context!!.applicationContext).leftArrow(customGlassImage)
+//        }
 
         create_glass_arrow_left.setOnClickListener {
             if (number > 1) {

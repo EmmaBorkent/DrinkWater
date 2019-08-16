@@ -10,17 +10,17 @@ object DrinksToday {
     var goal = 2000
     var dailyTotal = 0
 
-    var drinksTodayList: MutableList<Drinks> = mutableListOf()
+    var history_drinks_list: MutableList<Drinks> = mutableListOf()
 
 //    fun addDrink() {
 //        dailyTotal += currentGlass.volume
 //        sharedPreferences!!.edit().putInt("dailyTotal", dailyTotal).apply()
-//        drinksTodayList.add(0, currentGlass)
+//        history_drinks_list.add(0, currentGlass)
 //        serializeDrinksTodayList()
 //    }
 
 //    fun removeDrink(position: Int) {
-//        drinksTodayList.removeAt(position)
+//        history_drinks_list.removeAt(position)
 //        serializeDrinksTodayList()
 //    }
 
@@ -29,7 +29,7 @@ object DrinksToday {
 //        val volume: ArrayList<String> = ArrayList()
 //        val unit: ArrayList<String> = ArrayList()
 //
-//        for (drinks: Drinks in drinksTodayList) {
+//        for (drinks: Drinks in history_drinks_list) {
 //            image.add(drinks.image)
 //            volume.add(drinks.volume.toString())
 ////            unit.add(drinks.unit)

@@ -26,7 +26,7 @@ package com.ishiki.mizuwodrinkwater.activities
 //         To check if the intent works
 //        println("Intent in CustomGlassActivity ${currentGlass.image}")
 //    }
-
+//
 //    fun nextImage(@Suppress("UNUSED_PARAMETER") view: View) {
 //        if (number < 10) {
 //            number += 1

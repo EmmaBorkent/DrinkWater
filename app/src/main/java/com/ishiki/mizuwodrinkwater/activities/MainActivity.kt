@@ -9,9 +9,10 @@ import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
 import com.ishiki.mizuwodrinkwater.services.CreateDialog
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
+import com.ishiki.mizuwodrinkwater.services.LeftAndRightArrow
 import kotlinx.android.synthetic.main.activity_main.*
 
-open class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
 //    override fun onSaveInstanceState(outState: Bundle?) {
 //        super.onSaveInstanceState(outState)
@@ -75,6 +76,8 @@ open class MainActivity : AppCompatActivity() {
         }
 
         dbHandler = DrinksDatabaseHandler(this)
+
+        LeftAndRightArrow(this)
 
     }
 

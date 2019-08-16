@@ -4,16 +4,11 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
-import android.media.Image
 import android.os.Bundle
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.View
 import androidx.fragment.app.DialogFragment
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
-import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
+import kotlinx.android.synthetic.main.popup_edit_glass.*
 
 class PopupEditGlassFragment : DialogFragment() {
 
@@ -28,7 +23,7 @@ class PopupEditGlassFragment : DialogFragment() {
                         // save the changes
                         TODO("Add save functionality")
                     })
-                .setNegativeButton(R.string.popup_cancel_button,
+                .setNegativeButton(R.string.popup_delete_button,
                     DialogInterface.OnClickListener { dialog, which ->
                         // dialog is closed, nothing happens
                     })

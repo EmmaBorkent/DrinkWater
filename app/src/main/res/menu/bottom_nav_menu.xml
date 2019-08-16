@@ -4,21 +4,21 @@
     <item
             android:id="@+id/today"
             android:title="@string/bottom_menu_today"
-            android:icon="@drawable/ic_menu_user" />
+            android:icon="@drawable/ic_013_user_1" />
 
     <item
             android:id="@+id/history"
             android:title="@string/bottom_menu_history"
-            android:icon="@drawable/ic_menu_calendar" />
+            android:icon="@drawable/ic_004_calendar" />
 
     <item
             android:id="@+id/goal"
             android:title="@string/bottom_menu_goal"
-            android:icon="@drawable/ic_menu_plane" />
+            android:icon="@drawable/ic_menu_goal" />
 
     <item
             android:id="@+id/glasses"
             android:title="@string/bottom_menu_glasses"
-            android:icon="@drawable/ic_menu_cup" />
+            android:icon="@drawable/ic_008_mug" />
 
 </menu>

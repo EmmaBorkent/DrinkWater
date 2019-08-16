@@ -1,10 +1,16 @@
 package com.ishiki.mizuwodrinkwater.services
 
+import android.widget.ImageView
+import com.ishiki.mizuwodrinkwater.R
+import com.ishiki.mizuwodrinkwater.activities.MainActivity
 import com.ishiki.mizuwodrinkwater.model.Drinks
 //import com.ishiki.mizuwodrinkwater.services.DrinksToday.sharedPreferences
 
 object DrinkTypes {
 
+
+
+    // Must probably be a mutable list
     val glasses = arrayListOf<Drinks>(
         Drinks("water01", 250),
         Drinks("water02", 500),

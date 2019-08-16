@@ -5,21 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.adapters.DrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
-import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
-import kotlinx.android.synthetic.main.fragment_today.*
 
 class TodayFragment : Fragment() {
-
-    private lateinit var dbHandler: DrinksDatabaseHandler
-    private lateinit var glassesList: ArrayList<Drinks>
-    private lateinit var glassListItem: ArrayList<Drinks>
-    private lateinit var layoutManager: RecyclerView.LayoutManager
-    lateinit var adapter: DrinksRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +30,7 @@ class TodayFragment : Fragment() {
 //            DrinksToday.sharedPreferences?.getString("currentGlassUnit", DrinkTypes.currentGlass.unit).toString()
 //        )
 //
-//        DrinksToday.drinksTodayList.clear()
+//        DrinksToday.history_drinks_list.clear()
 //
 //        val image = ObjectSerializer.deserialize(
 //            DrinksToday.sharedPreferences?.getString("image",
@@ -57,7 +46,7 @@ class TodayFragment : Fragment() {
 //            if (image.size == volume.size && image.size == unit.size) {
 //
 //                for ((i) in image.withIndex()) {
-//                    DrinksToday.drinksTodayList.add(Drinks(image[i], volume[i], unit[i]))
+//                    DrinksToday.history_drinks_list.add(Drinks(image[i], volume[i], unit[i]))
 //                }
 //            }
 //        }
@@ -68,16 +57,16 @@ class TodayFragment : Fragment() {
 //        mainTextDailyTotal?.text = DrinksToday.dailyTotal.toString()
 //        mainTextGoalNumber?.text = DrinksToday.goal.toString()
 
-//        adapter = TodayDrinksRecyclerAdapter(MainActivity(), DrinksToday.drinksTodayList, object :
+//        adapter = TodayDrinksRecyclerAdapter(MainActivity(), DrinksToday.history_drinks_list, object :
 //            TodayDrinksRecyclerAdapter.OnItemClickListener {
 //            override fun onItemClick(dailyTotal: Int) {
 //                mainTextDailyTotal.text = dailyTotal.toString()
 //            }
 //        })
-//        drinksTodayList?.adapter = adapter
+//        history_drinks_list?.adapter = adapter
 //        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
-//        drinksTodayList?.layoutManager = layoutManager
-//        drinksTodayList?.setHasFixedSize(true)
+//        history_drinks_list?.layoutManager = layoutManager
+//        history_drinks_list?.setHasFixedSize(true)
 
 //        mainDrinkImage.setOnClickListener {
 //            val setGlassIntent = Intent(context, SetGlassActivity::class.java)
@@ -105,63 +94,13 @@ class TodayFragment : Fragment() {
 //        }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        showItems()
-
-    }
-
-    private fun showItems() {
-
-        dbHandler = DrinksDatabaseHandler(context!!.applicationContext)
-
-        glassesList = ArrayList()
-        glassesList.reverse()
-        glassListItem = ArrayList()
-
-        layoutManager = LinearLayoutManager(context!!.applicationContext)
-        drinksTodayList.layoutManager = layoutManager
-//        adapter = DrinksRecyclerAdapter(glassListItem, context!!.applicationContext, object : DrinksRecyclerAdapter.OnItemClickListener {
-//            override fun onItemClick(adapter: DrinksRecyclerAdapter) {
-//                adapter.notifyDataSetChanged()
-//            }
-//        })
-
-        adapter = DrinksRecyclerAdapter(glassListItem, context!!.applicationContext)
-//        adapter = DrinksRecyclerAdapter(glassListItem, context!!.applicationContext, object : DrinksRecyclerAdapter.OnItemClickListener {
-//            override fun onItemClick() {
-//                mainTextDailyTotal.text = dailyTotal.toString()
-//            }
-//        })
-
-        drinksTodayList.adapter = adapter
-
-        glassesList = dbHandler.readAllDrinks()
-
-        for (i in glassesList.iterator()) {
-            val drink = Drinks(i.image, i.volume)
-//            drink.image =
-//            drink.volume =
-
-            glassListItem.add(drink)
-        }
-
-        adapter.notifyDataSetChanged()
-
-    }
-
     fun addDrink() {
         // Create a drink
         val createDrink = Drinks("water02", 500)
 //        createDrink.image =
 //        createDrink.volume =
-        saveToDatabase(createDrink)
-        adapter.notifyDataSetChanged()
-    }
-
-    private fun saveToDatabase(drinks: Drinks) {
-        dbHandler.createDrink(drinks)
+//        saveToDatabase(createDrink)
+//        adapter.notifyDataSetChanged()
     }
 
 //    private fun createPopup() {

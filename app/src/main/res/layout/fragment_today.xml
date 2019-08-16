@@ -76,42 +76,22 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
         />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/guideline2"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.55"
-        />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/drinksTodayList"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            
-            app:layout_constraintTop_toBottomOf="@id/guideline2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-        />
-
+    
         <TextView
             android:id="@+id/mainGoalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/main_goal"
-            android:textColor="@android:color/tertiary_text_light"
             android:fontFamily="@font/montserrat"
+            android:text="@string/main_goal"
             android:textAlignment="center"
-            android:textSize="24sp"
             android:textAllCaps="true"
-            
+            android:textColor="@android:color/tertiary_text_light"
+        
+            android:textSize="24sp"
+        
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/guideline2"
-
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="16dp"
         />
     
         <TextView
