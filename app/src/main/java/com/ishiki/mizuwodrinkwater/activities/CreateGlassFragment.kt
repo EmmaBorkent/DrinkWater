@@ -42,7 +42,7 @@ class CreateGlassFragment : Fragment() {
             }
 
             name = "water0$number"
-            
+
             val resourceId = resources.getIdentifier(name, "drawable", context!!.packageName)
             customGlassImage.setImageResource(resourceId)
 
