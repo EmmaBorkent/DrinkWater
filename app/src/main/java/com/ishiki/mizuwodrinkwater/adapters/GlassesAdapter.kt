@@ -13,6 +13,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
+import com.ishiki.mizuwodrinkwater.services.DrinkTypes
+import com.ishiki.mizuwodrinkwater.services.DrinkTypes.nameToResourceId
 import com.ishiki.mizuwodrinkwater.services.OnItemClickListener
 
 class GlassesAdapter(
@@ -83,7 +85,7 @@ class GlassesAdapter(
                 } else {
                     number = 1
                 }
-                popupImage.setImageResource(nameToResourceId(number))
+                popupImage.setImageResource(nameToResourceId(number, context))
             }
             popupArrowLeft.setImageResource(R.drawable.ic_keyboard_arrow_left)
             popupArrowLeft.setOnClickListener {
@@ -92,7 +94,7 @@ class GlassesAdapter(
                 } else {
                     number = 10
                 }
-                popupImage.setImageResource(nameToResourceId(number))
+                popupImage.setImageResource(nameToResourceId(number, context))
             }
 
             popVolumeInput.text = drinks.volume.toString()
@@ -111,6 +113,9 @@ class GlassesAdapter(
                 builder.show()
 //                listener.onItemClicked(itemView, adapterPosition)
             }
+
+
+
         }
 
 //        fun editGlass() {
@@ -122,10 +127,10 @@ class GlassesAdapter(
             listener.onItemClicked(view, position)
         }
 
-        fun nameToResourceId(number: Int): Int {
-            val name = "water0$number"
-            return context.resources.getIdentifier(name, "drawable", context.packageName)
-        }
+//        fun nameToResourceId(number: Int): Int {
+//            val name = "water0$number"
+//            return context.resources.getIdentifier(name, "drawable", context.packageName)
+//        }
 
         @SuppressLint("InflateParams")
         private fun editGlass(glass: Drinks) {

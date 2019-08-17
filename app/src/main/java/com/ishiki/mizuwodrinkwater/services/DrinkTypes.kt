@@ -1,5 +1,6 @@
 package com.ishiki.mizuwodrinkwater.services
 
+import android.content.Context
 import android.widget.ImageView
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.activities.MainActivity
@@ -8,14 +9,21 @@ import com.ishiki.mizuwodrinkwater.model.Drinks
 
 object DrinkTypes {
 
-
-
     // Must probably be a mutable list
     val glasses = arrayListOf<Drinks>(
         Drinks("water01", 250),
         Drinks("water02", 500),
         Drinks("water03", 150)
     )
+
+    fun saveEditedDrink() {
+
+    }
+
+    fun nameToResourceId(number: Int, context: Context): Int {
+        val name = "water0$number"
+        return context.resources.getIdentifier(name, "drawable", context.packageName)
+    }
 
 //    val drinks = mutableListOf<Drinks>(
 //        Drinks("water01", "250", "ml"),
