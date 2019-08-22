@@ -109,8 +109,6 @@ class MainActivity : AppCompatActivity() {
 //    }
 
     fun editGlass() {
-
-//        builder.show()
         val popupFragment = PopupEditGlassFragment()
         popupFragment.show(supportFragmentManager, "edit glass")
     }

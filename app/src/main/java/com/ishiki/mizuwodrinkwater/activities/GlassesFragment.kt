@@ -1,18 +1,23 @@
 package com.ishiki.mizuwodrinkwater.activities
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
+import com.ishiki.mizuwodrinkwater.services.DataSetChanged
 import com.ishiki.mizuwodrinkwater.services.DrinkTypes
 import com.ishiki.mizuwodrinkwater.services.OnItemClickListener
 import kotlinx.android.synthetic.main.fragment_glasses.*
 
-class GlassesFragment : Fragment(), OnItemClickListener {
+class GlassesFragment : Fragment(), OnItemClickListener, DataSetChanged {
+
+    override fun onDataSetChanged() {
+        dataSetChange()
+    }
 
     override fun onItemClicked(view: View, position: Int) {
         (activity as MainActivity).editGlass()
@@ -37,10 +42,15 @@ class GlassesFragment : Fragment(), OnItemClickListener {
 
         layoutManager = GridLayoutManager(context!!.applicationContext, 2)
         glasses_recycler_view.layoutManager = layoutManager
-        adapter = GlassesAdapter(DrinkTypes.glasses, view!!.rootView.context, this)
+        adapter = GlassesAdapter(DrinkTypes.glasses, view!!.rootView.context, this, this)
         glasses_recycler_view.adapter = adapter
+//        adapter.notifyDataSetChanged()
 
 //        showItems()
+    }
+
+    fun dataSetChange() {
+        adapter.notifyDataSetChanged()
     }
 
 //    private fun showItems() {

@@ -16,8 +16,12 @@ object DrinkTypes {
         Drinks("water03", 150)
     )
 
-    fun saveEditedDrink() {
+    fun saveEditedDrink(editedVolume: Int, editedImage: String): Drinks {
+        val editedDrink = Drinks(editedImage, editedVolume)
+//                glasses[adapterPosition] = editedDrink
 
+//                glassesList[adapterPosition] = editedDrink
+        return editedDrink
     }
 
     fun nameToResourceId(number: Int, context: Context): Int {

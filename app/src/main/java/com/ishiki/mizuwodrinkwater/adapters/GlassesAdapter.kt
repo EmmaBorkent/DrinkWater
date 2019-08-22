@@ -13,21 +13,22 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
+import com.ishiki.mizuwodrinkwater.services.DataSetChanged
 import com.ishiki.mizuwodrinkwater.services.DrinkTypes
-import com.ishiki.mizuwodrinkwater.services.DrinkTypes.glasses
 import com.ishiki.mizuwodrinkwater.services.DrinkTypes.nameToResourceId
 import com.ishiki.mizuwodrinkwater.services.OnItemClickListener
 
 class GlassesAdapter(
         private val glassesList: ArrayList<Drinks>,
         private val context: Context,
-        private val listener: OnItemClickListener) :
+        private val listener: OnItemClickListener,
+        private val dataSetChangeListener: DataSetChanged) :
     RecyclerView.Adapter<GlassesAdapter.GlassHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GlassHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.glasses_list_item, parent,
                 false)
-        return GlassHolder(view, /*context, glassesList,*/ listener)
+        return GlassHolder(view, /*context, glassesList,*/ listener, dataSetChangeListener)
     }
 
     override fun getItemCount(): Int {
@@ -44,7 +45,8 @@ class GlassesAdapter(
         list: ArrayList<Drinks>*/,
 //        private val mContext = context
 //        private val mList = list
-        private val listener: OnItemClickListener) : RecyclerView.ViewHolder(itemView) {
+        private val listener: OnItemClickListener,
+        private val dataSetChangeListener: DataSetChanged) : RecyclerView.ViewHolder(itemView) {
 
 //        lateinit var dialog: Dialog
 //        private val glassesListItem: ConstraintLayout =
@@ -89,6 +91,7 @@ class GlassesAdapter(
                 } else {
                     number = 1
                 }
+                println("Drink number $number")
                 popupImage.setImageResource(nameToResourceId(number, context))
             }
             popupArrowLeft.setImageResource(R.drawable.ic_keyboard_arrow_left)
@@ -106,10 +109,17 @@ class GlassesAdapter(
             popupSaveButton.setOnClickListener {
                 println("popupSaveButton Clicked")
 //                DrinkTypes.glasses.set(index: Int, element: Drink)
+
+                glassesList.removeAt(adapterPosition)
                 val editedVolume = popupVolumeInput.text.toString().toInt()
                 val editedImage = "water0$number"
-                val editedDrink = Drinks(editedImage, editedVolume)
-                glasses[adapterPosition] = editedDrink
+                glassesList.add(adapterPosition, DrinkTypes.saveEditedDrink(editedVolume, editedImage))
+
+//                val editedDrink = Drinks(editedImage, editedVolume)
+//                glasses[adapterPosition] = editedDrink
+
+//                glassesList[adapterPosition] = editedDrink
+//                glassesList.add(editedDrink)
 
 //                drinks.image = nameToResourceId(number, context)
 
@@ -121,12 +131,14 @@ class GlassesAdapter(
                 println("Drink Image set")
                 builder.dismiss()
                 println("builder dismissed")
-                
+                dataSetChangeListener.onDataSetChanged()
             }
 
             popupDeleteButton.setImageResource(R.drawable.ic_drinks_list_item_delete_button)
             popupDeleteButton.setOnClickListener {
-
+                glassesList.removeAt(adapterPosition)
+                builder.dismiss()
+                dataSetChangeListener.onDataSetChanged()
             }
 
             // fun bindViews: Bind image, volume and edit button in RecyclerView
