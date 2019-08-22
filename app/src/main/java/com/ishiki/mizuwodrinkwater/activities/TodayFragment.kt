@@ -6,10 +6,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ishiki.mizuwodrinkwater.R
+import com.ishiki.mizuwodrinkwater.adapters.AddDrinkAdapter
+import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
+import com.ishiki.mizuwodrinkwater.services.DrinkTypes
+import kotlinx.android.synthetic.main.fragment_glasses.*
+import kotlinx.android.synthetic.main.popup_add_drink.*
 
 class TodayFragment : Fragment() {
+
+    private lateinit var layoutManager: LinearLayoutManager
+    private lateinit var adapter: AddDrinkAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -98,9 +108,20 @@ class TodayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
 //        val builder = Dialog(context!!)
 //        builder.setContentView(R.layout.popup_edit_glass)
 //        builder.setContentView(R.layout.popup_add_drink)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+//        layoutManager = LinearLayoutManager(this.context)
+//        popup_add_drink_recycler_view.layoutManager = layoutManager
+//        adapter = AddDrinkAdapter(DrinkTypes.glasses, this.context!!)
+//        popup_add_drink_recycler_view.adapter = adapter
     }
 
     fun addDrink() {

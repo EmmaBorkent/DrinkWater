@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ishiki.mizuwodrinkwater.R
+import com.ishiki.mizuwodrinkwater.adapters.AddDrinkAdapter
 import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
 import com.ishiki.mizuwodrinkwater.services.DataSetChanged
 import com.ishiki.mizuwodrinkwater.services.DrinkTypes
 import com.ishiki.mizuwodrinkwater.services.OnItemClickListener
 import kotlinx.android.synthetic.main.fragment_glasses.*
+import kotlinx.android.synthetic.main.popup_add_drink.*
 
 class GlassesFragment : Fragment(), OnItemClickListener, DataSetChanged {
 
@@ -26,8 +29,12 @@ class GlassesFragment : Fragment(), OnItemClickListener, DataSetChanged {
 //    private lateinit var dbHandler: DrinksDatabaseHandler
 //    private lateinit var glassesList: ArrayList<Drinks>
 //    private lateinit var glassListItem: ArrayList<Drinks>
-    private lateinit var layoutManager: GridLayoutManager
+
+//    private lateinit var layoutManager: GridLayoutManager
     private lateinit var adapter: GlassesAdapter
+
+    private lateinit var layoutManager2: LinearLayoutManager
+    private lateinit var adapter2: AddDrinkAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,10 +47,18 @@ class GlassesFragment : Fragment(), OnItemClickListener, DataSetChanged {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        layoutManager = GridLayoutManager(context!!.applicationContext, 2)
-        glasses_recycler_view.layoutManager = layoutManager
-        adapter = GlassesAdapter(DrinkTypes.glasses, view!!.rootView.context, this, this)
-        glasses_recycler_view.adapter = adapter
+//        layoutManager = GridLayoutManager(context!!.applicationContext, 2)
+//        glasses_recycler_view.layoutManager = layoutManager
+//        adapter = GlassesAdapter(DrinkTypes.glasses, view!!.rootView.context, this, this)
+//        glasses_recycler_view.adapter = adapter
+
+        layoutManager2 = LinearLayoutManager(context!!.applicationContext, LinearLayoutManager.HORIZONTAL,
+            false)
+        glasses_recycler_view.layoutManager = layoutManager2
+        adapter2 = AddDrinkAdapter(DrinkTypes.glasses, view!!.rootView.context)
+        glasses_recycler_view.adapter = adapter2
+
+
 //        adapter.notifyDataSetChanged()
 
 //        showItems()

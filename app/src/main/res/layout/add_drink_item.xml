@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/add_drink_item"
 >
@@ -12,8 +12,8 @@
         app:srcCompat="@drawable/water01"
         android:contentDescription="@string/glass_250"
         android:background="@android:color/transparent"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="32dp"
