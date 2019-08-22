@@ -93,6 +93,10 @@ class MainActivity : AppCompatActivity() {
 
         glassesAddButton.setOnClickListener {
 
+            val builder = Dialog(this)
+            builder.setContentView(R.layout.popup_add_drink)
+            builder.show()
+
             Toast.makeText(this, "Clicked Add on Home Fragment", Toast.LENGTH_SHORT).show()
 
                 // Create a drink

@@ -1,5 +1,6 @@
 package com.ishiki.mizuwodrinkwater.activities
 
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -92,6 +93,14 @@ class TodayFragment : Fragment() {
 //            val setGoalIntent = Intent(context, GoalActivity::class.java)
 //            startActivity(setGoalIntent)
 //        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+//        val builder = Dialog(context!!)
+//        builder.setContentView(R.layout.popup_edit_glass)
+//        builder.setContentView(R.layout.popup_add_drink)
     }
 
     fun addDrink() {
