@@ -10,7 +10,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name=".activities.GlassesPopupActivity"
-                android:theme="@style/Theme.AppCompat.Light.Dialog"></activity>
+                android:theme="@style/Theme.AppCompat.Light.Dialog"
+                android:excludeFromRecents="true"></activity>
         <activity
                 android:name=".activities.MainActivity"
                 android:label="@string/app_name">

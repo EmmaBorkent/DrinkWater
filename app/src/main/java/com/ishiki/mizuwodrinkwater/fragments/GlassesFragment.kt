@@ -13,6 +13,8 @@ import com.ishiki.mizuwodrinkwater.activities.GlassesPopupActivity
 import com.ishiki.mizuwodrinkwater.activities.MainActivity
 import com.ishiki.mizuwodrinkwater.adapters.GlassesRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Glasses
+import com.ishiki.mizuwodrinkwater.utilities.EXTRA_GLASS
+import com.ishiki.mizuwodrinkwater.utilities.EXTRA_VOLUME
 import kotlinx.android.synthetic.main.fragment_glasses.*
 
 class GlassesFragment : Fragment() {
@@ -36,6 +38,8 @@ class GlassesFragment : Fragment() {
         adapter = GlassesRecyclerAdapter(Glasses.glassesList, context!!) { glass ->
 //            Toast.makeText(context, "Clicked ${glass.image}", Toast.LENGTH_SHORT).show()
             val glassesPopupIntent = Intent(context, GlassesPopupActivity::class.java)
+            glassesPopupIntent.putExtra(EXTRA_GLASS, glass.image)
+            glassesPopupIntent.putExtra(EXTRA_VOLUME, glass.volume)
             startActivity(glassesPopupIntent)
         }
         glasses_recycler_view.adapter = adapter
