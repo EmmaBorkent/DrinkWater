@@ -8,14 +8,18 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.model.Drinks
+import com.ishiki.mizuwodrinkwater.model.Glasses
+import com.ishiki.mizuwodrinkwater.services.OnItemClickListenerAddDrinkAdapter
 
-class AddDrinkAdapter(private val glassesList: ArrayList<Drinks>, private val context: Context) :
-    RecyclerView.Adapter<AddDrinkAdapter.DrinkHolder>() {
+class AddDrinkAdapter(
+    private val glassesList: ArrayList<Glasses>,
+    private val context: Context,
+    private val listener: OnItemClickListenerAddDrinkAdapter
+) : RecyclerView.Adapter<AddDrinkAdapter.DrinkHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DrinkHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.add_drink_item, parent, false)
-        return DrinkHolder(view)
+        return DrinkHolder(view, listener)
     }
 
     override fun getItemCount(): Int {
@@ -26,14 +30,17 @@ class AddDrinkAdapter(private val glassesList: ArrayList<Drinks>, private val co
         holder.bindViews(glassesList[position])
     }
 
-    inner class DrinkHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class DrinkHolder(itemView: View, private val listener: OnItemClickListenerAddDrinkAdapter) :
+        RecyclerView.ViewHolder(itemView) {
+
         private val image = itemView.findViewById<ImageView>(R.id.add_drink_list_image)
         private val volume = itemView.findViewById<TextView>(R.id.add_drink_list_volume)
 
-        fun bindViews(drinks: Drinks) {
-            val resourceId = context.resources.getIdentifier(drinks.image, "drawable", context.packageName)
+        fun bindViews(glass: Glasses) {
+            val resourceId = context.resources.getIdentifier(glass.image, "drawable", context.packageName)
             image.setImageResource(resourceId)
-            volume.text = drinks.volume.toString()
+            volume.text = glass.volume.toString()
+            listener.onItemClickedAddDrink(glass, adapterPosition)
         }
     }
 

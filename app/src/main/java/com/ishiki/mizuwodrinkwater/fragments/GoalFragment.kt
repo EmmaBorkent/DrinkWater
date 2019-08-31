@@ -1,4 +1,4 @@
-package com.ishiki.mizuwodrinkwater.activities
+package com.ishiki.mizuwodrinkwater.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

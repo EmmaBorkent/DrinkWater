@@ -7,18 +7,18 @@
             android:icon="@drawable/ic_013_user_1" />
 
     <item
-            android:id="@+id/history"
-            android:title="@string/bottom_menu_history"
+            android:id="@+id/drinks"
+            android:title="@string/bottom_menu_drinks"
             android:icon="@drawable/ic_004_calendar" />
-
-    <item
-            android:id="@+id/goal"
-            android:title="@string/bottom_menu_goal"
-            android:icon="@drawable/ic_menu_goal" />
 
     <item
             android:id="@+id/glasses"
             android:title="@string/bottom_menu_glasses"
             android:icon="@drawable/ic_008_mug" />
+
+    <item
+            android:id="@+id/goal"
+            android:title="@string/bottom_menu_goal"
+            android:icon="@drawable/ic_menu_goal" />
 
 </menu>

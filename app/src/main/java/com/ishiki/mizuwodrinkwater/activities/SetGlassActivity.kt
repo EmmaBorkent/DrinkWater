@@ -5,7 +5,7 @@ package com.ishiki.mizuwodrinkwater.activities
 //import androidx.appcompat.app.AppCompatActivity
 //import android.os.Bundle
 //import com.ishiki.mizuwodrinkwater.R
-//import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
+//import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapterOLD2
 //import com.ishiki.mizuwodrinkwater.model.Drinks
 //import com.ishiki.mizuwodrinkwater.services.DrinkTypes.currentGlass
 //import com.ishiki.mizuwodrinkwater.services.DrinkTypes.drinks
@@ -15,7 +15,7 @@ package com.ishiki.mizuwodrinkwater.activities
 //
 //class SetGlassActivity : AppCompatActivity() {
 //
-//    private lateinit var adapter: GlassesAdapter
+//    private lateinit var adapter: GlassesAdapterOLD2
 //
 //    @Suppress("UNCHECKED_CAST")
 //    override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +47,7 @@ package com.ishiki.mizuwodrinkwater.activities
 //
 ////        currentGlass = intent.getParcelableExtra(EXTRA_CURRENT)
 //
-//        adapter = GlassesAdapter(this, drinks) { drink ->
+//        adapter = GlassesAdapterOLD2(this, drinks) { drink ->
 //            // Here goes the code that you want to happen when you click on it
 //            println("Selected ${drink.image}")
 //

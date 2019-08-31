@@ -9,8 +9,8 @@
 //import com.ishiki.mizuwodrinkwater.R
 //import com.ishiki.mizuwodrinkwater.model.Drinks
 //
-//class GlassesAdapter(private val context: Context, private val drinks: MutableList<Drinks>, private val itemClick: (Drinks) -> Unit) :
-// androidx.recyclerview.widget.RecyclerView.Adapter<GlassesAdapter.GlassHolder>() {
+//class GlassesAdapterOLD2(private val context: Context, private val drinks: MutableList<Drinks>, private val itemClick: (Drinks) -> Unit) :
+// androidx.recyclerview.widget.RecyclerView.Adapter<GlassesAdapterOLD2.GlassHolder>() {
 //
 //    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): GlassHolder {
 //        val view = LayoutInflater.from(context).inflate(R.layout.glasses_list, p0, false)

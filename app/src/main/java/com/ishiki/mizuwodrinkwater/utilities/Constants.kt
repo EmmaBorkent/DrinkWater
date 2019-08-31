@@ -5,8 +5,8 @@ const val EXTRA_DAILY = "Daily Total"
 const val DAILY_GOAL = "daily_goal"
 
 
-//const val EXTRA_CURRENT = "Current Glass Type"
-//const val EXTRA_SET = "Set Glass Type"
+//const val EXTRA_CURRENT = "Current Glasses Type"
+//const val EXTRA_SET = "Set Glasses Type"
 
 // Database Constants
 const val DATABASE_VERSION: Int = 1

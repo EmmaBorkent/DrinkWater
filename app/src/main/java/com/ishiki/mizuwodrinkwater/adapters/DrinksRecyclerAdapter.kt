@@ -10,7 +10,7 @@ import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
 
-//private val onItemClickListener: AdapterView.OnItemClickListener
+//private val onItemClickListener: AdapterView.OnItemClickListenerGlassesAdapter
 class DrinksRecyclerAdapter(private val drinksList: ArrayList<Drinks>,
                             private val context: Context
                             ) :
@@ -93,7 +93,7 @@ class DrinksRecyclerAdapter(private val drinksList: ArrayList<Drinks>,
 
     }
 
-//    interface OnItemClickListener {
+//    interface OnItemClickListenerGlassesAdapter {
 //        fun onItemClick(adapter: DrinksRecyclerAdapter)
 //    }
 

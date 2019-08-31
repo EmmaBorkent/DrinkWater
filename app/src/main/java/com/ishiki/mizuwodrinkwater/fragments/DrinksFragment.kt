@@ -1,4 +1,4 @@
-package com.ishiki.mizuwodrinkwater.activities
+package com.ishiki.mizuwodrinkwater.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,9 +11,9 @@ import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.DrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
-import kotlinx.android.synthetic.main.fragment_history.*
+import kotlinx.android.synthetic.main.fragment_drinks.*
 
-class HistoryFragment : Fragment() {
+class DrinksFragment : Fragment() {
 
     private lateinit var glassesList: ArrayList<Drinks>
     private lateinit var glassListItem: ArrayList<Drinks>
@@ -26,7 +26,7 @@ class HistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_history, container, false)
+        return inflater.inflate(R.layout.fragment_drinks, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -46,14 +46,14 @@ class HistoryFragment : Fragment() {
         layoutManager = LinearLayoutManager(context!!.applicationContext)
         history_drinks_list.layoutManager = layoutManager
 
-//        adapter = DrinksRecyclerAdapter(glassListItem, context!!.applicationContext, object : DrinksRecyclerAdapter.OnItemClickListener {
+//        adapter = DrinksRecyclerAdapter(glassListItem, context!!.applicationContext, object : DrinksRecyclerAdapter.OnItemClickListenerGlassesAdapter {
 //            override fun onItemClick(adapter: DrinksRecyclerAdapter) {
 //                adapter.notifyDataSetChanged()
 //            }
 //        })
 
         adapter = DrinksRecyclerAdapter(glassListItem, context!!.applicationContext)
-//        adapter = DrinksRecyclerAdapter(glassListItem, context!!.applicationContext, object : DrinksRecyclerAdapter.OnItemClickListener {
+//        adapter = DrinksRecyclerAdapter(glassListItem, context!!.applicationContext, object : DrinksRecyclerAdapter.OnItemClickListenerGlassesAdapter {
 //            override fun onItemClick() {
 //                mainTextDailyTotal.text = dailyTotal.toString()
 //            }

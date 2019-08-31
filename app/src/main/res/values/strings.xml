@@ -6,12 +6,12 @@
     
     // Bottom Navigation Menu
     <string name="bottom_menu_today">Home</string>
-    <string name="bottom_menu_history">History</string>
-    <string name="bottom_menu_goal">Goal</string>
+    <string name="bottom_menu_drinks">Drinks</string>
     <string name="bottom_menu_glasses">Glasses</string>
+    <string name="bottom_menu_goal">Goal</string>
 
     // Home Fragment
-    <string name="main_title">HOME</string>
+    <string name="main_title">Home</string>
     <string name="main_text">Tap the image to change the glass</string>
     <string name="main_text_2">Tap GOAL to change the daily goal</string>
     <string name="main_drank">Total</string>
@@ -25,11 +25,11 @@
     <string name="main_goal_start_amount">2000</string>
     <string name="main_button_set_goal">Set Goal</string>
     
-    // History Fragment
-    <string name="history_title">TODAY</string>
+    // Drinks Fragment
+    <string name="history_title">Drinks</string>
     
     // Goal Fragment
-    <string name="goal_title">GOAL</string>
+    <string name="goal_title">Goal</string>
     <string name="goal_text">Calculate your daily goal</string>
     <string name="goal_enter_weight_text">To calculate your daily goal, enter your weight</string>
     <string name="goal_calculate">Calculate</string>
@@ -37,7 +37,7 @@
     <string name="goal_current_goal">Your current goal is</string>
 
     // Glasses Fragment
-    <string name="set_glass">GLASSES</string>
+    <string name="set_glass">Glasses</string>
     <string name="set_glass_text">These are your customized glasses</string>
     <string name="add_glass">Add a Glass</string>
     <string name="drink_list_image">Drink List Image</string>
@@ -55,5 +55,6 @@
     <string name="popup_save_button">Save</string>
     <string name="popup_delete_button">Cancle</string>
     <string name="drinks_list_item_time">time</string>
+    <string name="edit_glasses">Edit Glasses</string>
 
 </resources>

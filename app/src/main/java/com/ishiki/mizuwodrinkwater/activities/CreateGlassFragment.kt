@@ -1,23 +1,21 @@
 package com.ishiki.mizuwodrinkwater.activities
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
-import com.ishiki.mizuwodrinkwater.model.Drinks
-import com.ishiki.mizuwodrinkwater.services.DrinkTypes
-import com.ishiki.mizuwodrinkwater.services.LeftAndRightArrow
+import com.ishiki.mizuwodrinkwater.fragments.GlassesFragment
+import com.ishiki.mizuwodrinkwater.model.Glasses
 import kotlinx.android.synthetic.main.activity_custom_glass.*
 
 class CreateGlassFragment : Fragment() {
 
     var name = "water01"
     private var number = 1
-    private lateinit var newGlass: Drinks
+//    private lateinit var newGlass: Drinks
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,13 +72,21 @@ class CreateGlassFragment : Fragment() {
             val checkEmpty = create_glass_volume_input.text
             val volume = create_glass_volume_input.text.toString().toInt()
 
+//            if (checkEmpty.isNotEmpty()) {
+//                newGlass = Drinks(name, volume)
+//                DrinkTypes.glasses.add(0, newGlass)
+//                (activity as MainActivity).replaceFragment(GlassesFragment())
+//            } else {
+//                Toast.makeText(context!!.applicationContext,
+//                    "Please enter a volume for the glass", Toast.LENGTH_SHORT).show()
+//            }
+
             if (checkEmpty.isNotEmpty()) {
-                newGlass = Drinks(name, volume)
-                DrinkTypes.glasses.add(0, newGlass)
+                Glasses.createGlass(name, volume)
                 (activity as MainActivity).replaceFragment(GlassesFragment())
             } else {
-                Toast.makeText(context!!.applicationContext,
-                    "Please enter a volume for the glass", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context!!.applicationContext, "Please enter a volume for the glass",
+                    Toast.LENGTH_SHORT).show()
             }
 
         }

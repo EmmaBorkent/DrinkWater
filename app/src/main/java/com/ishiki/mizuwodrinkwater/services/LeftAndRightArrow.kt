@@ -10,48 +10,31 @@ import java.lang.reflect.Field
 
 open class LeftAndRightArrow(val context: Context) {
 
-//    var name = "water01"
     lateinit var name: String
-//    var number = 1
 
     fun rightArrow(image: ImageView) {
-
         var number = 1
-
         if (number < 10) {
             number += 1
             println("The number is $number")
         } else {
             number = 1
         }
-
         name = "water0$number"
-
         val resourceId = context.resources.getIdentifier(name, "drawable", context.packageName)
         image.setImageResource(resourceId)
-
-        // Print to check
-//        println("The drink is $name")
-
-
     }
 
     fun leftArrow(image: ImageView) {
-
         var number = 1
-
         if (number > 1) {
             number -= 1
         } else {
             number = 10
         }
-
         name = "water0$number"
         val resourceId = context.resources.getIdentifier(name, "drawable", context.packageName)
         image.setImageResource(resourceId)
-
-        // Print to check
-        println("The drink is $name")
     }
 
     @Throws(IllegalArgumentException::class)

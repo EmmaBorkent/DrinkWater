@@ -4,7 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.GoalFragment">
+        tools:context=".fragments.GoalFragment">
     
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,9 +20,8 @@
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/julius_sans_one"
             android:text="@string/goal_title"
-
-            android:textAlignment="center"
             android:textAllCaps="true"
+            android:textAlignment="center"
             android:textSize="42sp"
             
             app:layout_constraintEnd_toEndOf="parent"

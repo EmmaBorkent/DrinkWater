@@ -1,22 +1,39 @@
-package com.ishiki.mizuwodrinkwater.activities
+package com.ishiki.mizuwodrinkwater.fragments
 
 import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
+import android.view.WindowManager
+import android.widget.ImageButton
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
+import com.ishiki.mizuwodrinkwater.activities.MainActivity
 import com.ishiki.mizuwodrinkwater.adapters.AddDrinkAdapter
-import com.ishiki.mizuwodrinkwater.adapters.GlassesAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
-import com.ishiki.mizuwodrinkwater.services.DrinkTypes
-import kotlinx.android.synthetic.main.fragment_glasses.*
-import kotlinx.android.synthetic.main.popup_add_drink.*
+import com.ishiki.mizuwodrinkwater.model.Glasses
+import com.ishiki.mizuwodrinkwater.services.DataSetChanged
+import com.ishiki.mizuwodrinkwater.services.OnItemClickListenerAddDrinkAdapter
+import com.ishiki.mizuwodrinkwater.services.OnItemClickListenerGlassesAdapter
 
-class TodayFragment : Fragment() {
+class HomeFragment : Fragment(), OnItemClickListenerGlassesAdapter, DataSetChanged,
+    OnItemClickListenerAddDrinkAdapter {
+    override fun onItemClickedAddDrink(glass: Glasses, position: Int) {
+
+    }
+
+    override fun onDataSetChanged() {
+
+    }
+
+    override fun onItemClicked(glass: Glasses, position: Int, dataSetChanged: DataSetChanged) {
+        Glasses.readGlass(position)
+        Toast.makeText(context, "Clicked an item in add drink RecyclerView", Toast.LENGTH_LONG).show()
+    }
 
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var adapter: AddDrinkAdapter
@@ -26,7 +43,7 @@ class TodayFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_today, container, false)
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +86,7 @@ class TodayFragment : Fragment() {
 //        mainTextGoalNumber?.text = DrinksToday.goal.toString()
 
 //        adapter = TodayDrinksRecyclerAdapter(MainActivity(), DrinksToday.history_drinks_list, object :
-//            TodayDrinksRecyclerAdapter.OnItemClickListener {
+//            TodayDrinksRecyclerAdapter.OnItemClickListenerGlassesAdapter {
 //            override fun onItemClick(dailyTotal: Int) {
 //                mainTextDailyTotal.text = dailyTotal.toString()
 //            }
@@ -122,6 +139,33 @@ class TodayFragment : Fragment() {
 //        popup_add_drink_recycler_view.layoutManager = layoutManager
 //        adapter = AddDrinkAdapter(DrinkTypes.glasses, this.context!!)
 //        popup_add_drink_recycler_view.adapter = adapter
+    }
+
+    fun createAddDrinkDialog() {
+
+        val dialog = Dialog(context!!)
+        dialog.setContentView(R.layout.popup_add_drink)
+        val popupAddDrink = dialog.findViewById(R.id.popup_add_drink_recycler_view) as RecyclerView
+        val popupEditGlassesButton = dialog.findViewById(R.id.popup_add_drink_edit_glasses_button) as ImageButton
+
+        layoutManager = LinearLayoutManager(dialog.context)
+        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        popupAddDrink.layoutManager = layoutManager
+        adapter = AddDrinkAdapter(Glasses.glassesList, context!!, this)
+        popupAddDrink.adapter = adapter
+
+        dialog.show()
+        val lp = WindowManager.LayoutParams()
+        lp.copyFrom(dialog.window?.attributes)
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT
+        dialog.window?.attributes = lp
+
+        popupEditGlassesButton.setOnClickListener {
+            Toast.makeText(context, "Clicked Add on Home Fragment", Toast.LENGTH_SHORT).show()
+
+            dialog.dismiss()
+            (activity as MainActivity).replaceFragment(GlassesFragment())
+        }
     }
 
     fun addDrink() {
