@@ -3,7 +3,7 @@
 
     <string name="main_unit">ml</string>
     <string name="goal_weight">kg</string>
-    
+
     // Bottom Navigation Menu
     <string name="bottom_menu_today">Home</string>
     <string name="bottom_menu_drinks">Drinks</string>
@@ -24,10 +24,10 @@
     <string name="main_goal">goal</string>
     <string name="main_goal_start_amount">2000</string>
     <string name="main_button_set_goal">Set Goal</string>
-    
+
     // Drinks Fragment
     <string name="history_title">Drinks</string>
-    
+
     // Goal Fragment
     <string name="goal_title">Goal</string>
     <string name="goal_text">Calculate your daily goal</string>

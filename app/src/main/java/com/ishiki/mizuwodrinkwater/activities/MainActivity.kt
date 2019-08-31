@@ -1,5 +1,6 @@
 package com.ishiki.mizuwodrinkwater.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -78,8 +79,10 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(GlassesFragment())
         glassesAddButton.show()
         glassesAddButton.setOnClickListener {
-            Toast.makeText(this, "Clicked FAB on Glasses Fragment",
-                Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Clicked FAB on Glasses Fragment",
+//                Toast.LENGTH_SHORT).show()
+            val glassesPopupIntent = Intent(this, GlassesPopupActivity::class.java)
+            startActivity(glassesPopupIntent)
         }
     }
 }

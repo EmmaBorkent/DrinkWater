@@ -1,5 +1,6 @@
 package com.ishiki.mizuwodrinkwater.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ishiki.mizuwodrinkwater.R
+import com.ishiki.mizuwodrinkwater.activities.GlassesPopupActivity
+import com.ishiki.mizuwodrinkwater.activities.MainActivity
 import com.ishiki.mizuwodrinkwater.adapters.GlassesRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Glasses
 import kotlinx.android.synthetic.main.fragment_glasses.*
@@ -30,8 +33,10 @@ class GlassesFragment : Fragment() {
 
         layoutManager = GridLayoutManager(context!!.applicationContext, 2)
         glasses_recycler_view.layoutManager = layoutManager
-        adapter = GlassesRecyclerAdapter(Glasses.glassesList, context!!) {glass ->
-            Toast.makeText(context, "Clicked ${glass.image}", Toast.LENGTH_SHORT).show()
+        adapter = GlassesRecyclerAdapter(Glasses.glassesList, context!!) { glass ->
+//            Toast.makeText(context, "Clicked ${glass.image}", Toast.LENGTH_SHORT).show()
+            val glassesPopupIntent = Intent(context, GlassesPopupActivity::class.java)
+            startActivity(glassesPopupIntent)
         }
         glasses_recycler_view.adapter = adapter
     }

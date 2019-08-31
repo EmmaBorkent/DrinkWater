@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".activities.GlassesPopupActivity">
+
+    <ImageView
+            android:id="@+id/popup_image"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/custom_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/water01" />
+
+    <ImageButton
+            android:id="@+id/popup_arrow_left"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/ic_keyboard_arrow_left"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/popup_image"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toTopOf="@+id/popup_image"
+            app:layout_constraintBottom_toBottomOf="@+id/popup_image"
+            android:contentDescription="@string/custom_left"
+            />
+
+
+    <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/ic_keyboard_arrow_right"
+            android:id="@+id/popup_arrow_right"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/popup_image"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintTop_toTopOf="@+id/popup_image"
+            app:layout_constraintBottom_toBottomOf="@+id/popup_image"
+            android:contentDescription="@string/custom_right"
+            />
+
+    <EditText
+            android:id="@+id/popup_volume_input"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:text="@string/glass_250"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/popup_image"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="@+id/popup_image"
+            app:layout_constraintTop_toTopOf="@id/popup_delete_button"
+            app:layout_constraintBottom_toBottomOf="@id/popup_delete_button"
+    />
+
+    <TextView
+            android:id="@+id/popup_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/main_unit"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/popup_volume_input"
+            app:layout_constraintStart_toEndOf="@+id/popup_volume_input"
+            app:layout_constraintTop_toTopOf="@+id/popup_volume_input" />
+
+    <ImageButton
+            android:id="@+id/popup_delete_button"
+            app:srcCompat="@drawable/ic_drinks_list_item_delete_button"
+            android:contentDescription="@string/popup_delete_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/popup_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="16dp"
+            />
+
+    <ImageButton
+            android:id="@+id/popup_save_button"
+            app:srcCompat="@drawable/ic_003_check"
+            android:contentDescription="@string/popup_save_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+
+            app:layout_constraintTop_toBottomOf="@id/popup_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            android:layout_margin="16dp"
+            />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
