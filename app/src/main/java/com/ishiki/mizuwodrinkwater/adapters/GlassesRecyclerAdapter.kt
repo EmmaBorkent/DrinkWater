@@ -12,7 +12,7 @@ import com.ishiki.mizuwodrinkwater.model.Glasses
 
 class GlassesRecyclerAdapter(private val glassesList: ArrayList<Glasses>,
                              private val context: Context,
-                             private val itemClick: (Glasses) -> Unit) :
+                             private val itemClick: (Glasses, Int) -> Unit) :
     RecyclerView.Adapter<GlassesRecyclerAdapter.GlassesHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GlassesHolder {
@@ -30,7 +30,7 @@ class GlassesRecyclerAdapter(private val glassesList: ArrayList<Glasses>,
     }
 
     inner class GlassesHolder(itemView: View,
-                              val itemClick: (Glasses) -> Unit) :
+                              val itemClick: (Glasses, Int) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         private val image = itemView.findViewById(R.id.glasses_list_image) as ImageView
         private val volume = itemView.findViewById(R.id.glasses_list_volume) as TextView
@@ -40,7 +40,7 @@ class GlassesRecyclerAdapter(private val glassesList: ArrayList<Glasses>,
                 context.packageName)
             image.setImageResource(resourceId)
             volume.text = glass.volume.toString()
-            itemView.setOnClickListener { itemClick(glass) }
+            itemView.setOnClickListener { itemClick(glass, adapterPosition) }
         }
     }
 

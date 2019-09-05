@@ -11,6 +11,7 @@ import com.ishiki.mizuwodrinkwater.fragments.GlassesFragment
 import com.ishiki.mizuwodrinkwater.model.Glasses
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CHECK
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_GLASS
+import com.ishiki.mizuwodrinkwater.utilities.EXTRA_POSITION
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_VOLUME
 import kotlinx.android.synthetic.main.activity_glasses_popup.*
 
@@ -56,22 +57,20 @@ class GlassesPopupActivity : AppCompatActivity() {
 
         popup_save_button.setOnClickListener {
 
+            val check = intent.getStringExtra(EXTRA_CHECK)
+            Log.d("check", "$check was clicked")
             val image = "water0$number"
             val volume = popup_volume_input.text.toString().toInt()
-            val position: Int = 
-            Glasses.updateGlass(image, volume, position)
 
-//            val check = intent.getStringExtra(EXTRA_CHECK)
-//            Log.d("check", "$check was clicked")
-//
-//            if (check == "fab") {
-//                val image = "water0$number"
-//                val volume = popup_volume_input.text.toString().toInt()
-//                Glasses.createGlass(image, volume)
-//                this.finish()
-//            } else {
-//                Toast.makeText(this, "$check was clicked", Toast.LENGTH_SHORT).show()
-//            }
+            if (check == "fab") {
+                Glasses.createGlass(image, volume)
+                this.finish()
+            } else {
+                val position: Int = intent.getIntExtra(EXTRA_POSITION, 0)
+                Log.d("position", "the item position is $position")
+                Glasses.updateGlass(image, volume, position)
+                this.finish()
+            }
         }
     }
 }
