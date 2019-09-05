@@ -5,21 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.activities.GlassesPopupActivity
-import com.ishiki.mizuwodrinkwater.activities.MainActivity
 import com.ishiki.mizuwodrinkwater.adapters.GlassesRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Glasses
+import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CHECK
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_GLASS
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_VOLUME
 import kotlinx.android.synthetic.main.fragment_glasses.*
 
 class GlassesFragment : Fragment() {
 
-    private lateinit var layoutManager: GridLayoutManager
+    private lateinit var layoutManager: RecyclerView.LayoutManager
     lateinit var adapter: GlassesRecyclerAdapter
 
     override fun onCreateView(
@@ -40,9 +40,15 @@ class GlassesFragment : Fragment() {
             val glassesPopupIntent = Intent(context, GlassesPopupActivity::class.java)
             glassesPopupIntent.putExtra(EXTRA_GLASS, glass.image)
             glassesPopupIntent.putExtra(EXTRA_VOLUME, glass.volume)
+            glassesPopupIntent.putExtra(EXTRA_CHECK, "adapter")
             startActivity(glassesPopupIntent)
         }
         glasses_recycler_view.adapter = adapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        adapter.notifyDataSetChanged()
     }
 }
 

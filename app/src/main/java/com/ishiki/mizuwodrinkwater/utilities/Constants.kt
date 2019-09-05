@@ -22,3 +22,4 @@ const val KEY_DRINK_TIME: String = "drink_time"
 
 const val EXTRA_GLASS = "glass"
 const val EXTRA_VOLUME = "volume"
+const val EXTRA_CHECK = "check"

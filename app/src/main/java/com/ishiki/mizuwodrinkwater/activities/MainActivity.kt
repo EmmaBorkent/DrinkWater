@@ -10,6 +10,7 @@ import com.ishiki.mizuwodrinkwater.fragments.DrinksFragment
 import com.ishiki.mizuwodrinkwater.fragments.GlassesFragment
 import com.ishiki.mizuwodrinkwater.fragments.GoalFragment
 import com.ishiki.mizuwodrinkwater.fragments.HomeFragment
+import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CHECK
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_GLASS
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_VOLUME
 import kotlinx.android.synthetic.main.activity_main.*
@@ -83,8 +84,9 @@ class MainActivity : AppCompatActivity() {
         glassesAddButton.setOnClickListener {
 //            Toast.makeText(this, "Clicked FAB on Glasses Fragment",
 //                Toast.LENGTH_SHORT).show()
-            val glassesPopupIntent = Intent(this, GlassesPopupActivity::class.java)
+            val glassesPopupIntent = Intent(applicationContext, GlassesPopupActivity::class.java)
             glassesPopupIntent.putExtra(EXTRA_GLASS, "water01")
+            glassesPopupIntent.putExtra(EXTRA_CHECK, "fab")
             glassesPopupIntent.putExtra(EXTRA_VOLUME, 250)
             startActivity(glassesPopupIntent)
         }
