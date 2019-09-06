@@ -1,7 +1,10 @@
 package com.ishiki.mizuwodrinkwater.fragments
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +13,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.activities.GlassesPopupActivity
+import com.ishiki.mizuwodrinkwater.activities.MainActivity
 import com.ishiki.mizuwodrinkwater.adapters.GlassesRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Glasses
+import com.ishiki.mizuwodrinkwater.services.ObjectSerializer
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CHECK
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_GLASS
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_POSITION
@@ -22,6 +27,10 @@ class GlassesFragment : Fragment() {
 
     private lateinit var layoutManager: RecyclerView.LayoutManager
     lateinit var adapter: GlassesRecyclerAdapter
+    private var sharedPref: SharedPreferences? = null
+//    val PREFS_FILENAME = "com.ishiki.mizuwodrinkwater.prefs"
+//    val IMAGE = "image"
+//    val VOLUME = "VOLUME"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +42,48 @@ class GlassesFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+//        sharedPref = activity?.getSharedPreferences(PREFS_FILENAME, 0)
+//        val image = ObjectSerializer.deserialize(sharedPref!!.getString(IMAGE,
+//            ObjectSerializer.serialize(ArrayList<String>())))
+//        val volume = ObjectSerializer.deserialize(sharedPref!!
+//            .getString("volume", ObjectSerializer.serialize(ArrayList<String>())))
+//
+//        if (image.size > 0 && volume.size > 0) {
+//            if (image.size == volume.size) {
+//                for ((i) in image.withIndex()) {
+//                    Glasses.glassesList.add(Glasses(image[i], volume[i].toInt()))
+//                }
+//            }
+//        }
+
+
+        sharedPref = activity?.getSharedPreferences(
+            getString(R.string.shared_preferences_file), 0)
+
+        Log.d("test", "before if statement")
+
+//        Glasses.glassesList.clear()
+
+        val image = ObjectSerializer.deserialize(sharedPref!!
+            .getString("image", ObjectSerializer.serialize(ArrayList<String>())))
+                as ArrayList<String>
+        val volume = ObjectSerializer.deserialize(sharedPref!!
+            .getString("volume", ObjectSerializer.serialize(ArrayList<String>())))
+                as ArrayList<String>
+
+        if (image.size > 0 && volume.size > 0) {
+            if (image.size == volume.size) {
+                for ((i) in image.withIndex()) {
+                    Glasses.glassesList.add(Glasses(image[i], volume[i].toInt()))
+                }
+            }
+        }
+
+        if (sharedPref!!.contains("image")) {
+            Log.d("test", "is this performed?")
+
+        }
 
         layoutManager = GridLayoutManager(context!!.applicationContext, 2)
         glasses_recycler_view.layoutManager = layoutManager
@@ -51,9 +102,50 @@ class GlassesFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         adapter.notifyDataSetChanged()
+        serializeGlassesList()
+    }
+
+    private fun serializeGlassesList() {
+        Log.d("serialize", "serialize glasses list started")
+        val image: ArrayList<String> = ArrayList()
+        val volume: ArrayList<String> = ArrayList()
+
+        for (glass: Glasses in Glasses.glassesList) {
+            image.add(glass.image)
+            volume.add(glass.volume.toString())
+        }
+
+        sharedPref = activity?.getSharedPreferences(getString(R.string.shared_preferences_file),
+            Context.MODE_PRIVATE) ?: return with(sharedPref!!.edit()) {
+            putString("image", ObjectSerializer.serialize(image))
+            putString("volume", ObjectSerializer.serialize(volume))
+            apply()
+        }
     }
 }
 
+//        if (DrinksToday.sharedPreferences!!.contains("imageCustom")) {
+//            drinks.clear()
+//
+//            val image = ObjectSerializer.deserialize(
+//                DrinksToday.sharedPreferences?.getString("imageCustom",
+//                    ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<String>
+//            val volume = ObjectSerializer.deserialize(
+//                DrinksToday.sharedPreferences?.getString("volumeCustom",
+//                    ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<String>
+//            val unit = ObjectSerializer.deserialize(
+//                DrinksToday.sharedPreferences?.getString("unitCustom",
+//                    ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<String>
+//
+//            if (image.size > 0 && volume.size > 0 && unit.size > 0) {
+//                if (image.size == volume.size && image.size == unit.size) {
+//
+//                    for ((i) in image.withIndex()) {
+//                        drinks.add(Drinks(image[i], volume[i], unit[i]))
+//                    }
+//                }
+//            }
+//        }
 
 //    private fun showItems() {
 //

@@ -1,29 +1,29 @@
-package com.ishiki.mizuwodrinkwater.services
-
-import android.content.SharedPreferences
-import com.ishiki.mizuwodrinkwater.model.Drinks
-//import com.ishiki.mizuwodrinkwater.services.DrinkTypes.currentGlass
-
-object DrinksToday {
-
-    var sharedPreferences: SharedPreferences? = null
-    var goal = 2000
-    var dailyTotal = 0
-
-    var history_drinks_list: MutableList<Drinks> = mutableListOf()
-
+//package com.ishiki.mizuwodrinkwater.services
+//
+//import android.content.SharedPreferences
+//import com.ishiki.mizuwodrinkwater.model.Drinks
+////import com.ishiki.mizuwodrinkwater.services.DrinkTypes.currentGlass
+//
+//object DrinksToday {
+//
+//    var sharedPreferences: SharedPreferences? = null
+//    var goal = 2000
+//    var dailyTotal = 0
+//
+//    var history_drinks_list: MutableList<Drinks> = mutableListOf()
+//
 //    fun addDrink() {
 //        dailyTotal += currentGlass.volume
 //        sharedPreferences!!.edit().putInt("dailyTotal", dailyTotal).apply()
 //        history_drinks_list.add(0, currentGlass)
 //        serializeDrinksTodayList()
 //    }
-
+//
 //    fun removeDrink(position: Int) {
 //        history_drinks_list.removeAt(position)
 //        serializeDrinksTodayList()
 //    }
-
+//
 //    private fun serializeDrinksTodayList() {
 //        val image: ArrayList<String> = ArrayList()
 //        val volume: ArrayList<String> = ArrayList()
@@ -39,4 +39,4 @@ object DrinksToday {
 //        sharedPreferences?.edit()?.putString("volume", ObjectSerializer.serialize(volume))?.apply()
 //        sharedPreferences?.edit()?.putString("unit", ObjectSerializer.serialize(unit))?.apply()
 //    }
-}
+//}

@@ -1,6 +1,7 @@
 package com.ishiki.mizuwodrinkwater.model
 
 import android.content.Context
+import android.content.SharedPreferences
 
 class Glasses(var image: String, var volume: Int) {
 
@@ -43,7 +44,5 @@ class Glasses(var image: String, var volume: Int) {
         fun deleteGlass(position: Int) {
             glassesList.removeAt(position)
         }
-
     }
-
 }

@@ -1,13 +1,10 @@
 package com.ishiki.mizuwodrinkwater.activities
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.fragments.GlassesFragment
 import com.ishiki.mizuwodrinkwater.model.Glasses
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CHECK
 import com.ishiki.mizuwodrinkwater.utilities.EXTRA_GLASS
@@ -56,7 +53,6 @@ class GlassesPopupActivity : AppCompatActivity() {
         }
 
         popup_save_button.setOnClickListener {
-
             val check = intent.getStringExtra(EXTRA_CHECK)
             Log.d("check", "$check was clicked")
             val image = "water0$number"
@@ -71,6 +67,13 @@ class GlassesPopupActivity : AppCompatActivity() {
                 Glasses.updateGlass(image, volume, position)
                 this.finish()
             }
+        }
+
+        popup_delete_button.setOnClickListener {
+            val position: Int = intent.getIntExtra(EXTRA_POSITION, 0)
+            Log.d("position", "the item position is $position")
+            Glasses.deleteGlass(position)
+            this.finish()
         }
     }
 }

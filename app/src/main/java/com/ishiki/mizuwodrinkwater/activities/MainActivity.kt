@@ -1,6 +1,8 @@
 package com.ishiki.mizuwodrinkwater.activities
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -61,6 +63,9 @@ class MainActivity : AppCompatActivity() {
             replaceHomeFragment()
         }
 //        dbHandler = DrinksDatabaseHandler(this)
+
+        val sharedPrefs = this.getSharedPreferences(
+            getString(R.string.shared_preferences_file), Context.MODE_PRIVATE)
     }
 
     fun replaceFragment(fragment: androidx.fragment.app.Fragment) {
