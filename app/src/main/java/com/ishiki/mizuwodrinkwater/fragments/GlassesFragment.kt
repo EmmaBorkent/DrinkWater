@@ -27,21 +27,39 @@ class GlassesFragment : Fragment() {
 
     private lateinit var layoutManager: RecyclerView.LayoutManager
     lateinit var adapter: GlassesRecyclerAdapter
-    private var sharedPref: SharedPreferences? = null
+    var sharedPreferences: SharedPreferences? = null
+
+//    private var sharedPref: SharedPreferences? = null
 //    val PREFS_FILENAME = "com.ishiki.mizuwodrinkwater.prefs"
 //    val IMAGE = "image"
 //    val VOLUME = "VOLUME"
+
+    // Create a SharedPreference file
+//    var sharedPreferences = activity?.getSharedPreferences(
+//        getString(R.string.shared_preferences_file), 0)
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        Log.d("lifecycle", "onAttach")
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("lifecycle", "onCreate")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("lifecycle", "onCreateView")
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_glasses, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        Log.d("lifecycle", "onActivityCreated")
 
 //        sharedPref = activity?.getSharedPreferences(PREFS_FILENAME, 0)
 //        val image = ObjectSerializer.deserialize(sharedPref!!.getString(IMAGE,
@@ -57,32 +75,34 @@ class GlassesFragment : Fragment() {
 //            }
 //        }
 
+//        Log.d("test", "before if statement")
 
-        sharedPref = activity?.getSharedPreferences(
+//
+
+        // You need to open the sharedPreferences first, before you can read from them, duh
+        sharedPreferences = activity?.getSharedPreferences(
             getString(R.string.shared_preferences_file), 0)
+        if (sharedPreferences != null) {
 
-        Log.d("test", "before if statement")
+            Glasses.glassesList.clear()
 
-//        Glasses.glassesList.clear()
+            val image = ObjectSerializer.deserialize(sharedPreferences!!
+                .getString("image", ObjectSerializer.serialize(ArrayList<String>())))
+                    as ArrayList<String>
+            val volume = ObjectSerializer.deserialize(sharedPreferences!!
+                .getString("volume", ObjectSerializer.serialize(ArrayList<String>())))
+                    as ArrayList<String>
 
-        val image = ObjectSerializer.deserialize(sharedPref!!
-            .getString("image", ObjectSerializer.serialize(ArrayList<String>())))
-                as ArrayList<String>
-        val volume = ObjectSerializer.deserialize(sharedPref!!
-            .getString("volume", ObjectSerializer.serialize(ArrayList<String>())))
-                as ArrayList<String>
-
-        if (image.size > 0 && volume.size > 0) {
-            if (image.size == volume.size) {
-                for ((i) in image.withIndex()) {
-                    Glasses.glassesList.add(Glasses(image[i], volume[i].toInt()))
+            if (image.size > 0 && volume.size > 0) {
+                if (image.size == volume.size) {
+                    for ((i) in image.withIndex()) {
+                        Glasses.glassesList.add(Glasses(image[i], volume[i].toInt()))
+                    }
                 }
             }
-        }
 
-        if (sharedPref!!.contains("image")) {
-            Log.d("test", "is this performed?")
-
+            val imageTest: String? = sharedPreferences!!.getString("imageTest", "water01")
+            Log.d("sharedPreferences", "imageTest: $imageTest")
         }
 
         layoutManager = GridLayoutManager(context!!.applicationContext, 2)
@@ -99,14 +119,20 @@ class GlassesFragment : Fragment() {
         glasses_recycler_view.adapter = adapter
     }
 
+    override fun onStart() {
+        super.onStart()
+        Log.d("lifecycle", "onStart")
+    }
+
     override fun onResume() {
         super.onResume()
+        Log.d("lifecycle", "onResume")
         adapter.notifyDataSetChanged()
         serializeGlassesList()
     }
 
     private fun serializeGlassesList() {
-        Log.d("serialize", "serialize glasses list started")
+
         val image: ArrayList<String> = ArrayList()
         val volume: ArrayList<String> = ArrayList()
 
@@ -115,12 +141,53 @@ class GlassesFragment : Fragment() {
             volume.add(glass.volume.toString())
         }
 
-        sharedPref = activity?.getSharedPreferences(getString(R.string.shared_preferences_file),
-            Context.MODE_PRIVATE) ?: return with(sharedPref!!.edit()) {
+        // This block of code is working
+        sharedPreferences = activity?.getSharedPreferences(
+            getString(R.string.shared_preferences_file), 0) ?: return
+        // Create a SharedPreferences Editor
+        with(sharedPreferences!!.edit()) {
             putString("image", ObjectSerializer.serialize(image))
             putString("volume", ObjectSerializer.serialize(volume))
-            apply()
+
+            putString("imageTest", "water03")
+            commit()
+            // or apply??
         }
+        // Check
+        val imageTest: String? = sharedPreferences!!.getString("imageTest", "water01")
+        Log.d("sharedPreferences", "imageTest: $imageTest")
+
+//        var sharedPreferences = activity?.getSharedPreferences(getString(R.string.shared_preferences_file),
+//            Context.MODE_PRIVATE) ?: return with (sharedPreferences!!.edit()) {
+//            putString("image", ObjectSerializer.serialize(image))
+//            putString("volume", ObjectSerializer.serialize(volume))
+//            apply()
+//        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("lifecycle", "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("lifecycle", "onStop")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("lifecycle", "onDestroyView")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("lifecycle", "onDestroy")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.d("lifecycle", "onDetach")
     }
 }
 
