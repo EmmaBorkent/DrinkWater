@@ -18,6 +18,7 @@ const val KEY_ID: String = "id"
 const val KEY_DRINK_IMAGE: String = "drink_name"
 const val KEY_DRINK_VOLUME: String = "drink_volume"
 const val KEY_DRINK_TIME: String = "drink_time"
+const val KEY_DRINK_GOAL: String = "drink_goal"
 
 
 const val EXTRA_GLASS = "glass"

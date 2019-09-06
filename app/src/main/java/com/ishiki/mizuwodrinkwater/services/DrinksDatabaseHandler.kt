@@ -16,7 +16,8 @@ class DrinksDatabaseHandler(context: Context) :
                 KEY_ID + " INTEGER PRIMARY KEY," +
                 KEY_DRINK_IMAGE + " TEXT," +
                 KEY_DRINK_VOLUME + " INT," +
-                KEY_DRINK_TIME + " LONG" + ")"
+                KEY_DRINK_TIME + " LONG," +
+                KEY_DRINK_GOAL + " INT" + ")"
 
         db?.execSQL(createDrinksTable)
     }
@@ -34,6 +35,7 @@ class DrinksDatabaseHandler(context: Context) :
         values.put(KEY_DRINK_IMAGE, drink.image)
         values.put(KEY_DRINK_VOLUME, drink.volume)
         values.put(KEY_DRINK_TIME, System.currentTimeMillis())
+        values.put(KEY_DRINK_GOAL, drink.goal)
 
         db.insert(TABLE_NAME, null, values)
 
@@ -49,7 +51,8 @@ class DrinksDatabaseHandler(context: Context) :
                         KEY_ID,
                         KEY_DRINK_IMAGE,
                         KEY_DRINK_VOLUME,
-                        KEY_DRINK_TIME
+                        KEY_DRINK_TIME,
+                        KEY_DRINK_GOAL
                 ), "$KEY_ID=?",
                 arrayOf(id.toString()),
                 null, null, null, null
@@ -61,6 +64,7 @@ class DrinksDatabaseHandler(context: Context) :
 //        drink.image =
 //        drink.volume =
         drink.time = cursor.getLong(cursor.getColumnIndex(KEY_DRINK_TIME))
+        drink.goal = cursor.getInt(cursor.getColumnIndex(KEY_DRINK_GOAL))
 
         cursor.close()
         return drink
@@ -80,6 +84,7 @@ class DrinksDatabaseHandler(context: Context) :
 //                drink.image =
 //                drink.volume =
                 drink.time = cursor.getLong(cursor.getColumnIndex(KEY_DRINK_TIME))
+                drink.goal = cursor.getInt(cursor.getColumnIndex(KEY_DRINK_GOAL))
 
                 list.add(drink)
             } while (cursor.moveToNext())
@@ -95,6 +100,7 @@ class DrinksDatabaseHandler(context: Context) :
         values.put(KEY_DRINK_IMAGE, drink.image)
         values.put(KEY_DRINK_VOLUME, drink.volume)
         values.put(KEY_DRINK_TIME, System.currentTimeMillis())
+        values.put(KEY_DRINK_GOAL, drink.goal)
 
         return db.update(TABLE_NAME, values, "$KEY_ID=?", arrayOf(drink.id.toString()))
     }

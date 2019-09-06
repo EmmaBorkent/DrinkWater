@@ -9,6 +9,7 @@ class Drinks(var image: String, var volume: Int) {
 //    lateinit var image: String
 //    var volume: Int = 0
     var time: Long = 0
+    var goal: Int = 2000
 
     fun showHumanDate(time: Long): String {
         val dateFormat: DateFormat = DateFormat.getDateInstance()
