@@ -1,27 +1,30 @@
 package com.ishiki.mizuwodrinkwater.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
 import android.view.Window
-import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.DrinksDialogRecyclerAdapter
-import com.ishiki.mizuwodrinkwater.fragments.GlassesFragment
+import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.model.Glasses
+import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
+import com.ishiki.mizuwodrinkwater.services.ObjectSerializer
 import kotlinx.android.synthetic.main.activity_drink_dialog.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
 class DrinksDialogActivity : AppCompatActivity() {
 
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var adapter: DrinksDialogRecyclerAdapter
+    private var sharedPreferences: SharedPreferences? = null
+    private lateinit var dbHandler: DrinksDatabaseHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,11 +50,11 @@ class DrinksDialogActivity : AppCompatActivity() {
 
 
 
-        val glassesList2 = arrayListOf(
-            Glasses("water01", 250),
-            Glasses("water02", 500),
-            Glasses("water03", 150)
-        )
+//        val glassesList2 = arrayListOf(
+//            Glasses("water01", 250),
+//            Glasses("water02", 500),
+//            Glasses("water03", 150)
+//        )
 
         activity_drink_dialog_edit_button.setOnClickListener {
             Log.d("DrinksDialogActivity", "Clicked Edit Button")
@@ -60,11 +63,52 @@ class DrinksDialogActivity : AppCompatActivity() {
             startActivity(glassesFragmentIntent)
         }
 
-        // This works in HomeFragment...
+        sharedPreferences = getSharedPreferences(
+            getString(R.string.shared_preferences_file), 0
+        )
+
+        if (sharedPreferences != null) {
+
+            Glasses.glassesList.clear()
+
+            @Suppress("UNCHECKED_CAST")
+            val image = ObjectSerializer.deserialize(
+                sharedPreferences!!
+                    .getString("image", ObjectSerializer.serialize(ArrayList<String>()))
+            )
+                    as ArrayList<String>
+
+            @Suppress("UNCHECKED_CAST")
+            val volume = ObjectSerializer.deserialize(
+                sharedPreferences!!
+                    .getString("volume", ObjectSerializer.serialize(ArrayList<String>()))
+            )
+                    as ArrayList<String>
+
+            if (image.size > 0 && volume.size > 0) {
+                if (image.size == volume.size) {
+                    for ((i) in image.withIndex()) {
+                        Glasses.glassesList.add(Glasses(image[i], volume[i].toInt()))
+                    }
+                }
+            }
+
+            val imageTest: String? = sharedPreferences!!.getString("imageTest", "water01")
+            Log.d("sharedPreferences", "imageTest: $imageTest")
+        }
+
+        dbHandler = DrinksDatabaseHandler(this)
         layoutManager = LinearLayoutManager(this, HORIZONTAL, false)
         activity_drink_dialog_recyclerview.layoutManager = layoutManager
-        adapter = DrinksDialogRecyclerAdapter(glassesList2, this) { glass ->
+        adapter = DrinksDialogRecyclerAdapter(Glasses.glassesList, this) { glass ->
             Log.d("DrinksDialogActivity", "Item ${glass.image} clicked")
+            val drink = Drinks()
+            drink.image = glass.image
+            drink.volume = glass.volume
+            dbHandler.createDrink(drink)
+            val homeFragmentIntent = Intent(applicationContext, MainActivity::class.java)
+            homeFragmentIntent.putExtra("loadFragment", R.id.today)
+            startActivity(homeFragmentIntent)
         }
         activity_drink_dialog_recyclerview.adapter = adapter
 

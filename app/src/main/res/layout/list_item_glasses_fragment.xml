@@ -26,21 +26,6 @@
         android:clickable="false"
     />
 
-    <Button
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:id="@+id/glasses_list_edit_button"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/ic_drinks_list_item_edit_button"
-
-            app:layout_constraintWidth_percent="0.2"
-            app:layout_constraintHeight_percent="0.2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-
-            android:layout_margin="16dp"
-    />
-
     <TextView
         android:id="@+id/glasses_list_volume"
         android:text="@string/glass_250"
