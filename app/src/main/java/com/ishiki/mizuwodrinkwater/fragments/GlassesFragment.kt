@@ -11,14 +11,14 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.activities.GlassesPopupActivity
+import com.ishiki.mizuwodrinkwater.activities.GlassesDialogActivity
 import com.ishiki.mizuwodrinkwater.adapters.GlassesRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Glasses
 import com.ishiki.mizuwodrinkwater.services.ObjectSerializer
-import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CHECK
-import com.ishiki.mizuwodrinkwater.utilities.EXTRA_GLASS
-import com.ishiki.mizuwodrinkwater.utilities.EXTRA_POSITION
-import com.ishiki.mizuwodrinkwater.utilities.EXTRA_VOLUME
+import com.ishiki.mizuwodrinkwater.services.EXTRA_CHECK
+import com.ishiki.mizuwodrinkwater.services.EXTRA_GLASS
+import com.ishiki.mizuwodrinkwater.services.EXTRA_POSITION
+import com.ishiki.mizuwodrinkwater.services.EXTRA_VOLUME
 import kotlinx.android.synthetic.main.fragment_glasses.*
 
 class GlassesFragment : Fragment() {
@@ -76,7 +76,7 @@ class GlassesFragment : Fragment() {
         layoutManager = GridLayoutManager(context!!.applicationContext, 2)
         glasses_recycler_view.layoutManager = layoutManager
         adapter = GlassesRecyclerAdapter(Glasses.glassesList, context!!) { glass, position ->
-            val glassesPopupIntent = Intent(context, GlassesPopupActivity::class.java)
+            val glassesPopupIntent = Intent(context, GlassesDialogActivity::class.java)
             glassesPopupIntent.putExtra(EXTRA_GLASS, glass.image)
             glassesPopupIntent.putExtra(EXTRA_VOLUME, glass.volume)
             glassesPopupIntent.putExtra(EXTRA_CHECK, "adapter")

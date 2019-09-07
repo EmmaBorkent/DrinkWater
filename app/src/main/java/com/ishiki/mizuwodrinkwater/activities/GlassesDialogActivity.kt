@@ -6,18 +6,18 @@ import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.model.Glasses
-import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CHECK
-import com.ishiki.mizuwodrinkwater.utilities.EXTRA_GLASS
-import com.ishiki.mizuwodrinkwater.utilities.EXTRA_POSITION
-import com.ishiki.mizuwodrinkwater.utilities.EXTRA_VOLUME
-import kotlinx.android.synthetic.main.activity_glasses_popup.*
+import com.ishiki.mizuwodrinkwater.services.EXTRA_CHECK
+import com.ishiki.mizuwodrinkwater.services.EXTRA_GLASS
+import com.ishiki.mizuwodrinkwater.services.EXTRA_POSITION
+import com.ishiki.mizuwodrinkwater.services.EXTRA_VOLUME
+import kotlinx.android.synthetic.main.activity_glasses_dialog.*
 
-class GlassesPopupActivity : AppCompatActivity() {
+class GlassesDialogActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
-        setContentView(R.layout.activity_glasses_popup)
+        setContentView(R.layout.activity_glasses_dialog)
 
         // Intents always gets called in onCreate
         val glassImage = intent.getStringExtra(EXTRA_GLASS)

@@ -1,4 +1,4 @@
-package com.ishiki.mizuwodrinkwater.services
+package com.ishiki.mizuwodrinkwater.unused
 
 interface DataSetChanged {
     fun onDataSetChanged()

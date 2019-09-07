@@ -2,6 +2,7 @@ package com.ishiki.mizuwodrinkwater.fragments
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,15 +14,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.activities.MainActivity
-import com.ishiki.mizuwodrinkwater.adapters.AddDrinkAdapter
-import com.ishiki.mizuwodrinkwater.model.Drinks
+import com.ishiki.mizuwodrinkwater.adapters.DrinksDialogRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Glasses
-import com.ishiki.mizuwodrinkwater.services.DataSetChanged
-import com.ishiki.mizuwodrinkwater.services.OnItemClickListenerAddDrinkAdapter
+import com.ishiki.mizuwodrinkwater.unused.DataSetChanged
+import com.ishiki.mizuwodrinkwater.services.ClickListenerDrinkDialog
 import com.ishiki.mizuwodrinkwater.services.OnItemClickListenerGlassesAdapter
+import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment : Fragment(), OnItemClickListenerGlassesAdapter, DataSetChanged,
-    OnItemClickListenerAddDrinkAdapter {
+class HomeFragment : Fragment(), OnItemClickListenerGlassesAdapter,
+    DataSetChanged,
+    ClickListenerDrinkDialog {
     override fun onItemClickedAddDrink(glass: Glasses, position: Int) {
 
     }
@@ -35,8 +37,8 @@ class HomeFragment : Fragment(), OnItemClickListenerGlassesAdapter, DataSetChang
         Toast.makeText(context, "Clicked an item in add drink RecyclerView", Toast.LENGTH_LONG).show()
     }
 
-    private lateinit var layoutManager: LinearLayoutManager
-    private lateinit var adapter: AddDrinkAdapter
+//    private lateinit var layoutManager: RecyclerView.LayoutManager
+//    private lateinit var adapter: DrinksDialogRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +50,9 @@ class HomeFragment : Fragment(), OnItemClickListenerGlassesAdapter, DataSetChang
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
 
 //        DrinksToday.sharedPreferences = this.getSharedPreferences("com.ishiki.mizuwodrinkwater", 0)
 //        DrinksToday.goal = DrinksToday.sharedPreferences!!.getInt(DAILY_GOAL, DrinksToday.goal)
@@ -135,42 +140,43 @@ class HomeFragment : Fragment(), OnItemClickListenerGlassesAdapter, DataSetChang
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+
 //        layoutManager = LinearLayoutManager(this.context)
 //        popup_add_drink_recycler_view.layoutManager = layoutManager
-//        adapter = AddDrinkAdapter(DrinkTypes.glasses, this.context!!)
+//        adapter = DrinksDialogRecyclerAdapter(DrinkTypes.glasses, this.context!!)
 //        popup_add_drink_recycler_view.adapter = adapter
     }
 
-    fun createAddDrinkDialog() {
-
-        val dialog = Dialog(context!!)
-        dialog.setContentView(R.layout.popup_add_drink)
-        val popupAddDrink = dialog.findViewById(R.id.popup_add_drink_recycler_view) as RecyclerView
-        val popupEditGlassesButton = dialog.findViewById(R.id.popup_add_drink_edit_glasses_button) as ImageButton
-
-        layoutManager = LinearLayoutManager(dialog.context)
-        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        popupAddDrink.layoutManager = layoutManager
-        adapter = AddDrinkAdapter(Glasses.glassesList, context!!, this)
-        popupAddDrink.adapter = adapter
-
-        dialog.show()
-        val lp = WindowManager.LayoutParams()
-        lp.copyFrom(dialog.window?.attributes)
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT
-        dialog.window?.attributes = lp
-
-        popupEditGlassesButton.setOnClickListener {
-            Toast.makeText(context, "Clicked Add on Home Fragment", Toast.LENGTH_SHORT).show()
-
-            dialog.dismiss()
-            (activity as MainActivity).replaceFragment(GlassesFragment())
-        }
-    }
+//    fun createAddDrinkDialog() {
+//
+//        val dialog = Dialog(context!!)
+//        dialog.setContentView(R.layout.x_popup_add_drink)
+//        val popupAddDrink = dialog.findViewById(R.id.popup_add_drink_recycler_view) as RecyclerView
+//        val popupEditGlassesButton = dialog.findViewById(R.id.popup_add_drink_edit_glasses_button) as ImageButton
+//
+//        layoutManager = LinearLayoutManager(dialog.context)
+//        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+//        popupAddDrink.layoutManager = layoutManager
+//        adapter = DrinksDialogRecyclerAdapter(Glasses.glassesList, context!!, this)
+//        popupAddDrink.adapter = adapter
+//
+//        dialog.show()
+//        val lp = WindowManager.LayoutParams()
+//        lp.copyFrom(dialog.window?.attributes)
+//        lp.width = WindowManager.LayoutParams.MATCH_PARENT
+//        dialog.window?.attributes = lp
+//
+//        popupEditGlassesButton.setOnClickListener {
+//            Toast.makeText(context, "Clicked Add on Home Fragment", Toast.LENGTH_SHORT).show()
+//
+//            dialog.dismiss()
+//            (activity as MainActivity).replaceFragment(GlassesFragment())
+//        }
+//    }
 
     fun addDrink() {
         // Create a drink
-        val createDrink = Drinks("water02", 500)
+//        val createDrink = Drinks("water02", 500)
 //        createDrink.image =
 //        createDrink.volume =
 //        saveToDatabase(createDrink)

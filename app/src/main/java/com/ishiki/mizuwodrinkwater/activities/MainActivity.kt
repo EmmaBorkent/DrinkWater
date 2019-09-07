@@ -1,8 +1,6 @@
 package com.ishiki.mizuwodrinkwater.activities
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,14 +10,15 @@ import com.ishiki.mizuwodrinkwater.fragments.DrinksFragment
 import com.ishiki.mizuwodrinkwater.fragments.GlassesFragment
 import com.ishiki.mizuwodrinkwater.fragments.GoalFragment
 import com.ishiki.mizuwodrinkwater.fragments.HomeFragment
-import com.ishiki.mizuwodrinkwater.utilities.EXTRA_CHECK
-import com.ishiki.mizuwodrinkwater.utilities.EXTRA_GLASS
-import com.ishiki.mizuwodrinkwater.utilities.EXTRA_VOLUME
+import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
+import com.ishiki.mizuwodrinkwater.services.EXTRA_CHECK
+import com.ishiki.mizuwodrinkwater.services.EXTRA_GLASS
+import com.ishiki.mizuwodrinkwater.services.EXTRA_VOLUME
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-//    private lateinit var dbHandler: DrinksDatabaseHandler
+    private lateinit var dbHandler: DrinksDatabaseHandler
 
     private val mOnNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -62,10 +61,18 @@ class MainActivity : AppCompatActivity() {
         } else {
             replaceHomeFragment()
         }
-//        dbHandler = DrinksDatabaseHandler(this)
 
-        val sharedPrefs = this.getSharedPreferences(
-            getString(R.string.shared_preferences_file), Context.MODE_PRIVATE)
+        dbHandler = DrinksDatabaseHandler(this)
+
+//        val drink = Drinks()
+//        drink.image = "water01"
+//        drink.volume = 250
+//        dbHandler.createDrink(drink)
+
+//        dbHandler.deleteDrink(3)
+//        dbHandler.deleteDrink(4)
+
+        dbHandler.getCount()
     }
 
     fun replaceFragment(fragment: androidx.fragment.app.Fragment) {
@@ -80,6 +87,8 @@ class MainActivity : AppCompatActivity() {
         glassesAddButton.setOnClickListener {
             Toast.makeText(this, "Clicked FAB on Home Fragment",
                 Toast.LENGTH_SHORT).show()
+            val drinksDialogIntent = Intent(applicationContext, DrinksDialogActivity::class.java)
+            startActivity(drinksDialogIntent)
         }
     }
 
@@ -89,15 +98,14 @@ class MainActivity : AppCompatActivity() {
         glassesAddButton.setOnClickListener {
 //            Toast.makeText(this, "Clicked FAB on Glasses Fragment",
 //                Toast.LENGTH_SHORT).show()
-            val glassesPopupIntent = Intent(applicationContext, GlassesPopupActivity::class.java)
-            glassesPopupIntent.putExtra(EXTRA_GLASS, "water01")
-            glassesPopupIntent.putExtra(EXTRA_CHECK, "fab")
-            glassesPopupIntent.putExtra(EXTRA_VOLUME, 250)
-            startActivity(glassesPopupIntent)
+            val glassesDialogIntent = Intent(applicationContext, GlassesDialogActivity::class.java)
+            glassesDialogIntent.putExtra(EXTRA_GLASS, "water01")
+            glassesDialogIntent.putExtra(EXTRA_CHECK, "fab")
+            glassesDialogIntent.putExtra(EXTRA_VOLUME, 250)
+            startActivity(glassesDialogIntent)
         }
     }
 }
-
 
 //    private fun saveToDatabase(drinks: Drinks) {
 //        dbHandler.createDrink(drinks)
@@ -122,7 +130,7 @@ class MainActivity : AppCompatActivity() {
 //        layoutManager = LinearLayoutManager(dialog.context)
 //        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
 //        popupAddDrink.layoutManager = layoutManager
-//        adapter = AddDrinkAdapter(DrinkTypes.glasses, this, this)
+//        adapter = DrinksDialogRecyclerAdapter(DrinkTypes.glasses, this, this)
 //        popupAddDrink.adapter = adapter
 //
 //        dialog.show()

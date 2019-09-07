@@ -1,6 +1,7 @@
 package com.ishiki.mizuwodrinkwater.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +13,14 @@ import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
 
 //private val onItemClickListener: AdapterView.OnItemClickListenerGlassesAdapter
 class DrinksRecyclerAdapter(private val drinksList: ArrayList<Drinks>,
-                            private val context: Context
-                            ) :
+                            private val context: Context,
+                            private val itemClick: (Drinks, Int) -> Unit) :
         RecyclerView.Adapter<DrinksRecyclerAdapter.DrinksHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DrinksHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.drinks_list_item, parent,
+        val view = LayoutInflater.from(context).inflate(R.layout.list_item_drinks_fragment, parent,
                 false)
-        return DrinksHolder(view, context, drinksList)
+        return DrinksHolder(view, itemClick)
     }
 
     override fun getItemCount(): Int {
@@ -30,11 +31,8 @@ class DrinksRecyclerAdapter(private val drinksList: ArrayList<Drinks>,
         holder.bindDrinks(drinksList[position])
     }
 
-    inner class DrinksHolder(itemView: View, context: Context, list: ArrayList<Drinks>) :
-            RecyclerView.ViewHolder(itemView), View.OnClickListener {
-
-        private val mContext = context
-        private val mList = list
+    inner class DrinksHolder(itemView: View, val itemClick: (Drinks, Int) -> Unit) :
+            RecyclerView.ViewHolder(itemView) {
 
         private val drinkImage = itemView.findViewById(R.id.drinks_list_item_image)
                 as ImageView
@@ -47,49 +45,43 @@ class DrinksRecyclerAdapter(private val drinksList: ArrayList<Drinks>,
         private val drinkDelete = itemView.findViewById(R.id.drinks_list_item_delete_button)
                 as Button
 
-        fun bindDrinks(drinks: Drinks) {
-            val resourceId = context.resources.getIdentifier(drinks.image, "drawable",
+        fun bindDrinks(drink: Drinks) {
+            val resourceId = context.resources.getIdentifier(drink.image, "drawable",
                     context.packageName)
             drinkImage.setImageResource(resourceId)
-            drinkVolume.text = drinks.volume.toString()
-            drinkTime.text = drinks.showHumanDate(drinks.time)
-            drinkEdit.setOnClickListener(this)
-            drinkDelete.setOnClickListener(this)
+            drinkVolume.text = drink.volume.toString()
+            drinkTime.text = drink.showHumanDate(drink.time)
 
-//            drinkEdit.setOnClickListener {
-//                Toast.makeText(context, "Clicked Edit Button", Toast.LENGTH_SHORT).show()
-//            }
-//
-//            drinkDelete.setOnClickListener {
-//                Toast.makeText(context, "Clicked Delete Button", Toast.LENGTH_SHORT).show()
-//            }
-        }
-
-        override fun onClick(v: View?) {
-
-            val mPosition: Int = adapterPosition
-            val drink = mList[mPosition]
-
-            when(v?.id) {
-                drinkDelete.id -> {
-                    deleteDrink(drink.id)
-                    mList.removeAt(adapterPosition)
-                    notifyItemRemoved(adapterPosition)
-                }
-                drinkEdit.id -> {
-                    editDrink(drink)
-                }
+            drinkEdit.setOnClickListener { itemClick(drink, adapterPosition) }
+            drinkDelete.setOnClickListener {
+                val db = DrinksDatabaseHandler(context)
+                db.deleteDrink(drink.id)
+                drinksList.removeAt(adapterPosition)
+                notifyItemRemoved(adapterPosition)
+                Log.d("adapter", "delete item")
             }
         }
 
-        private fun deleteDrink(id: Int) {
-            val database = DrinksDatabaseHandler(mContext)
-            database.deleteDrink(id)
-        }
+//        override fun onClick(v: View?) {
+//
+//            val mPosition: Int = adapterPosition
+//            val drink = drinksList[mPosition]
+//
+//            when(v?.id) {
+//                drinkDelete.id -> {
+//                    deleteDrink(drink.id)
+//                    drinksList.removeAt(adapterPosition)
+//                    notifyItemRemoved(adapterPosition)
+//                }
+//                drinkEdit.id -> {
+//                    editDrink(drink)
+//                }
+//            }
+//        }
 
-        private fun editDrink(drinks: Drinks) {
-            Toast.makeText(context, "Clicked Edit Button", Toast.LENGTH_SHORT).show()
-        }
+//        private fun editDrink(drinks: Drinks) {
+//            Toast.makeText(context, "Clicked Edit Button", Toast.LENGTH_SHORT).show()
+//        }
 
     }
 

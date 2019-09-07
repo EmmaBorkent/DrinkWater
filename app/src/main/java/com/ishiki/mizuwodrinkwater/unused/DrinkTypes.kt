@@ -1,4 +1,4 @@
-package com.ishiki.mizuwodrinkwater.services
+package com.ishiki.mizuwodrinkwater.unused
 //
 //import android.content.Context
 //import android.widget.ImageView

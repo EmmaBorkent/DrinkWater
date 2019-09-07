@@ -1,4 +1,4 @@
-package com.ishiki.mizuwodrinkwater.activities
+package com.ishiki.mizuwodrinkwater.unused
 //
 //import android.content.Intent
 //import androidx.appcompat.app.AppCompatActivity

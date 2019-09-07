@@ -16,8 +16,8 @@ class GlassesRecyclerAdapter(private val glassesList: ArrayList<Glasses>,
     RecyclerView.Adapter<GlassesRecyclerAdapter.GlassesHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GlassesHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.glasses_list_item, parent,
-            false)
+        val view = LayoutInflater.from(context).inflate(R.layout.list_item_glasses_fragment,
+            parent, false)
         return GlassesHolder(view, itemClick)
     }
 
@@ -26,16 +26,16 @@ class GlassesRecyclerAdapter(private val glassesList: ArrayList<Glasses>,
     }
 
     override fun onBindViewHolder(holder: GlassesHolder, position: Int) {
-        holder.bindViews(glassesList[position], context)
+        holder.bindViews(glassesList[position])
     }
 
-    inner class GlassesHolder(itemView: View,
-                              val itemClick: (Glasses, Int) -> Unit) :
+    inner class GlassesHolder(itemView: View, val itemClick: (Glasses, Int) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
-        private val image = itemView.findViewById(R.id.glasses_list_image) as ImageView
-        private val volume = itemView.findViewById(R.id.glasses_list_volume) as TextView
 
-        fun bindViews(glass: Glasses, context: Context) {
+        private val image = itemView.findViewById<ImageView>(R.id.glasses_list_image)
+        private val volume = itemView.findViewById<TextView>(R.id.glasses_list_volume)
+
+        fun bindViews(glass: Glasses) {
             val resourceId: Int = context.resources.getIdentifier(glass.image, "drawable",
                 context.packageName)
             image.setImageResource(resourceId)

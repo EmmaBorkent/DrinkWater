@@ -1,6 +1,7 @@
 package com.ishiki.mizuwodrinkwater.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,10 +16,8 @@ import kotlinx.android.synthetic.main.fragment_drinks.*
 
 class DrinksFragment : Fragment() {
 
-    private lateinit var glassesList: ArrayList<Drinks>
-    private lateinit var glassListItem: ArrayList<Drinks>
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    lateinit var adapter: DrinksRecyclerAdapter
+    private lateinit var adapter: DrinksRecyclerAdapter
     private lateinit var dbHandler: DrinksDatabaseHandler
 
     override fun onCreateView(
@@ -31,48 +30,51 @@ class DrinksFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         showItems()
     }
 
     private fun showItems() {
-
         dbHandler = DrinksDatabaseHandler(context!!.applicationContext)
 
-        glassesList = ArrayList()
-        glassesList.reverse()
-        glassListItem = ArrayList()
+        var databaseDrinks: ArrayList<Drinks> = ArrayList()
+        databaseDrinks.reverse()
+        val drinksList: ArrayList<Drinks> = ArrayList()
 
         layoutManager = LinearLayoutManager(context!!.applicationContext)
-        history_drinks_list.layoutManager = layoutManager
+        drinks_recyclerview.layoutManager = layoutManager
 
-//        adapter = DrinksRecyclerAdapter(glassListItem, context!!.applicationContext, object : DrinksRecyclerAdapter.OnItemClickListenerGlassesAdapter {
+//        adapter = DrinksRecyclerAdapter(drinksList, context!!.applicationContext, object : DrinksRecyclerAdapter.OnItemClickListenerGlassesAdapter {
 //            override fun onItemClick(adapter: DrinksRecyclerAdapter) {
 //                adapter.notifyDataSetChanged()
 //            }
 //        })
 
-        adapter = DrinksRecyclerAdapter(glassListItem, context!!.applicationContext)
-//        adapter = DrinksRecyclerAdapter(glassListItem, context!!.applicationContext, object : DrinksRecyclerAdapter.OnItemClickListenerGlassesAdapter {
+        adapter = DrinksRecyclerAdapter(drinksList, context!!.applicationContext) { item,
+                                                                                    position ->
+            Log.d("adapter", "the item ${item.image} has position $position")
+        }
+//        adapter = DrinksRecyclerAdapter(drinksList, context!!.applicationContext)
+//        adapter = DrinksRecyclerAdapter(drinksList, context!!.applicationContext, object : DrinksRecyclerAdapter.OnItemClickListenerGlassesAdapter {
 //            override fun onItemClick() {
 //                mainTextDailyTotal.text = dailyTotal.toString()
 //            }
 //        })
 
-        history_drinks_list.adapter = adapter
+        drinks_recyclerview.adapter = adapter
 
-        glassesList = dbHandler.readAllDrinks()
+        databaseDrinks = dbHandler.readAllDrinks()
 
-        for (i in glassesList.iterator()) {
-            val drink = Drinks(i.image, i.volume)
-//            drink.image =
-//            drink.volume =
-
-            glassListItem.add(drink)
+        for (i in databaseDrinks.iterator()) {
+            Log.d("database", "${i.id} + ${i.image}")
+            val drink = Drinks()
+            drink.id = i.id
+            drink.image = i.image
+            drink.volume = i.volume
+            drink.time = i.time
+            drinksList.add(drink)
         }
 
         adapter.notifyDataSetChanged()
-
     }
 
     private fun saveToDatabase(drinks: Drinks) {

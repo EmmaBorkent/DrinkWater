@@ -2,59 +2,73 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/add_drink_item"
+        android:id="@+id/glasses_list_item"
 >
 
     <ImageView
-        android:id="@+id/add_drink_list_image"
+        android:id="@+id/glasses_list_image"
         app:srcCompat="@drawable/water01"
         android:contentDescription="@string/glass_250"
         android:background="@android:color/transparent"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="32dp"
         app:layout_constraintDimensionRatio="1:1"
         android:focusableInTouchMode="false"
         android:clickable="false"
     />
 
+    <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/glasses_list_edit_button"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/ic_drinks_list_item_edit_button"
+
+            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            android:layout_margin="16dp"
+    />
+
     <TextView
-        android:id="@+id/add_drink_list_volume"
+        android:id="@+id/glasses_list_volume"
         android:text="@string/glass_250"
         android:fontFamily="@font/montserrat"
         android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="@+id/add_drink_list_image"
-        app:layout_constraintEnd_toEndOf="@+id/add_drink_list_image"
+        app:layout_constraintStart_toStartOf="@+id/glasses_list_image"
+        app:layout_constraintEnd_toEndOf="@+id/glasses_list_image"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/add_drink_list_image"
+        app:layout_constraintTop_toBottomOf="@+id/glasses_list_image"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintBottom_toBottomOf="parent"
     />
 
     <TextView
-        android:id="@+id/add_drink_list_unit"
+        android:id="@+id/glasses_list_unit"
         android:text="@string/main_unit"
         android:fontFamily="@font/montserrat"
         android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/add_drink_list_volume"
-        android:layout_margin="8dp"
-        app:layout_constraintTop_toTopOf="@+id/add_drink_list_volume"
-        app:layout_constraintBottom_toBottomOf="@+id/add_drink_list_volume"
+        app:layout_constraintStart_toEndOf="@+id/glasses_list_volume"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toTopOf="@+id/glasses_list_volume"
+        app:layout_constraintBottom_toBottomOf="@+id/glasses_list_volume"
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

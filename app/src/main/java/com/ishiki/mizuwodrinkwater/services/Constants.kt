@@ -1,4 +1,4 @@
-package com.ishiki.mizuwodrinkwater.utilities
+package com.ishiki.mizuwodrinkwater.services
 
 const val EXTRA_DAILY = "Daily Total"
 //const val PREFS_FILENAME = "com.ishiki.mizuwodrinkwater.prefs"
@@ -10,7 +10,7 @@ const val DAILY_GOAL = "daily_goal"
 
 // Database Constants
 const val DATABASE_VERSION: Int = 1
-const val DATABASE_NAME: String = "mizuwo_drink_water.db"
+const val DATABASE_NAME: String = "mizuwo_drinks.db"
 const val TABLE_NAME: String = "drinks"
 
 // Drinks table column names
