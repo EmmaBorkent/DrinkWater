@@ -50,7 +50,7 @@ class DrinksRecyclerAdapter(private val drinksList: ArrayList<Drinks>,
                     context.packageName)
             drinkImage.setImageResource(resourceId)
             drinkVolume.text = drink.volume.toString()
-            drinkTime.text = drink.showHumanDate(drink.time)
+            drinkTime.text = drink.showHumanTime(drink.time)
 
             drinkEdit.setOnClickListener { itemClick(drink, adapterPosition) }
             drinkDelete.setOnClickListener {

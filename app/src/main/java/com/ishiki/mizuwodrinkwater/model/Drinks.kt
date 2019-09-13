@@ -1,6 +1,8 @@
 package com.ishiki.mizuwodrinkwater.model
 
+import java.sql.Time
 import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 class Drinks {
@@ -26,6 +28,11 @@ class Drinks {
     fun showHumanDate(time: Long): String {
         val dateFormat: DateFormat = DateFormat.getDateInstance()
         return dateFormat.format(Date(time).time)
+    }
+
+    fun showHumanTime(time: Long): String {
+        val timeFormat: DateFormat = DateFormat.getTimeInstance(DateFormat.SHORT)
+        return timeFormat.format(Date(time).time)
     }
 
 }

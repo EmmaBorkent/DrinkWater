@@ -22,6 +22,7 @@ class DrinksFragment : Fragment() {
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var adapter: DrinksRecyclerAdapter
     private lateinit var dbHandler: DrinksDatabaseHandler
+
     private val date: Calendar = Calendar.getInstance()
     @SuppressLint("SimpleDateFormat")
     private val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
@@ -39,22 +40,16 @@ class DrinksFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val showDate = Drinks().showHumanDate(date.timeInMillis)
-        Log.d("time", "Today's date is $showDate")
         checkTodayDate()
         showItems()
 
         drinks_arrow_left.setOnClickListener {
             drinks_arrow_right.visibility = View.VISIBLE
-
             date.add(Calendar.DAY_OF_YEAR, -1)
             val showHumanDate = Drinks().showHumanDate(date.timeInMillis)
             drinks_text_day.text = showHumanDate
-            Log.d("time", "Left arrow date is $showHumanDate")
-
             minusOne -= 1
             showItems()
-
             checkYesterdayDate()
         }
 
@@ -62,11 +57,8 @@ class DrinksFragment : Fragment() {
             date.add(Calendar.DAY_OF_YEAR, 1)
             val showHumanDate = Drinks().showHumanDate(date.timeInMillis)
             drinks_text_day.text = showHumanDate
-            Log.d("time", "Right arrow date is $showHumanDate")
-
             minusOne += 1
             showItems()
-
             checkTodayDate()
             checkYesterdayDate()
         }
@@ -74,28 +66,24 @@ class DrinksFragment : Fragment() {
 
     private fun showItems() {
         dbHandler = DrinksDatabaseHandler(context!!.applicationContext)
+        val drinksList: ArrayList<Drinks> = ArrayList()
 
         layoutManager = LinearLayoutManager(context!!.applicationContext)
         drinks_recyclerview.layoutManager = layoutManager
 
-        val drinksList: ArrayList<Drinks> = ArrayList()
         adapter = DrinksRecyclerAdapter(drinksList, context!!.applicationContext) { item,
                                                                                     position ->
             Log.d("adapter", "the item ${item.image} has position $position")
         }
         drinks_recyclerview.adapter = adapter
 
-        val databaseDrinks: ArrayList<Drinks>
-
         val year = date.get(Calendar.YEAR)
         val month = date.get(Calendar.MONTH)+1
         val day = date.get(Calendar.DATE)
+        val parseFrom = format.parse("$year-$month-$day 00:00:00")
+        val parseTo = format.parse("$year-$month-$day 23:59:00")
 
-        val from = "$year-$month-$day 00:00:00"
-        val to = "$year-$month-$day 23:59:00"
-        val parseFrom = format.parse(from)
-        val parseTo = format.parse(to)
-
+        val databaseDrinks: ArrayList<Drinks>
         databaseDrinks = dbHandler.findDay(parseTo.time, parseFrom.time)
 
         for (i in databaseDrinks.iterator()) {
