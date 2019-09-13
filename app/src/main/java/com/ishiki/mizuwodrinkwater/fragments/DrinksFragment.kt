@@ -1,5 +1,6 @@
 package com.ishiki.mizuwodrinkwater.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,12 +14,20 @@ import com.ishiki.mizuwodrinkwater.adapters.DrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
 import kotlinx.android.synthetic.main.fragment_drinks.*
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.*
+import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
 
 class DrinksFragment : Fragment() {
 
-    private lateinit var layoutManager: RecyclerView.LayoutManager
+    private lateinit var layoutManager: LinearLayoutManager
     private lateinit var adapter: DrinksRecyclerAdapter
     private lateinit var dbHandler: DrinksDatabaseHandler
+    private val date: Calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,9 +37,30 @@ class DrinksFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_drinks, container, false)
     }
 
+    @SuppressLint("NewApi")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         showItems()
+        checkTodayDate()
+
+        drinks_arrow_left.setOnClickListener {
+            drinks_arrow_right.visibility = View.VISIBLE
+
+            date.add(Calendar.DAY_OF_YEAR, -1)
+            val showHumanDate = Drinks().showHumanDate(date.timeInMillis)
+            drinks_text_day.text = showHumanDate
+
+            checkYesterdayDate()
+        }
+
+        drinks_arrow_right.setOnClickListener {
+            date.add(Calendar.DAY_OF_YEAR, 1)
+            val showHumanDate = Drinks().showHumanDate(date.timeInMillis)
+            drinks_text_day.text = showHumanDate
+
+            checkTodayDate()
+            checkYesterdayDate()
+        }
     }
 
     private fun showItems() {
@@ -43,23 +73,10 @@ class DrinksFragment : Fragment() {
         layoutManager = LinearLayoutManager(context!!.applicationContext)
         drinks_recyclerview.layoutManager = layoutManager
 
-//        adapter = DrinksRecyclerAdapter(drinksList, context!!.applicationContext, object : DrinksRecyclerAdapter.OnItemClickListenerGlassesAdapter {
-//            override fun onItemClick(adapter: DrinksRecyclerAdapter) {
-//                adapter.notifyDataSetChanged()
-//            }
-//        })
-
         adapter = DrinksRecyclerAdapter(drinksList, context!!.applicationContext) { item,
                                                                                     position ->
             Log.d("adapter", "the item ${item.image} has position $position")
         }
-//        adapter = DrinksRecyclerAdapter(drinksList, context!!.applicationContext)
-//        adapter = DrinksRecyclerAdapter(drinksList, context!!.applicationContext, object : DrinksRecyclerAdapter.OnItemClickListenerGlassesAdapter {
-//            override fun onItemClick() {
-//                mainTextDailyTotal.text = dailyTotal.toString()
-//            }
-//        })
-
         drinks_recyclerview.adapter = adapter
 
         databaseDrinks = dbHandler.readAllDrinks()
@@ -77,7 +94,40 @@ class DrinksFragment : Fragment() {
         adapter.notifyDataSetChanged()
     }
 
-    private fun saveToDatabase(drinks: Drinks) {
-        dbHandler.createDrink(drinks)
+    private fun checkTodayDate() {
+        val showHumanDate = Drinks().showHumanDate(date.timeInMillis)
+        val currentDate = Calendar.getInstance()
+        val humanDate = Drinks().showHumanDate(currentDate.timeInMillis)
+        if (showHumanDate == humanDate) {
+            drinks_arrow_right.visibility = View.INVISIBLE
+            drinks_text_day.text = getString(R.string.drinks_today)
+        }
     }
+
+    private fun checkYesterdayDate() {
+        val showHumanDate = Drinks().showHumanDate(date.timeInMillis)
+        val currentDate = Calendar.getInstance()
+        currentDate.add(Calendar.DAY_OF_YEAR, -1)
+        val humanDate = Drinks().showHumanDate(currentDate.timeInMillis)
+        if (showHumanDate == humanDate) {
+            drinks_text_day.text = getString(R.string.drinks_yesterday)
+        }
+    }
+
+//    private fun saveToDatabase(drinks: Drinks) {
+//        dbHandler.createDrink(drinks)
+//    }
+
+//    private fun date() {
+//
+//        val today = System.currentTimeMillis()
+//        val showHumanDateToday = Drinks().showHumanDate(today)
+//        Log.d("DrinksFragment", "Current time $showHumanDateToday")
+//
+//        val twoDaysAgo = Calendar.getInstance()
+//        twoDaysAgo.add(Calendar.DAY_OF_YEAR, -2)
+//        val showHumanDateTwoDaysAgo = Drinks().showHumanDate(twoDaysAgo.timeInMillis)
+//        Log.d("DrinksFragment", "Two days ago $showHumanDateTwoDaysAgo")
+//
+//    }
 }

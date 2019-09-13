@@ -1,36 +1,18 @@
 package com.ishiki.mizuwodrinkwater.fragments
 
-import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.activities.MainActivity
-import com.ishiki.mizuwodrinkwater.adapters.DrinksDialogRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Glasses
-import com.ishiki.mizuwodrinkwater.unused.DataSetChanged
 import com.ishiki.mizuwodrinkwater.services.ClickListenerDrinkDialog
 import com.ishiki.mizuwodrinkwater.services.OnItemClickListenerGlassesAdapter
-import kotlinx.android.synthetic.main.fragment_home.*
+import com.ishiki.mizuwodrinkwater.unused.DataSetChanged
 
-class HomeFragment : Fragment(), OnItemClickListenerGlassesAdapter,
-    DataSetChanged,
-    ClickListenerDrinkDialog {
-    override fun onItemClickedAddDrink(glass: Glasses, position: Int) {
-
-    }
-
-    override fun onDataSetChanged() {
-
-    }
+class HomeFragment : Fragment(), OnItemClickListenerGlassesAdapter {
 
     override fun onItemClicked(glass: Glasses, position: Int, dataSetChanged: DataSetChanged) {
         Glasses.readGlass(position)
@@ -50,9 +32,6 @@ class HomeFragment : Fragment(), OnItemClickListenerGlassesAdapter,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-
 
 //        DrinksToday.sharedPreferences = this.getSharedPreferences("com.ishiki.mizuwodrinkwater", 0)
 //        DrinksToday.goal = DrinksToday.sharedPreferences!!.getInt(DAILY_GOAL, DrinksToday.goal)
@@ -127,24 +106,10 @@ class HomeFragment : Fragment(), OnItemClickListenerGlassesAdapter,
 //        }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-
-//        val builder = Dialog(context!!)
-//        builder.setContentView(R.layout.popup_edit_glass)
-//        builder.setContentView(R.layout.popup_add_drink)
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
 
-//        layoutManager = LinearLayoutManager(this.context)
-//        popup_add_drink_recycler_view.layoutManager = layoutManager
-//        adapter = DrinksDialogRecyclerAdapter(DrinkTypes.glasses, this.context!!)
-//        popup_add_drink_recycler_view.adapter = adapter
     }
 
 //    fun createAddDrinkDialog() {
@@ -173,15 +138,6 @@ class HomeFragment : Fragment(), OnItemClickListenerGlassesAdapter,
 //            (activity as MainActivity).replaceFragment(GlassesFragment())
 //        }
 //    }
-
-    fun addDrink() {
-        // Create a drink
-//        val createDrink = Drinks("water02", 500)
-//        createDrink.image =
-//        createDrink.volume =
-//        saveToDatabase(createDrink)
-//        adapter.notifyDataSetChanged()
-    }
 
 //    private fun createPopup() {
 //        val view = layoutInflater.inflate(R.layout.popup_edit_glass, null)

@@ -30,6 +30,8 @@
 
     // Drinks Fragment
     <string name="history_title">Drinks</string>
+    <string name="drinks_today">Today</string>
+    <string name="drinks_yesterday">Yesterday</string>
 
     // Goal Fragment
     <string name="goal_title">Goal</string>

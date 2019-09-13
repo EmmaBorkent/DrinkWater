@@ -2,6 +2,7 @@ package com.ishiki.mizuwodrinkwater.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -10,11 +11,15 @@ import com.ishiki.mizuwodrinkwater.fragments.DrinksFragment
 import com.ishiki.mizuwodrinkwater.fragments.GlassesFragment
 import com.ishiki.mizuwodrinkwater.fragments.GoalFragment
 import com.ishiki.mizuwodrinkwater.fragments.HomeFragment
+import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
 import com.ishiki.mizuwodrinkwater.services.EXTRA_CHECK
 import com.ishiki.mizuwodrinkwater.services.EXTRA_GLASS
 import com.ishiki.mizuwodrinkwater.services.EXTRA_VOLUME
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.DateFormat
+import java.time.LocalDateTime
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
