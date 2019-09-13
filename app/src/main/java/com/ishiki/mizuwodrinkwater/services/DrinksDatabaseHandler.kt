@@ -93,6 +93,33 @@ class DrinksDatabaseHandler(context: Context) :
         return list
     }
 
+    fun findDay(fromTime: Long, toTime: Long): ArrayList<Drinks> {
+        val db: SQLiteDatabase = readableDatabase
+        val list: ArrayList<Drinks> = ArrayList()
+        val query = "SELECT * FROM $TABLE_NAME WHERE $KEY_DRINK_TIME >= \"$toTime\" AND " +
+                "$KEY_DRINK_TIME <= \"$fromTime\""
+
+//        where  game_date >= '2012-03-11' and game_date  <= '2012-05-11'
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val drink = Drinks()
+                drink.id = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+                drink.image = cursor.getString(cursor.getColumnIndex(KEY_DRINK_IMAGE))
+                drink.volume = cursor.getInt(cursor.getColumnIndex(KEY_DRINK_VOLUME))
+                drink.time = cursor.getLong(cursor.getColumnIndex(KEY_DRINK_TIME))
+
+                list.add(drink)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        Log.d("DrinksDatabaseHandler",
+            "Found Drinks in the Database between $fromTime and $toTime")
+        return list
+    }
+
     fun updateDrink(drink: Drinks): Int {
         val db = writableDatabase
         val values = ContentValues()
@@ -119,24 +146,3 @@ class DrinksDatabaseHandler(context: Context) :
         return cursor.count
     }
 }
-
-//    fun findDay(time: Long): Drinks {
-//        val db: SQLiteDatabase = writableDatabase
-//        val query = "SELECT * FROM $TABLE_NAME WHERE $KEY_DRINK_TIME = \"$time\""
-//        val cursor = db.rawQuery(query, null)
-//        lateinit var drink: Drinks
-//        if (cursor.moveToFirst()) {
-//            cursor.moveToFirst()
-//            drink = Drinks(
-//                cursor.getString(cursor.getColumnIndex(KEY_DRINK_IMAGE)),
-//                cursor.getInt(cursor.getColumnIndex(KEY_DRINK_VOLUME)),
-//                cursor.getInt(cursor.getColumnIndex(KEY_DRINK_GOAL))
-//            )
-////            drink.id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID)))
-//            drink.time = cursor.getLong(cursor.getColumnIndex(KEY_DRINK_TIME))
-//            cursor.close()
-//        }
-//        db.close()
-//        Log.d("DrinksDatabaseHandler", "Found a Drink in the Database at $time")
-//        return drink
-//    }

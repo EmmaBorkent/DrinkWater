@@ -3,23 +3,17 @@ package com.ishiki.mizuwodrinkwater.fragments
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.adapters.DrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
 import kotlinx.android.synthetic.main.fragment_drinks.*
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.*
-import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 class DrinksFragment : Fragment() {
@@ -28,6 +22,7 @@ class DrinksFragment : Fragment() {
     private lateinit var adapter: DrinksRecyclerAdapter
     private lateinit var dbHandler: DrinksDatabaseHandler
     private val date: Calendar = Calendar.getInstance()
+    private var minusOne = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,8 +35,11 @@ class DrinksFragment : Fragment() {
     @SuppressLint("NewApi")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        showItems()
+
+        val showDate = Drinks().showHumanDate(date.timeInMillis)
+        Log.d("time", "Today's date is $showDate")
         checkTodayDate()
+        showItems()
 
         drinks_arrow_left.setOnClickListener {
             drinks_arrow_right.visibility = View.VISIBLE
@@ -49,6 +47,10 @@ class DrinksFragment : Fragment() {
             date.add(Calendar.DAY_OF_YEAR, -1)
             val showHumanDate = Drinks().showHumanDate(date.timeInMillis)
             drinks_text_day.text = showHumanDate
+            Log.d("time", "Left arrow date is $showHumanDate")
+
+            minusOne -= 1
+            showItems()
 
             checkYesterdayDate()
         }
@@ -57,6 +59,10 @@ class DrinksFragment : Fragment() {
             date.add(Calendar.DAY_OF_YEAR, 1)
             val showHumanDate = Drinks().showHumanDate(date.timeInMillis)
             drinks_text_day.text = showHumanDate
+            Log.d("time", "Right arrow date is $showHumanDate")
+
+            minusOne += 1
+            showItems()
 
             checkTodayDate()
             checkYesterdayDate()
@@ -66,20 +72,25 @@ class DrinksFragment : Fragment() {
     private fun showItems() {
         dbHandler = DrinksDatabaseHandler(context!!.applicationContext)
 
-        var databaseDrinks: ArrayList<Drinks> = ArrayList()
-        databaseDrinks.reverse()
-        val drinksList: ArrayList<Drinks> = ArrayList()
-
         layoutManager = LinearLayoutManager(context!!.applicationContext)
         drinks_recyclerview.layoutManager = layoutManager
 
+        val drinksList: ArrayList<Drinks> = ArrayList()
         adapter = DrinksRecyclerAdapter(drinksList, context!!.applicationContext) { item,
                                                                                     position ->
             Log.d("adapter", "the item ${item.image} has position $position")
         }
         drinks_recyclerview.adapter = adapter
 
-        databaseDrinks = dbHandler.readAllDrinks()
+        val databaseDrinks: ArrayList<Drinks>
+
+        val showDate = Drinks().showHumanDate(date.timeInMillis)
+        Log.d("time", "After showItems the date is $showDate")
+
+        val to = Calendar.getInstance()
+        to.add(Calendar.DAY_OF_YEAR, minusOne)
+
+        databaseDrinks = dbHandler.findDay(date.timeInMillis, to.timeInMillis)
 
         for (i in databaseDrinks.iterator()) {
             Log.d("database", "${i.id} + ${i.image}")
@@ -90,9 +101,12 @@ class DrinksFragment : Fragment() {
             drink.time = i.time
             drinksList.add(drink)
         }
+        drinksList.reverse()
 
         adapter.notifyDataSetChanged()
     }
+
+    // Cannot combine these functions because of limitations using .timeInMillis
 
     private fun checkTodayDate() {
         val showHumanDate = Drinks().showHumanDate(date.timeInMillis)
