@@ -13,6 +13,7 @@ import com.ishiki.mizuwodrinkwater.adapters.DrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
 import kotlinx.android.synthetic.main.fragment_drinks.*
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -22,6 +23,8 @@ class DrinksFragment : Fragment() {
     private lateinit var adapter: DrinksRecyclerAdapter
     private lateinit var dbHandler: DrinksDatabaseHandler
     private val date: Calendar = Calendar.getInstance()
+    @SuppressLint("SimpleDateFormat")
+    private val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
     private var minusOne = -1
 
     override fun onCreateView(
@@ -84,13 +87,16 @@ class DrinksFragment : Fragment() {
 
         val databaseDrinks: ArrayList<Drinks>
 
-        val showDate = Drinks().showHumanDate(date.timeInMillis)
-        Log.d("time", "After showItems the date is $showDate")
+        val year = date.get(Calendar.YEAR)
+        val month = date.get(Calendar.MONTH)+1
+        val day = date.get(Calendar.DATE)
 
-        val to = Calendar.getInstance()
-        to.add(Calendar.DAY_OF_YEAR, minusOne)
+        val from = "$year-$month-$day 00:00:00"
+        val to = "$year-$month-$day 23:59:00"
+        val parseFrom = format.parse(from)
+        val parseTo = format.parse(to)
 
-        databaseDrinks = dbHandler.findDay(date.timeInMillis, to.timeInMillis)
+        databaseDrinks = dbHandler.findDay(parseTo.time, parseFrom.time)
 
         for (i in databaseDrinks.iterator()) {
             Log.d("database", "${i.id} + ${i.image}")
@@ -107,7 +113,7 @@ class DrinksFragment : Fragment() {
     }
 
     // Cannot combine these functions because of limitations using .timeInMillis
-
+    // Maybe I can, because now I can parse
     private fun checkTodayDate() {
         val showHumanDate = Drinks().showHumanDate(date.timeInMillis)
         val currentDate = Calendar.getInstance()
