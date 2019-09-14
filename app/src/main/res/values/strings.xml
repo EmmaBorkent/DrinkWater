@@ -27,6 +27,7 @@
     <string name="main_goal">goal</string>
     <string name="main_goal_start_amount">2000</string>
     <string name="main_button_set_goal">Set Goal</string>
+    <string name="percentage_unit">%</string>
 
     // Drinks Fragment
     <string name="history_title">Drinks</string>
@@ -61,5 +62,10 @@
     <string name="popup_delete_button">Cancle</string>
     <string name="drinks_list_item_time">time</string>
     <string name="edit_glasses">Edit Glasses</string>
+
+    // Change Drink Dialog Activity
+    <string name="change_drink_image">Drink Image</string>
+    <string name="change_drink_volume">250 ml</string>
+    <string name="change_drink_time">8:00</string>
 
 </resources>

@@ -27,7 +27,7 @@ class GlassesDialogActivity : AppCompatActivity() {
 
         val resourceId = resources.getIdentifier(glassImage, "drawable", packageName)
         popup_image.setImageResource(resourceId)
-        popup_volume_input.setText(glassVolume.toString())
+        change_drink_volume_input.setText(glassVolume.toString())
 
         // You have to use toString() first, because otherwise you are converting a character
         // toInt() and the character number for 1 is 49.
@@ -56,7 +56,7 @@ class GlassesDialogActivity : AppCompatActivity() {
             val check = intent.getStringExtra(EXTRA_CHECK)
             Log.d("check", "$check was clicked")
             val image = "water0$number"
-            val volume = popup_volume_input.text.toString().toInt()
+            val volume = change_drink_volume_input.text.toString().toInt()
 
             if (check == "fab") {
                 Glasses.createGlass(image, volume)

@@ -17,9 +17,9 @@ import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.model.Glasses
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
 import com.ishiki.mizuwodrinkwater.services.ObjectSerializer
-import kotlinx.android.synthetic.main.activity_drink_dialog.*
+import kotlinx.android.synthetic.main.activity_add_drink_dialog.*
 
-class DrinksDialogActivity : AppCompatActivity() {
+class AddDrinksDialogActivity : AppCompatActivity() {
 
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var adapter: DrinksDialogRecyclerAdapter
@@ -29,7 +29,7 @@ class DrinksDialogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
-        setContentView(R.layout.activity_drink_dialog)
+        setContentView(R.layout.activity_add_drink_dialog)
 
         // Set dialog width, because with recyclerView match_parent does not work
         val dialog = findViewById<View>(R.id.activity_drink_dialog_container)
@@ -57,7 +57,7 @@ class DrinksDialogActivity : AppCompatActivity() {
 //        )
 
         activity_drink_dialog_edit_button.setOnClickListener {
-            Log.d("DrinksDialogActivity", "Clicked Edit Button")
+            Log.d("AddDrinksDialogActivity", "Clicked Edit Button")
             val glassesFragmentIntent = Intent(applicationContext, MainActivity::class.java)
             glassesFragmentIntent.putExtra("loadFragment", R.id.glasses)
             startActivity(glassesFragmentIntent)
@@ -101,7 +101,7 @@ class DrinksDialogActivity : AppCompatActivity() {
         layoutManager = LinearLayoutManager(this, HORIZONTAL, false)
         activity_drink_dialog_recyclerview.layoutManager = layoutManager
         adapter = DrinksDialogRecyclerAdapter(Glasses.glassesList, this) { glass ->
-            Log.d("DrinksDialogActivity", "Item ${glass.image} clicked")
+            Log.d("AddDrinksDialogActivity", "Item ${glass.image} clicked")
             val drink = Drinks()
             drink.image = glass.image
             drink.volume = glass.volume
@@ -116,16 +116,16 @@ class DrinksDialogActivity : AppCompatActivity() {
 //        activity_drink_dialog_recyclerview.layoutManager = layoutManager
 //
 //        for (item in Glasses.glassesList) {
-//            Log.d("DrinksDialogActivity", item.image)
+//            Log.d("AddDrinksDialogActivity", item.image)
 //        }
 //
 //        adapter = DrinksDialogRecyclerAdapter(Glasses.glassesList, applicationContext) { glass ->
-//            Log.d("DrinksDialogActivity", "Clicked ${glass.image}")
+//            Log.d("AddDrinksDialogActivity", "Clicked ${glass.image}")
 //        }
 //        activity_drink_dialog_recyclerview.adapter = adapter
 //
 //        activity_drink_dialog_edit_button.setOnClickListener {
-//            Log.d("DrinksDialogActivity", "Clicked Edit Button")
+//            Log.d("AddDrinksDialogActivity", "Clicked Edit Button")
 //        }
     }
 }

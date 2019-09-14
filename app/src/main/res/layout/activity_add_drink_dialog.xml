@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:context=".activities.DrinksDialogActivity"
+        tools:context=".activities.AddDrinksDialogActivity"
         android:id="@+id/activity_drink_dialog_container">
 
     <androidx.recyclerview.widget.RecyclerView

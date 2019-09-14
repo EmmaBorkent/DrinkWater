@@ -51,7 +51,7 @@
     />
     
     <EditText
-        android:id="@+id/popup_volume_input"
+        android:id="@+id/change_drink_volume_input"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
@@ -76,9 +76,9 @@
         android:text="@string/main_unit"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/popup_volume_input"
-        app:layout_constraintStart_toEndOf="@+id/popup_volume_input"
-        app:layout_constraintTop_toTopOf="@+id/popup_volume_input" />
+        app:layout_constraintBottom_toBottomOf="@+id/change_drink_volume_input"
+        app:layout_constraintStart_toEndOf="@+id/change_drink_volume_input"
+        app:layout_constraintTop_toTopOf="@+id/change_drink_volume_input" />
     
     <ImageButton
         android:id="@+id/popup_delete_button"

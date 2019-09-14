@@ -18,22 +18,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/water01" />
-    
+
     <TextView
-        android:id="@+id/drinks_list_item_volume"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/basic_amount"
-    
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/drinks_list_item_time"
-        app:layout_constraintStart_toEndOf="@+id/drinks_list_item_image"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+            android:id="@+id/drinks_list_item_volume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/basic_amount"
+
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/drinks_list_item_time"
+            app:layout_constraintStart_toEndOf="@+id/drinks_list_item_image"
+            app:layout_constraintTop_toTopOf="@+id/drinks_list_item_image"
+            app:layout_constraintVertical_bias="1.0"
+            />
     
     <TextView
         android:id="@+id/drinks_list_item_unit"
@@ -61,7 +62,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/drinks_list_item_unit"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.2"
 
         android:layout_margin="16dp" />
     
@@ -77,16 +78,17 @@
         
         android:layout_marginEnd="16dp"
     />
-    
+
     <TextView
-        android:id="@+id/drinks_list_item_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-    
-        android:fontFamily="@font/montserrat"
-    
-        android:text="@string/drinks_list_item_time"
-        app:layout_constraintBottom_toBottomOf="@+id/drinks_list_item_image"
-        app:layout_constraintStart_toStartOf="@id/drinks_list_item_volume" />
+            android:id="@+id/drinks_list_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="@font/montserrat"
+
+            android:text="@string/drinks_list_item_time"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/drinks_list_item_image"
+            app:layout_constraintStart_toStartOf="@id/drinks_list_item_volume" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

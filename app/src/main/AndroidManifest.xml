@@ -9,8 +9,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".activities.ChangeDrinkDialogActivity"></activity>
         <activity
-                android:name=".activities.DrinksDialogActivity"
+                android:name=".activities.AddDrinksDialogActivity"
                 android:excludeFromRecents="true"
                 android:theme="@style/Theme.AppCompat.Light.Dialog" />
         <activity
