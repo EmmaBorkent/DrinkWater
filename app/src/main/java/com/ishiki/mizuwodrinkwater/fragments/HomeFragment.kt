@@ -1,26 +1,35 @@
 package com.ishiki.mizuwodrinkwater.fragments
 
+import android.annotation.SuppressLint
+import android.graphics.*
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.RectShape
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.model.Glasses
-import com.ishiki.mizuwodrinkwater.services.ClickListenerDrinkDialog
-import com.ishiki.mizuwodrinkwater.services.OnItemClickListenerGlassesAdapter
-import com.ishiki.mizuwodrinkwater.unused.DataSetChanged
+import com.ishiki.mizuwodrinkwater.activities.MainActivity
+import com.ishiki.mizuwodrinkwater.model.Drinks
+import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
+import com.ishiki.mizuwodrinkwater.services.HOME_TODAY
+import kotlinx.android.synthetic.main.fragment_home.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
-class HomeFragment : Fragment(), OnItemClickListenerGlassesAdapter {
-
-    override fun onItemClicked(glass: Glasses, position: Int, dataSetChanged: DataSetChanged) {
-        Glasses.readGlass(position)
-        Toast.makeText(context, "Clicked an item in add drink RecyclerView", Toast.LENGTH_LONG).show()
-    }
+class HomeFragment : Fragment() {
 
 //    private lateinit var layoutManager: RecyclerView.LayoutManager
 //    private lateinit var adapter: DrinksDialogRecyclerAdapter
+    private lateinit var dbHandler: DrinksDatabaseHandler
+    private val date: Calendar = Calendar.getInstance()
+    @SuppressLint("SimpleDateFormat")
+    private val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    private var minusOne = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -109,8 +118,77 @@ class HomeFragment : Fragment(), OnItemClickListenerGlassesAdapter {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        val showHumanDate = Drinks().showHumanDate(date.timeInMillis)
+        val todayDateText = context?.getString(R.string.home_today_date, HOME_TODAY,
+            showHumanDate)
+        fragment_home_today_date.text = todayDateText
+//        fragment_home_volume_text.text = dailyTotal().toString()
+        fragment_home_goal_text.text = Drinks.goal.toString()
+        val percentage = dailyTotal() * 100 / Drinks.goal
+        fragment_home_goal_percentage.text = percentage.toString()
+
+        dailyProgressBar()
+    }
+
+    private fun dailyTotal(): Int {
+        dbHandler = DrinksDatabaseHandler(context!!.applicationContext)
+
+        val year = date.get(Calendar.YEAR)
+        val month = date.get(Calendar.MONTH)+1
+        val day = date.get(Calendar.DATE)
+        val parseFrom = format.parse("$year-$month-$day 00:00:00")
+        val parseTo = format.parse("$year-$month-$day 23:59:00")
+
+        val databaseDrinks: ArrayList<Drinks>
+        databaseDrinks = dbHandler.findDay(parseTo.time, parseFrom.time)
+
+        var totalVolume = 0
+        for (i in databaseDrinks.iterator()) {
+            totalVolume += i.volume
+        }
+        return totalVolume
+    }
+
+    private fun dailyProgressBar() {
+
+        val displayMetrics = DisplayMetrics()
+        activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
+
+        val bitmap = Bitmap.createBitmap(displayMetrics.widthPixels,
+            displayMetrics.heightPixels, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        val shapeDrawable = ShapeDrawable(RectShape())
+
+        // Rectangle positions
+        val left = 0
+        val top = displayMetrics.heightPixels*0.15
+        val right = displayMetrics.widthPixels*0.03
+        val bottom = displayMetrics.heightPixels*0.98
+
 
     }
+
+//    private fun roundedCorners(bitmap: Bitmap): Bitmap {
+////        val output: Bitmap = Bitmap.createBitmap(bitmap.width, bitmap.height,
+////            Bitmap.Config.ARGB_8888)
+////        val canvas = Canvas(output)
+//
+////        val color = resources.getColor(R.color.text)
+////        val paint = Paint()
+////        val rect = Rect(0,0,bitmap.width,bitmap.height)
+////        val rectF = RectF()
+////        val roundPx = 12F
+////
+////        paint.isAntiAlias = true
+////        canvas.drawARGB(0,0,0,0)
+//////        paint.color = color
+////        canvas.drawRoundRect(rectF, roundPx,roundPx,paint)
+////
+////        paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+////        canvas.drawBitmap(bitmap, rect, rect, paint)
+////
+////        return output
+//    }
 
 //    fun createAddDrinkDialog() {
 //

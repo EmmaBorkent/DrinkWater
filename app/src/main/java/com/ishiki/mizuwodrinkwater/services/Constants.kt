@@ -25,3 +25,6 @@ const val EXTRA_GLASS = "glass"
 const val EXTRA_VOLUME = "volume"
 const val EXTRA_CHECK = "check"
 const val EXTRA_POSITION = "position"
+
+// Home Fragment
+const val HOME_TODAY = "Vandaag"

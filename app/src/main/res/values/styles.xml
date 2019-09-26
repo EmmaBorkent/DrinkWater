@@ -1,11 +1,69 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- A style is a collection of attributes that specify the appearance for a single View.
+    A style can specify attributes such as font color, font size, background color, and more. -->
+
+    <!-- Application theme -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
     </style>
+
+    <style name="floatingActionButton" parent="Widget.Design.FloatingActionButton">
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="tint">@color/colorAccentLight</item>
+    </style>
+
+    <style name="BaseIcon" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="IconYellow" parent="BaseIcon">
+        <item name="tint">@color/colorPrimary</item>
+    </style>
+
+    <style name="IconGrey" parent="BaseIcon">
+        <item name="tint">@color/colorOnSurface</item>
+    </style>
+
+    <style name="IconDarkGrey" parent="BaseIcon">
+        <item name="tint">@color/textColorPrimary</item>
+    </style>
+
+
+
+    <style name="primaryFontFamily">
+        <item name="android:fontFamily">@font/montserrat</item>
+    </style>
+
+    <style name="Headline1" parent="primaryFontFamily">
+        <item name="android:textColor">@color/textColorPrimaryDark</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Headline2" parent="primaryFontFamily">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Subtitle1" parent="primaryFontFamily"/>
+
+    <style name="Caption1" parent="primaryFontFamily">
+        <item name="android:textSize">100sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Caption2" parent="Caption1">
+        <item name="android:textSize">48sp</item>
+    </style>
+
+
 
 </resources>

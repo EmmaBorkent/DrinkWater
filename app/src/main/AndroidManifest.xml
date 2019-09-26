@@ -13,11 +13,11 @@
         <activity
                 android:name=".activities.AddDrinksDialogActivity"
                 android:excludeFromRecents="true"
-                android:theme="@style/Theme.AppCompat.Light.Dialog" />
+                android:theme="@style/Theme.MaterialComponents.Light.Dialog" />
         <activity
                 android:name=".activities.GlassesDialogActivity"
                 android:excludeFromRecents="true"
-                android:theme="@style/Theme.AppCompat.Light.Dialog" />
+                android:theme="@style/Theme.MaterialComponents.Light.Dialog" />
         <activity
                 android:name=".activities.MainActivity"
                 android:label="@string/app_name">

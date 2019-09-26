@@ -10,6 +10,10 @@ class Drinks {
     var volume: Int = 0
     var time: Long = 0
 
+    companion object {
+        var goal: Int = 2500
+    }
+
     fun showHumanDate(time: Long): String {
         val dateFormat: DateFormat = DateFormat.getDateInstance()
         return dateFormat.format(Date(time).time)

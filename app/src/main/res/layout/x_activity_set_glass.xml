@@ -19,7 +19,6 @@
             app:srcCompat="@drawable/ic_action_add"
             app:fabSize="auto"
             app:layout_constraintEnd_toEndOf="parent"
-            app:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView

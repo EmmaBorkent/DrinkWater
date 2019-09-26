@@ -15,6 +15,7 @@
 
     // Home Fragment
     <string name="main_title">Home</string>
+    <string name="home_fragment_title">Hi, Emma!</string>
     <string name="main_text">Tap the image to change the glass</string>
     <string name="main_text_2">Tap GOAL to change the daily goal</string>
     <string name="main_drank">Total</string>
@@ -28,6 +29,13 @@
     <string name="main_goal_start_amount">2000</string>
     <string name="main_button_set_goal">Set Goal</string>
     <string name="percentage_unit">%</string>
+    <string name="home_progress">Daily Progress Bar</string>
+    <string name="home_today_date">%1$s %2$s</string>
+    <string name="home_notification">Notification Icon</string>
+    <string name="home_change_display">Change Display Icon</string>
+    <string name="home_activity">Activiteit</string>
+    <string name="home_display_activity">Display Today\'s Activity</string>
+    <string name="home_edit_activity">Edit Today\'s Activity</string>
 
     // Drinks Fragment
     <string name="history_title">Drinks</string>

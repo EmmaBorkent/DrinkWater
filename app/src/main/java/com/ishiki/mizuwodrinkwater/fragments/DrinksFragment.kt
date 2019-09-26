@@ -22,7 +22,6 @@ class DrinksFragment : Fragment() {
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var adapter: DrinksRecyclerAdapter
     private lateinit var dbHandler: DrinksDatabaseHandler
-
     private val date: Calendar = Calendar.getInstance()
     @SuppressLint("SimpleDateFormat")
     private val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
@@ -87,7 +86,6 @@ class DrinksFragment : Fragment() {
         databaseDrinks = dbHandler.findDay(parseTo.time, parseFrom.time)
 
         for (i in databaseDrinks.iterator()) {
-            Log.d("database", "${i.id} + ${i.image}")
             val drink = Drinks()
             drink.id = i.id
             drink.image = i.image
