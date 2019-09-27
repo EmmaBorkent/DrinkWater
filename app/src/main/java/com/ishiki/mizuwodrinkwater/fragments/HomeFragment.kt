@@ -1,29 +1,23 @@
 package com.ishiki.mizuwodrinkwater.fragments
 
 import android.annotation.SuppressLint
-import android.graphics.*
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.RectShape
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.activities.MainActivity
 import com.ishiki.mizuwodrinkwater.adapters.DrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
 import com.ishiki.mizuwodrinkwater.services.HOME_TODAY
-import kotlinx.android.synthetic.main.fragment_drinks.*
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.list_item_drinks_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -156,23 +150,34 @@ class HomeFragment : Fragment() {
         val halfScreenHeight = displayMetrics.heightPixels*0.38
         mBottomSheetBehavior.peekHeight = halfScreenHeight.toInt()
 
+        val animationClockwise = AnimationUtils.loadAnimation(activity,
+            R.anim.rotate_clockwise)
+        animationClockwise.fillAfter = true
+        val animationCounterClockwise = AnimationUtils.loadAnimation(activity,
+            R.anim.rotate_counter_clockwise)
+        animationCounterClockwise.fillAfter = true
+
         home_fragment_display_activity.setOnClickListener {
             mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+            home_fragment_display_activity.startAnimation(animationClockwise)
         }
 
         mBottomSheetBehavior.bottomSheetCallback = object: BottomSheetBehavior.BottomSheetCallback() {
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
-            }
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_EXPANDED) {
                     home_fragment_display_activity.setOnClickListener {
                         mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+
+                        home_fragment_display_activity.startAnimation(animationCounterClockwise)
                     }
                 } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
                     home_fragment_display_activity.setOnClickListener {
                         mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+                        home_fragment_display_activity.startAnimation(animationClockwise)
                     }
                 }
 
