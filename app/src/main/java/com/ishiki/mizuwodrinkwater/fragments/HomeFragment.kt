@@ -7,24 +7,31 @@ import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.activities.MainActivity
+import com.ishiki.mizuwodrinkwater.adapters.DrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
 import com.ishiki.mizuwodrinkwater.services.HOME_TODAY
+import kotlinx.android.synthetic.main.fragment_drinks.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.list_item_drinks_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
 
-//    private lateinit var layoutManager: RecyclerView.LayoutManager
-//    private lateinit var adapter: DrinksDialogRecyclerAdapter
+    private lateinit var layoutManager: LinearLayoutManager
+    private lateinit var adapter: DrinksRecyclerAdapter
     private lateinit var dbHandler: DrinksDatabaseHandler
     private val date: Calendar = Calendar.getInstance()
     @SuppressLint("SimpleDateFormat")
@@ -118,6 +125,8 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        showItems()
+
         val showHumanDate = Drinks().showHumanDate(date.timeInMillis)
         val todayDateText = context?.getString(R.string.home_today_date, HOME_TODAY,
             showHumanDate)
@@ -127,7 +136,87 @@ class HomeFragment : Fragment() {
         val percentage = dailyTotal() * 100 / Drinks.goal
         fragment_home_goal_percentage.text = percentage.toString()
 
-        dailyProgressBar()
+        fragment_home_notifications.setOnClickListener {
+            Toast.makeText(context,"Notificaties", Toast.LENGTH_SHORT).show()
+        }
+
+        fragment_home_change_main_display.setOnClickListener {
+            Toast.makeText(context, "Verander Display Weergave", Toast.LENGTH_SHORT).show()
+        }
+
+        home_fragment_edit_activity.setOnClickListener {
+            Toast.makeText(context, "Activiteit Aanpassen", Toast.LENGTH_SHORT).show()
+        }
+
+
+        val mBottomSheetBehavior = BottomSheetBehavior
+            .from(activity_bottom_sheet)
+        val displayMetrics = DisplayMetrics()
+        activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
+        val halfScreenHeight = displayMetrics.heightPixels*0.38
+        mBottomSheetBehavior.peekHeight = halfScreenHeight.toInt()
+
+        home_fragment_display_activity.setOnClickListener {
+            mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+
+        mBottomSheetBehavior.bottomSheetCallback = object: BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
+            }
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    home_fragment_display_activity.setOnClickListener {
+                        mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                    }
+                } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    home_fragment_display_activity.setOnClickListener {
+                        mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                    }
+                }
+
+//                when (newState) {
+//                    BottomSheetBehavior.STATE_EXPANDED -> expanded()
+//                    BottomSheetBehavior.STATE_COLLAPSED -> collapsed()
+//                    BottomSheetBehavior.STATE_DRAGGING -> Log.i("STATE", "Dragging...")
+//                    BottomSheetBehavior.STATE_SETTLING -> Log.i("STATE", "Setteling...")
+//                    BottomSheetBehavior.STATE_HALF_EXPANDED -> Log.i("STATE", "Half Expended State")
+//                    BottomSheetBehavior.STATE_HIDDEN -> Log.i("STATE", "Hidden State")
+//                }
+            }
+
+            fun expanded() {
+                Log.i("STATE", "Expanded State")
+                home_fragment_display_activity.setOnClickListener {
+                    mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                }
+            }
+
+            fun collapsed() {
+                Log.i("STATE", "Collapsed State")
+                home_fragment_display_activity.setOnClickListener {
+                    mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                }
+            }
+
+
+        }
+
+//        mBottomSheetBehavior.setBottomSheetCallback(object:BottomSheetBehavior.BottomSheetCallback() {
+//            fun onStateChanged(@NonNull bottomSheet:View, newState:Int) {
+//                when (newState) {
+//                    BottomSheetBehavior.STATE_COLLAPSED -> mTextViewState.setText("Collapsed")
+//                    BottomSheetBehavior.STATE_DRAGGING -> mTextViewState.setText("Dragging...")
+//                    BottomSheetBehavior.STATE_EXPANDED -> mTextViewState.setText("Expanded")
+//                    BottomSheetBehavior.STATE_HIDDEN -> mTextViewState.setText("Hidden")
+//                    BottomSheetBehavior.STATE_SETTLING -> mTextViewState.setText("Settling...")
+//                }
+//            }
+//        })
+
+
+
     }
 
     private fun dailyTotal(): Int {
@@ -149,23 +238,39 @@ class HomeFragment : Fragment() {
         return totalVolume
     }
 
-    private fun dailyProgressBar() {
+    private fun showItems() {
+        dbHandler = DrinksDatabaseHandler(context!!.applicationContext)
+        val drinksList: ArrayList<Drinks> = ArrayList()
 
-        val displayMetrics = DisplayMetrics()
-        activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
+        layoutManager = LinearLayoutManager(context!!.applicationContext)
+        drinks_recyclerview_small.layoutManager = layoutManager
 
-        val bitmap = Bitmap.createBitmap(displayMetrics.widthPixels,
-            displayMetrics.heightPixels, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        val shapeDrawable = ShapeDrawable(RectShape())
+        adapter = DrinksRecyclerAdapter(drinksList, context!!.applicationContext) { item,
+                                                                                    position ->
+            Log.d("adapter", "the item ${item.image} has position $position")
+        }
+        drinks_recyclerview_small.adapter = adapter
 
-        // Rectangle positions
-        val left = 0
-        val top = displayMetrics.heightPixels*0.15
-        val right = displayMetrics.widthPixels*0.03
-        val bottom = displayMetrics.heightPixels*0.98
+        val year = date.get(Calendar.YEAR)
+        val month = date.get(Calendar.MONTH)+1
+        val day = date.get(Calendar.DATE)
+        val parseFrom = format.parse("$year-$month-$day 00:00:00")
+        val parseTo = format.parse("$year-$month-$day 23:59:00")
 
+        val databaseDrinks: ArrayList<Drinks>
+        databaseDrinks = dbHandler.findDay(parseTo.time, parseFrom.time)
 
+        for (i in databaseDrinks.iterator()) {
+            val drink = Drinks()
+            drink.id = i.id
+            drink.image = i.image
+            drink.volume = i.volume
+            drink.time = i.time
+            drinksList.add(drink)
+        }
+        drinksList.reverse()
+
+        adapter.notifyDataSetChanged()
     }
 
 //    private fun roundedCorners(bitmap: Bitmap): Bitmap {

@@ -18,7 +18,7 @@ class DrinksDatabaseHandler(context: Context) :
                 KEY_ID + " INTEGER PRIMARY KEY," +
                 KEY_DRINK_IMAGE + " TEXT," +
                 KEY_DRINK_VOLUME + " INT," +
-                KEY_DRINK_TIME + " LONG," + ")"
+                KEY_DRINK_TIME + " LONG" + ")"
 
         db?.execSQL(createDrinksTable)
         Log.d("DrinksDatabaseHandler", "Database Table Created")

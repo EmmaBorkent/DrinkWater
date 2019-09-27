@@ -37,6 +37,10 @@
     <string name="home_display_activity">Display Today\'s Activity</string>
     <string name="home_edit_activity">Edit Today\'s Activity</string>
 
+    // Recycler View List Item
+    <style name="description_edit_button">Edit this entry</style>
+    <style name="description_delete_button">Delete this entry</style>
+
     // Drinks Fragment
     <string name="history_title">Drinks</string>
     <string name="drinks_today">Today</string>

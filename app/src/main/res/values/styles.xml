@@ -1,4 +1,4 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- A style is a collection of attributes that specify the appearance for a single View.
     A style can specify attributes such as font color, font size, background color, and more. -->
@@ -20,8 +20,12 @@
 
     <style name="BaseIcon" parent="Widget.AppCompat.ImageButton">
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:scaleType">centerCrop</item>
-        <item name="android:padding">8dp</item>
+        <item name="android:scaleType">centerInside</item>
+        // According to material design 4dp grid system for
+        // bottom app bar, iconography and typography
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="layout_constraintDimensionRatio">1:1</item>
     </style>
 
     <style name="IconYellow" parent="BaseIcon">
@@ -51,6 +55,14 @@
     <style name="Headline2" parent="primaryFontFamily">
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Headline3" parent="primaryFontFamily">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Headline4" parent="primaryFontFamily">
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="Subtitle1" parent="primaryFontFamily"/>

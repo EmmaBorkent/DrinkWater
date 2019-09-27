@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.ishiki.mizuwodrinkwater.R
+import com.ishiki.mizuwodrinkwater.activities.MainActivity
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
 
@@ -41,9 +42,9 @@ class DrinksRecyclerAdapter(private val drinksList: ArrayList<Drinks>,
         private val drinkTime = itemView.findViewById(R.id.drinks_list_item_time)
                 as TextView
         private val drinkEdit = itemView.findViewById(R.id.drinks_list_item_edit_button)
-                as Button
+                as ImageButton
         private val drinkDelete = itemView.findViewById(R.id.drinks_list_item_delete_button)
-                as Button
+                as ImageButton
 
         fun bindDrinks(drink: Drinks) {
             val resourceId = context.resources.getIdentifier(drink.image, "drawable",
@@ -51,6 +52,9 @@ class DrinksRecyclerAdapter(private val drinksList: ArrayList<Drinks>,
             drinkImage.setImageResource(resourceId)
             drinkVolume.text = drink.volume.toString()
             drinkTime.text = drink.showHumanTime(drink.time)
+
+            drinkEdit.visibility = View.INVISIBLE
+            drinkDelete.visibility = View.INVISIBLE
 
             drinkEdit.setOnClickListener { itemClick(drink, adapterPosition) }
             drinkDelete.setOnClickListener {
