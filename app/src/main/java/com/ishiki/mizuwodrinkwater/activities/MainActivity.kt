@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         dbHandler.getCount()
     }
 
-    fun replaceFragment(fragment: androidx.fragment.app.Fragment) {
+    private fun replaceFragment(fragment: androidx.fragment.app.Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment)
         fragmentTransaction.commit()

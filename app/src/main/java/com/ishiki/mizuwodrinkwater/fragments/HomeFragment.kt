@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -28,9 +29,9 @@ class HomeFragment : Fragment() {
     private lateinit var adapter: DrinksRecyclerAdapter
     private lateinit var dbHandler: DrinksDatabaseHandler
     private val date: Calendar = Calendar.getInstance()
-    @SuppressLint("SimpleDateFormat")
+        @SuppressLint("SimpleDateFormat")
     private val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-    private var minusOne = -1
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -119,8 +120,7 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        showItems()
-
+        // Set subtitle, percentage and goal values
         val showHumanDate = Drinks().showHumanDate(date.timeInMillis)
         val todayDateText = context?.getString(R.string.home_today_date, HOME_TODAY,
             showHumanDate)
@@ -138,89 +138,12 @@ class HomeFragment : Fragment() {
             Toast.makeText(context, "Verander Display Weergave", Toast.LENGTH_SHORT).show()
         }
 
-        home_fragment_edit_activity.setOnClickListener {
-            Toast.makeText(context, "Activiteit Aanpassen", Toast.LENGTH_SHORT).show()
-        }
+        // Create Bottom Sheet
+        bottomSheetBehavior = BottomSheetBehavior.from<ConstraintLayout>(activity_bottom_sheet)
+        bottomSheet()
 
-
-        val mBottomSheetBehavior = BottomSheetBehavior
-            .from(activity_bottom_sheet)
-        val displayMetrics = DisplayMetrics()
-        activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
-        val halfScreenHeight = displayMetrics.heightPixels*0.38
-        mBottomSheetBehavior.peekHeight = halfScreenHeight.toInt()
-
-        val animationClockwise = AnimationUtils.loadAnimation(activity,
-            R.anim.rotate_clockwise)
-        animationClockwise.fillAfter = true
-        val animationCounterClockwise = AnimationUtils.loadAnimation(activity,
-            R.anim.rotate_counter_clockwise)
-        animationCounterClockwise.fillAfter = true
-
-        home_fragment_display_activity.setOnClickListener {
-            mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-
-            home_fragment_display_activity.startAnimation(animationClockwise)
-        }
-
-        mBottomSheetBehavior.bottomSheetCallback = object: BottomSheetBehavior.BottomSheetCallback() {
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
-
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    home_fragment_display_activity.setOnClickListener {
-                        mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-
-                        home_fragment_display_activity.startAnimation(animationCounterClockwise)
-                    }
-                } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                    home_fragment_display_activity.setOnClickListener {
-                        mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-
-                        home_fragment_display_activity.startAnimation(animationClockwise)
-                    }
-                }
-
-//                when (newState) {
-//                    BottomSheetBehavior.STATE_EXPANDED -> expanded()
-//                    BottomSheetBehavior.STATE_COLLAPSED -> collapsed()
-//                    BottomSheetBehavior.STATE_DRAGGING -> Log.i("STATE", "Dragging...")
-//                    BottomSheetBehavior.STATE_SETTLING -> Log.i("STATE", "Setteling...")
-//                    BottomSheetBehavior.STATE_HALF_EXPANDED -> Log.i("STATE", "Half Expended State")
-//                    BottomSheetBehavior.STATE_HIDDEN -> Log.i("STATE", "Hidden State")
-//                }
-            }
-
-            fun expanded() {
-                Log.i("STATE", "Expanded State")
-                home_fragment_display_activity.setOnClickListener {
-                    mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                }
-            }
-
-            fun collapsed() {
-                Log.i("STATE", "Collapsed State")
-                home_fragment_display_activity.setOnClickListener {
-                    mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-                }
-            }
-
-
-        }
-
-//        mBottomSheetBehavior.setBottomSheetCallback(object:BottomSheetBehavior.BottomSheetCallback() {
-//            fun onStateChanged(@NonNull bottomSheet:View, newState:Int) {
-//                when (newState) {
-//                    BottomSheetBehavior.STATE_COLLAPSED -> mTextViewState.setText("Collapsed")
-//                    BottomSheetBehavior.STATE_DRAGGING -> mTextViewState.setText("Dragging...")
-//                    BottomSheetBehavior.STATE_EXPANDED -> mTextViewState.setText("Expanded")
-//                    BottomSheetBehavior.STATE_HIDDEN -> mTextViewState.setText("Hidden")
-//                    BottomSheetBehavior.STATE_SETTLING -> mTextViewState.setText("Settling...")
-//                }
-//            }
-//        })
-
-
+        // Show drinks today in Bottom Sheet
+        showItems()
 
     }
 
@@ -230,17 +153,84 @@ class HomeFragment : Fragment() {
         val year = date.get(Calendar.YEAR)
         val month = date.get(Calendar.MONTH)+1
         val day = date.get(Calendar.DATE)
-        val parseFrom = format.parse("$year-$month-$day 00:00:00")
-        val parseTo = format.parse("$year-$month-$day 23:59:00")
+        val parseFrom: Date? = format.parse("$year-$month-$day 00:00:00")
+        val parseTo: Date? = format.parse("$year-$month-$day 23:59:00")
 
         val databaseDrinks: ArrayList<Drinks>
-        databaseDrinks = dbHandler.findDay(parseTo.time, parseFrom.time)
+        databaseDrinks = dbHandler.findDay(parseTo!!.time, parseFrom!!.time)
 
         var totalVolume = 0
         for (i in databaseDrinks.iterator()) {
             totalVolume += i.volume
         }
         return totalVolume
+    }
+
+    private fun bottomSheet() {
+
+        // setOnClickListeners for arrow and edit button
+//        home_fragment_display_activity.setOnClickListener(this)
+//        home_fragment_edit_activity.setOnClickListener(this)
+
+        home_fragment_display_activity.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+        home_fragment_edit_activity.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+
+        // Get display height to calculate peekHeight for the Bottom Sheet
+        val displayMetrics = DisplayMetrics()
+        activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
+        // This might go wrong with screens with different pixel densities!
+        val halfScreenHeight = displayMetrics.heightPixels*0.41
+        bottomSheetBehavior.peekHeight = halfScreenHeight.toInt()
+
+        bottomSheetBehavior.bottomSheetCallback = object: BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+
+                val animationClockwise = AnimationUtils.loadAnimation(activity,
+                    R.anim.rotate_clockwise)
+                animationClockwise.fillAfter = true
+                val animationCounterClockwise = AnimationUtils.loadAnimation(activity,
+                    R.anim.rotate_counter_clockwise)
+                animationCounterClockwise.fillAfter = true
+
+                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    home_fragment_display_activity.startAnimation(animationClockwise)
+                    home_fragment_edit_activity.visibility = View.INVISIBLE
+
+                    home_fragment_display_activity.setOnClickListener {
+                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                    }
+
+                    adapter.notifyDataSetChanged()
+
+
+                } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    home_fragment_display_activity.startAnimation(animationCounterClockwise)
+                    home_fragment_edit_activity.visibility = View.VISIBLE
+
+                    home_fragment_display_activity.setOnClickListener {
+                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                    }
+
+                    adapter.notifyDataSetChanged()
+                }
+
+                // For state logging
+//                when (newState) {
+//                    BottomSheetBehavior.STATE_EXPANDED -> Log.i("STATE", "Expanded State")
+//                    BottomSheetBehavior.STATE_COLLAPSED -> Log.i("STATE", "Collapsed State")
+//                    BottomSheetBehavior.STATE_DRAGGING -> Log.i("STATE", "Dragging...")
+//                    BottomSheetBehavior.STATE_SETTLING -> Log.i("STATE", "Settling...")
+//                    BottomSheetBehavior.STATE_HALF_EXPANDED -> Log.i("STATE", "Half Expended State")
+//                    BottomSheetBehavior.STATE_HIDDEN -> Log.i("STATE", "Hidden State")
+//                }
+            }
+        }
     }
 
     private fun showItems() {
@@ -250,8 +240,8 @@ class HomeFragment : Fragment() {
         layoutManager = LinearLayoutManager(context!!.applicationContext)
         drinks_recyclerview_small.layoutManager = layoutManager
 
-        adapter = DrinksRecyclerAdapter(drinksList, context!!.applicationContext) { item,
-                                                                                    position ->
+        adapter = DrinksRecyclerAdapter(drinksList, context!!.applicationContext,
+            bottomSheetBehavior) { item, position ->
             Log.d("adapter", "the item ${item.image} has position $position")
         }
         drinks_recyclerview_small.adapter = adapter
@@ -259,11 +249,11 @@ class HomeFragment : Fragment() {
         val year = date.get(Calendar.YEAR)
         val month = date.get(Calendar.MONTH)+1
         val day = date.get(Calendar.DATE)
-        val parseFrom = format.parse("$year-$month-$day 00:00:00")
-        val parseTo = format.parse("$year-$month-$day 23:59:00")
+        val parseFrom: Date? = format.parse("$year-$month-$day 00:00:00")
+        val parseTo: Date? = format.parse("$year-$month-$day 23:59:00")
 
         val databaseDrinks: ArrayList<Drinks>
-        databaseDrinks = dbHandler.findDay(parseTo.time, parseFrom.time)
+        databaseDrinks = dbHandler.findDay(parseTo!!.time, parseFrom!!.time)
 
         for (i in databaseDrinks.iterator()) {
             val drink = Drinks()
@@ -277,74 +267,5 @@ class HomeFragment : Fragment() {
 
         adapter.notifyDataSetChanged()
     }
-
-//    private fun roundedCorners(bitmap: Bitmap): Bitmap {
-////        val output: Bitmap = Bitmap.createBitmap(bitmap.width, bitmap.height,
-////            Bitmap.Config.ARGB_8888)
-////        val canvas = Canvas(output)
-//
-////        val color = resources.getColor(R.color.text)
-////        val paint = Paint()
-////        val rect = Rect(0,0,bitmap.width,bitmap.height)
-////        val rectF = RectF()
-////        val roundPx = 12F
-////
-////        paint.isAntiAlias = true
-////        canvas.drawARGB(0,0,0,0)
-//////        paint.color = color
-////        canvas.drawRoundRect(rectF, roundPx,roundPx,paint)
-////
-////        paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
-////        canvas.drawBitmap(bitmap, rect, rect, paint)
-////
-////        return output
-//    }
-
-//    fun createAddDrinkDialog() {
-//
-//        val dialog = Dialog(context!!)
-//        dialog.setContentView(R.layout.x_popup_add_drink)
-//        val popupAddDrink = dialog.findViewById(R.id.popup_add_drink_recycler_view) as RecyclerView
-//        val popupEditGlassesButton = dialog.findViewById(R.id.popup_add_drink_edit_glasses_button) as ImageButton
-//
-//        layoutManager = LinearLayoutManager(dialog.context)
-//        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
-//        popupAddDrink.layoutManager = layoutManager
-//        adapter = DrinksDialogRecyclerAdapter(Glasses.glassesList, context!!, this)
-//        popupAddDrink.adapter = adapter
-//
-//        dialog.show()
-//        val lp = WindowManager.LayoutParams()
-//        lp.copyFrom(dialog.window?.attributes)
-//        lp.width = WindowManager.LayoutParams.MATCH_PARENT
-//        dialog.window?.attributes = lp
-//
-//        popupEditGlassesButton.setOnClickListener {
-//            Toast.makeText(context, "Clicked Add on Home Fragment", Toast.LENGTH_SHORT).show()
-//
-//            dialog.dismiss()
-//            (activity as MainActivity).replaceFragment(GlassesFragment())
-//        }
-//    }
-
-//    private fun createPopup() {
-//        val view = layoutInflater.inflate(R.layout.popup_edit_glass, null)
-////        val drinkImage = view.popupGlassImage
-////        val drinkVolume = view.popupVolume
-//
-//        dialogBuilder = AlertDialog.Builder(activity!!.applicationContext).setView(view)
-//        dialog = dialogBuilder.create()
-//        dialog.show()
-//
-//        popupSelectButton.setOnClickListener {
-//
-//        }
-//    }
-
-//    private fun goalReached() {
-//        val toast = Toast.makeText(context, "Congratulations! You reached your daily goal!",
-//            Toast.LENGTH_LONG)
-//        toast.show()
-//    }
 
 }

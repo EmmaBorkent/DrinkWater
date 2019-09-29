@@ -54,7 +54,6 @@
 
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
             android:background="@drawable/corners_rounded_shade"
             android:elevation="2dp"
             app:layout_constraintBottom_toTopOf="@id/guideline50"
@@ -168,7 +167,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.56" />
+            app:layout_constraintGuide_percent="0.52" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -179,26 +178,30 @@
             android:elevation="3dp"
             >
 
+            <!-- peekHeight is set programmatically -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/activity_bottom_sheet"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/bottom_sheet_behavior"
                 app:behavior_hideable="false"
-                app:behavior_peekHeight="320dp"
-                android:background="@android:color/holo_red_light">
+                app:behavior_peekHeight="350dp"
+                android:background="@color/colorBackground"
+                >
 
                 <TextView
                     android:id="@+id/home_fragment_activity_text"
-                    style="@style/Headline2"
-                    android:layout_width="wrap_content"
-
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:text="@string/home_activity"
+                    style="@style/Headline2"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="@id/home_fragment_display_activity"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    />
 
                 <ImageButton
                     android:id="@+id/home_fragment_display_activity"
@@ -207,6 +210,7 @@
                     android:layout_height="48dp"
 
                     android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
                     android:contentDescription="@string/home_display_activity"
                     android:src="@drawable/ic_caret_arrow_up"
                     app:layout_constraintEnd_toEndOf="parent"

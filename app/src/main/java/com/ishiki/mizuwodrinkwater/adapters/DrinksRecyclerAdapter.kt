@@ -5,23 +5,26 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.activities.MainActivity
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
 
-//private val onItemClickListener: AdapterView.OnItemClickListenerGlassesAdapter
 class DrinksRecyclerAdapter(private val drinksList: ArrayList<Drinks>,
                             private val context: Context,
+                            private val bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>,
                             private val itemClick: (Drinks, Int) -> Unit) :
         RecyclerView.Adapter<DrinksRecyclerAdapter.DrinksHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DrinksHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.list_item_drinks_fragment, parent,
                 false)
-        return DrinksHolder(view, itemClick)
+        return DrinksHolder(view, bottomSheetBehavior, itemClick)
     }
 
     override fun getItemCount(): Int {
@@ -32,7 +35,9 @@ class DrinksRecyclerAdapter(private val drinksList: ArrayList<Drinks>,
         holder.bindDrinks(drinksList[position])
     }
 
-    inner class DrinksHolder(itemView: View, val itemClick: (Drinks, Int) -> Unit) :
+    inner class DrinksHolder(itemView: View,
+                             private val bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>,
+                             val itemClick: (Drinks, Int) -> Unit) :
             RecyclerView.ViewHolder(itemView) {
 
         private val drinkImage = itemView.findViewById(R.id.drinks_list_item_image)
@@ -53,8 +58,14 @@ class DrinksRecyclerAdapter(private val drinksList: ArrayList<Drinks>,
             drinkVolume.text = drink.volume.toString()
             drinkTime.text = drink.showHumanTime(drink.time)
 
-            drinkEdit.visibility = View.INVISIBLE
-            drinkDelete.visibility = View.INVISIBLE
+            if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
+                drinkEdit.visibility = View.INVISIBLE
+                drinkDelete.visibility = View.INVISIBLE
+            } else if (bottomSheetBehavior.state == BottomSheetBehavior
+                    .STATE_EXPANDED) {
+                drinkEdit.visibility = View.VISIBLE
+                drinkDelete.visibility = View.VISIBLE
+            }
 
             drinkEdit.setOnClickListener { itemClick(drink, adapterPosition) }
             drinkDelete.setOnClickListener {
@@ -88,9 +99,4 @@ class DrinksRecyclerAdapter(private val drinksList: ArrayList<Drinks>,
 //        }
 
     }
-
-//    interface OnItemClickListenerGlassesAdapter {
-//        fun onItemClick(adapter: DrinksRecyclerAdapter)
-//    }
-
 }

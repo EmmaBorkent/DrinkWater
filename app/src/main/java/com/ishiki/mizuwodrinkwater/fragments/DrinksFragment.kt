@@ -70,11 +70,11 @@ class DrinksFragment : Fragment() {
         layoutManager = LinearLayoutManager(context!!.applicationContext)
         drinks_recyclerview.layoutManager = layoutManager
 
-        adapter = DrinksRecyclerAdapter(drinksList, context!!.applicationContext) { item,
-                                                                                    position ->
-            Log.d("adapter", "the item ${item.image} has position $position")
-        }
-        drinks_recyclerview.adapter = adapter
+//        adapter = DrinksRecyclerAdapter(drinksList, context!!.applicationContext) { item,
+//                                                                                    position ->
+//            Log.d("adapter", "the item ${item.image} has position $position")
+//        }
+//        drinks_recyclerview.adapter = adapter
 
         val year = date.get(Calendar.YEAR)
         val month = date.get(Calendar.MONTH)+1
