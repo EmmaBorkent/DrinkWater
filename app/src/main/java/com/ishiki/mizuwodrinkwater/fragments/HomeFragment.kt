@@ -12,6 +12,8 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.ishiki.mizuwodrinkwater.R
@@ -141,9 +143,16 @@ class HomeFragment : Fragment() {
         }
 
         fragment_home_goal_text_button.setOnClickListener {
-            val goalFragmentIntent = Intent(context, MainActivity::class.java)
-            goalFragmentIntent.putExtra("loadFragment", R.id.goal)
-            startActivity(goalFragmentIntent)
+            // Don't use intent, it is slow.
+//            val goalFragmentIntent = Intent(context, MainActivity::class.java)
+//            goalFragmentIntent.putExtra("loadFragment", R.id.goal)
+//            startActivity(goalFragmentIntent)
+
+            val goalFragment = GoalFragment()
+            val fragmentTransaction: FragmentTransaction = fragmentManager!!.beginTransaction()
+            fragmentTransaction.replace(R.id.fragmentContainer, goalFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
 
         // Create Bottom Sheet
