@@ -18,6 +18,11 @@
         <item name="tint">@color/colorAccentLight</item>
     </style>
 
+    <style name="plainTextButton" parent="Headline3">
+        <item name="android:backgroundTint">@android:color/transparent</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
     <style name="BaseIcon" parent="Widget.AppCompat.ImageButton">
         <item name="android:background">@android:color/transparent</item>
         <item name="android:scaleType">centerInside</item>
@@ -41,9 +46,11 @@
     </style>
 
 
+    // Text Styles
 
     <style name="primaryFontFamily">
         <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
     </style>
 
     <style name="Headline1" parent="primaryFontFamily">
