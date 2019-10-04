@@ -45,8 +45,6 @@ class GlassesFragment : Fragment() {
 
         if (sharedPreferences != null) {
 
-            Glasses.glassesList.clear()
-
             @Suppress("UNCHECKED_CAST")
             val image = ObjectSerializer.deserialize(
                 sharedPreferences!!
@@ -63,14 +61,15 @@ class GlassesFragment : Fragment() {
 
             if (image.size > 0 && volume.size > 0) {
                 if (image.size == volume.size) {
+                    Glasses.glassesList.clear()
+
                     for ((i) in image.withIndex()) {
                         Glasses.glassesList.add(Glasses(image[i], volume[i].toInt()))
                     }
                 }
             }
 
-            val imageTest: String? = sharedPreferences!!.getString("imageTest", "water01")
-            Log.d("sharedPreferences", "imageTest: $imageTest")
+            Log.d("sharedPreferences", "This is printed if sharedpreferences is not empty")
         }
 
         layoutManager = GridLayoutManager(context!!.applicationContext, 2)

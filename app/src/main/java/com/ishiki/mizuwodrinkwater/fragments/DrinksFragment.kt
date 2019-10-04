@@ -40,7 +40,6 @@ class DrinksFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         checkTodayDate()
-        showItems()
 
         drinks_arrow_left.setOnClickListener {
             drinks_arrow_right.visibility = View.VISIBLE
