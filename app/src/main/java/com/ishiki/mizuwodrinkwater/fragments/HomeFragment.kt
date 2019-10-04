@@ -1,6 +1,7 @@
 package com.ishiki.mizuwodrinkwater.fragments
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.ishiki.mizuwodrinkwater.R
+import com.ishiki.mizuwodrinkwater.activities.MainActivity
 import com.ishiki.mizuwodrinkwater.adapters.DrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
@@ -126,7 +128,7 @@ class HomeFragment : Fragment() {
             showHumanDate)
         fragment_home_today_date.text = todayDateText
 //        fragment_home_volume_text.text = dailyTotal().toString()
-        fragment_home_goal_text.text = Drinks.goal.toString()
+        fragment_home_goal_text_button.text = Drinks.goal.toString()
         val percentage = dailyTotal() * 100 / Drinks.goal
         fragment_home_goal_percentage.text = percentage.toString()
 
@@ -136,6 +138,12 @@ class HomeFragment : Fragment() {
 
         fragment_home_change_main_display.setOnClickListener {
             Toast.makeText(context, "Verander Display Weergave", Toast.LENGTH_SHORT).show()
+        }
+
+        fragment_home_goal_text_button.setOnClickListener {
+            val goalFragmentIntent = Intent(context, MainActivity::class.java)
+            goalFragmentIntent.putExtra("loadFragment", R.id.goal)
+            startActivity(goalFragmentIntent)
         }
 
         // Create Bottom Sheet

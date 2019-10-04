@@ -139,12 +139,3 @@ class GlassesFragment : Fragment() {
 //        adapter.notifyDataSetChanged()
 //
 //    }
-//
-//    setGlassButton.setOnClickListener {
-//        // Print to check
-//        println("Into Intent on SetGlassActivity is ${DrinkTypes.currentGlass.image}")
-//        val customGlassIntent = Intent(context, CustomGlassActivity::class.java)
-////        customGlassIntent.putExtra(EXTRA_DAILY, dailyTotal)
-////        customGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
-//        startActivity(customGlassIntent)
-//    }
