@@ -28,7 +28,7 @@
 
     <TextView
             android:id="@+id/mainTextUnit8"
-            android:text="@string/main_unit"
+            android:text="@string/main_unit_ml"
             android:fontFamily="@font/montserrat"
             android:textSize="24sp"
             android:layout_width="wrap_content"

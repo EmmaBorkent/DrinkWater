@@ -1,7 +1,6 @@
 package com.ishiki.mizuwodrinkwater.fragments
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
@@ -12,16 +11,16 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.activities.MainActivity
 import com.ishiki.mizuwodrinkwater.adapters.DrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
 import com.ishiki.mizuwodrinkwater.services.HOME_TODAY
+import com.ishiki.mizuwodrinkwater.services.UNIT_PERCENTAGE
+import com.ishiki.mizuwodrinkwater.services.UNIT_VOLUME
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -33,9 +32,10 @@ class HomeFragment : Fragment() {
     private lateinit var adapter: DrinksRecyclerAdapter
     private lateinit var dbHandler: DrinksDatabaseHandler
     private val date: Calendar = Calendar.getInstance()
-        @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat")
     private val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private var state = "percent"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,81 +45,11 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-//        DrinksToday.sharedPreferences = this.getSharedPreferences("com.ishiki.mizuwodrinkwater", 0)
-//        DrinksToday.goal = DrinksToday.sharedPreferences!!.getInt(DAILY_GOAL, DrinksToday.goal)
-//        DrinksToday.dailyTotal = DrinksToday.sharedPreferences!!.getInt("dailyTotal", DrinksToday.dailyTotal)
-//        DrinkTypes.currentGlass = Drinks(
-//            DrinksToday.sharedPreferences?.getString("currentGlassImage", DrinkTypes.currentGlass.image).toString(),
-//            DrinksToday.sharedPreferences?.getString("currentGlassVolume", DrinkTypes.currentGlass.volume).toString(),
-//            DrinksToday.sharedPreferences?.getString("currentGlassUnit", DrinkTypes.currentGlass.unit).toString()
-//        )
-//
-//        DrinksToday.history_drinks_list.clear()
-//
-//        val image = ObjectSerializer.deserialize(
-//            DrinksToday.sharedPreferences?.getString("image",
-//                ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<String>
-//        val volume = ObjectSerializer.deserialize(
-//            DrinksToday.sharedPreferences?.getString("volume",
-//                ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<String>
-//        val unit = ObjectSerializer.deserialize(
-//            DrinksToday.sharedPreferences?.getString("unit",
-//                ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<String>
-//
-//        if (image.size > 0 && volume.size > 0 && unit.size > 0) {
-//            if (image.size == volume.size && image.size == unit.size) {
-//
-//                for ((i) in image.withIndex()) {
-//                    DrinksToday.history_drinks_list.add(Drinks(image[i], volume[i], unit[i]))
-//                }
-//            }
+    //    fun Group.setAllOnClickListener(listener: View.OnClickListener?) {
+//        referencedIds.forEach { id ->
+//            rootView.findViewById<View>(id).setOnClickListener(listener)
 //        }
-
-//        val resourceId = resources.getIdentifier(DrinkTypes.currentGlass.image, "drawable")
-//        mainDrinkImage?.setBackgroundResource(resourceId)
-//        mainWaterAmount?.text = DrinkTypes.currentGlass.volume
-//        mainTextDailyTotal?.text = DrinksToday.dailyTotal.toString()
-//        mainTextGoalNumber?.text = DrinksToday.goal.toString()
-
-//        adapter = TodayDrinksRecyclerAdapter(MainActivity(), DrinksToday.history_drinks_list, object :
-//            TodayDrinksRecyclerAdapter.OnItemClickListenerGlassesAdapter {
-//            override fun onItemClick(dailyTotal: Int) {
-//                mainTextDailyTotal.text = dailyTotal.toString()
-//            }
-//        })
-//        history_drinks_list?.adapter = adapter
-//        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
-//        history_drinks_list?.layoutManager = layoutManager
-//        history_drinks_list?.setHasFixedSize(true)
-
-//        mainDrinkImage.setOnClickListener {
-//            val setGlassIntent = Intent(context, SetGlassActivity::class.java)
-//            setGlassIntent.putExtra(EXTRA_DAILY, DrinksToday.dailyTotal)
-////          setGlassIntent.putExtra(EXTRA_CURRENT, currentGlass)
-//            startActivity(setGlassIntent)
-//        }
-
-//        todayAddButton.setOnClickListener {
-//            Toast.makeText(context?.applicationContext, "Clicked FAB on Today Fragment", Toast.LENGTH_LONG).show()
-//        }
-
-//        mainButtonAdd?.setOnClickListener {
-//            DrinksToday.addDrink()
-//            adapter.notifyDataSetChanged()
-//            mainTextDailyTotal.text = DrinksToday.dailyTotal.toString()
-//            if (DrinksToday.dailyTotal >= DrinksToday.goal) {
-//                goalReached()
-//            }
-//        }
-
-//        mainButtonSetGoal.setOnClickListener {
-//            val setGoalIntent = Intent(context, GoalActivity::class.java)
-//            startActivity(setGoalIntent)
-//        }
-    }
+//    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -129,17 +59,46 @@ class HomeFragment : Fragment() {
         val todayDateText = context?.getString(R.string.home_today_date, HOME_TODAY,
             showHumanDate)
         fragment_home_today_date.text = todayDateText
+
 //        fragment_home_volume_text.text = dailyTotal().toString()
         fragment_home_goal_text_button.text = Drinks.goal.toString()
-        val percentage = dailyTotal() * 100 / Drinks.goal
-        fragment_home_goal_percentage.text = percentage.toString()
+
+        setPercentage()
+//        val percentage = dailyTotal() * 100 / Drinks.goal
+//        fragment_home_goal_main_view.text = percentage.toString()
+
+//        fragment_home_goal_main_view.setOnClickListener {
+////
+//        }
+
+
+//        val group = R.id.fragment_home_main_click_view
+//
+//        fragment_home_main_click_view.post {
+//            group.setAllOnClickListener(object : View.OnClickListener {
+//                override fun onClick(v: View) {
+//                    val text = (v as Button).text
+//                    Toast.makeText(this@MainActivity, text, Toast.LENGTH_SHORT).show()
+//                }
+//            })
+//        }
+
+//        fragment_home_main_click_view.setAllOnClickListener(View.OnClickListener {
+//            Toast.makeText(context,"What am I clicking?!", Toast.LENGTH_SHORT).show()
+//        })
+
+//        fragment_home_main_click_view.setOnClickListener {
+//            switchPercentageVolume()
+//            Toast.makeText(context,"Test Bigger Click View", Toast.LENGTH_SHORT).show()
+//        }
 
         fragment_home_notifications.setOnClickListener {
             Toast.makeText(context,"Notificaties", Toast.LENGTH_SHORT).show()
         }
 
         fragment_home_change_main_display.setOnClickListener {
-            Toast.makeText(context, "Verander Display Weergave", Toast.LENGTH_SHORT).show()
+            //            Toast.makeText(context, "Verander Display Weergave", Toast.LENGTH_SHORT).show()
+            switchPercentageVolume()
         }
 
         fragment_home_goal_text_button.setOnClickListener {
@@ -203,7 +162,7 @@ class HomeFragment : Fragment() {
         val halfScreenHeight = displayMetrics.heightPixels*0.41
         bottomSheetBehavior.peekHeight = halfScreenHeight.toInt()
 
-        bottomSheetBehavior.bottomSheetCallback = object: BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetBehavior.addBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -247,7 +206,41 @@ class HomeFragment : Fragment() {
 //                    BottomSheetBehavior.STATE_HIDDEN -> Log.i("STATE", "Hidden State")
 //                }
             }
+        })
+
+    }
+
+    private fun setPercentage() {
+        val percentage = dailyTotal() * 100 / Drinks.goal
+        fragment_home_goal_main_view.text = percentage.toString()
+        val unit = context?.getString(R.string.main_unit_percentage)
+        fragment_home_percentage_unit.text = "$unit"
+        state = UNIT_PERCENTAGE
+        Log.d("STATE", "The state is $state")
+    }
+
+    private fun setVolume() {
+        val volume: Int = dailyTotal()
+        fragment_home_goal_main_view.text = volume.toString()
+        val unit = context?.getString(R.string.main_unit_ml)
+        fragment_home_percentage_unit.text = "$unit"
+        state = UNIT_VOLUME
+        Log.d("STATE", "The state is $state")
+    }
+
+    private fun switchPercentageVolume() {
+        if (state == UNIT_PERCENTAGE) {
+            setVolume()
+            fragment_home_change_main_display.text = resources.getString(R.string.main_unit_percentage)
+            Log.d("STATE", "The state is $state")
+
+        } else if (state == UNIT_VOLUME) {
+            setPercentage()
+            fragment_home_change_main_display.text = resources.getString(R.string.main_unit_ml)
+            Log.d("STATE", "The state is $state")
         }
+
+        // when state is percentage or volume change text of unit!
     }
 
     private fun showItems() {

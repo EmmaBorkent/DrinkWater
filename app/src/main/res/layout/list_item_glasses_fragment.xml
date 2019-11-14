@@ -44,7 +44,7 @@
 
     <TextView
         android:id="@+id/glasses_list_unit"
-        android:text="@string/main_unit"
+        android:text="@string/main_unit_ml"
         android:fontFamily="@font/montserrat"
         android:textSize="18sp"
         android:layout_width="wrap_content"

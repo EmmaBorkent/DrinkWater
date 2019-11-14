@@ -61,44 +61,63 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_home_today_date">
 
-            <TextView
-                android:id="@+id/fragment_home_goal_percentage"
-                style="@style/Caption1"
-
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_home_main_click_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/main_total"
 
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.4" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
 
-            <TextView
-                android:id="@+id/fragment_home_percentage_unit"
-                style="@style/Caption2"
-                android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/fragment_home_goal_main_view"
+                    android:text="@string/main_total"
+                    style="@style/plainTextButton.Big"
 
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/percentage_unit"
-                app:layout_constraintBaseline_toBaselineOf="@id/fragment_home_goal_percentage"
-                app:layout_constraintBottom_toBottomOf="@id/fragment_home_goal_percentage"
-                app:layout_constraintStart_toEndOf="@id/fragment_home_goal_percentage"
-                app:layout_constraintTop_toTopOf="@id/fragment_home_goal_percentage" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_home_percentage_unit"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.4"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    />
 
-            <ImageButton
+                <TextView
+                    android:id="@+id/fragment_home_percentage_unit"
+                    android:text="@string/percentage_unit"
+                    style="@style/Caption2"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBaseline_toBaselineOf="@id/fragment_home_goal_main_view"
+                    app:layout_constraintBottom_toBottomOf="@id/fragment_home_goal_main_view"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/fragment_home_goal_main_view"
+                    app:layout_constraintTop_toTopOf="@id/fragment_home_goal_main_view" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
                 android:id="@+id/fragment_home_change_main_display"
-                style="@style/IconGrey"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                style="@style/plainTextButton.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/main_unit_ml"
+                android:fontFamily="@font/montserrat"
+                android:textAllCaps="false"
 
-                android:layout_marginTop="16dp"
-                android:background="@android:color/transparent"
+                android:layout_marginTop="8dp"
                 android:contentDescription="@string/home_change_display"
-                android:src="@drawable/ic_004_water"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline16"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -106,28 +125,24 @@
             <TextView
                 android:id="@+id/mainTextUnit3"
                 android:layout_width="wrap_content"
-
                 android:layout_height="wrap_content"
+                style="@style/Headline3"
 
-                android:fontFamily="@font/montserrat"
-                android:text="@string/main_unit"
-                android:textAlignment="center"
-                android:textSize="24sp"
+                android:text="@string/main_unit_ml"
                 app:layout_constraintBaseline_toBaselineOf="@+id/fragment_home_goal_text_button"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_home_goal_text_button"
                 app:layout_constraintStart_toEndOf="@+id/fragment_home_goal_text_button" />
 
             <Button
                 android:id="@+id/fragment_home_goal_text_button"
-                android:text="@string/main_goal_start_amount"
                 style="@style/plainTextButton"
-
                 android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
+                android:text="@string/main_goal_start_amount"
                 app:layout_constraintBottom_toBottomOf="@+id/green_dot"
                 app:layout_constraintStart_toEndOf="@+id/green_dot"
-                app:layout_constraintTop_toTopOf="@+id/green_dot"
-                />
+                app:layout_constraintTop_toTopOf="@+id/green_dot" />
 
             <FrameLayout
                 android:id="@+id/green_dot"

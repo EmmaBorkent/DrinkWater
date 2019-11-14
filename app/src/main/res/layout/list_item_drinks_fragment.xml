@@ -45,7 +45,7 @@
 
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/main_unit"
+        android:text="@string/main_unit_ml"
         app:layout_constraintBottom_toBottomOf="@+id/drinks_list_item_volume"
         app:layout_constraintStart_toEndOf="@+id/drinks_list_item_volume"
         app:layout_constraintTop_toTopOf="@+id/drinks_list_item_volume" />

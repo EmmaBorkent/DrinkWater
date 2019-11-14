@@ -31,7 +31,7 @@ class GlassesDialogActivity : AppCompatActivity() {
 
         // You have to use toString() first, because otherwise you are converting a character
         // toInt() and the character number for 1 is 49.
-        var number = glassImage[6].toString().toInt()
+        var number = glassImage!![6].toString().toInt()
         Log.d("number", "the number is $number")
         popup_arrow_right.setOnClickListener {
             if (number < 10) {

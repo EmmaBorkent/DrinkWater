@@ -2,7 +2,6 @@ package com.ishiki.mizuwodrinkwater.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -82,7 +81,7 @@ class DrinksFragment : Fragment() {
         val parseTo = format.parse("$year-$month-$day 23:59:00")
 
         val databaseDrinks: ArrayList<Drinks>
-        databaseDrinks = dbHandler.findDay(parseTo.time, parseFrom.time)
+        databaseDrinks = dbHandler.findDay(parseTo!!.time, parseFrom!!.time)
 
         for (i in databaseDrinks.iterator()) {
             val drink = Drinks()

@@ -20,6 +20,9 @@ const val KEY_DRINK_VOLUME: String = "drink_volume"
 const val KEY_DRINK_TIME: String = "drink_time"
 const val KEY_DRINK_GOAL: String = "drink_goal"
 
+// State Unit Constants
+const val UNIT_VOLUME = "volume"
+const val UNIT_PERCENTAGE = "percentage"
 
 const val EXTRA_GLASS = "glass"
 const val EXTRA_VOLUME = "volume"

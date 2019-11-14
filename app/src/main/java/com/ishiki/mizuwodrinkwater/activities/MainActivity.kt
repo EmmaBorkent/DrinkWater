@@ -64,18 +64,10 @@ class MainActivity : AppCompatActivity() {
 
         dbHandler = DrinksDatabaseHandler(this)
 
-//        val drink = Drinks()
-//        drink.image = "water01"
-//        drink.volume = 250
-//        dbHandler.createDrink(drink)
-
-//        dbHandler.deleteDrink(3)
-//        dbHandler.deleteDrink(4)
-
         dbHandler.getCount()
     }
 
-    fun replaceFragment(fragment: androidx.fragment.app.Fragment) {
+    private fun replaceFragment(fragment: androidx.fragment.app.Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment)
         fragmentTransaction.commit()
@@ -96,8 +88,6 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(GlassesFragment())
         glassesAddButton.show()
         glassesAddButton.setOnClickListener {
-//            Toast.makeText(this, "Clicked FAB on Glasses Fragment",
-//                Toast.LENGTH_SHORT).show()
             val glassesDialogIntent = Intent(applicationContext, GlassesDialogActivity::class.java)
             glassesDialogIntent.putExtra(EXTRA_GLASS, "water01")
             glassesDialogIntent.putExtra(EXTRA_CHECK, "fab")
@@ -106,51 +96,3 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-
-//    private fun saveToDatabase(drinks: Drinks) {
-//        dbHandler.createDrink(drinks)
-//    }
-
-//    fun editGlass(glass: Glasses, position: Int, dataSetChanged: DataSetChanged) {
-//        val popupFragment = GlassesDialog(glass, position, dataSetChanged)
-//        popupFragment.show(supportFragmentManager, "edit glass")
-//    }
-
-//private fun homeFragment() {
-//    replaceFragment(HomeFragment())
-//    glassesAddButton.show()
-//
-//    glassesAddButton.setOnClickListener {
-//
-//        val dialog = Dialog(this)
-//        dialog.setContentView(R.layout.popup_add_drink)
-//        val popupAddDrink = dialog.findViewById(R.id.popup_add_drink_recycler_view) as RecyclerView
-//        val popupEditGlassesButton = dialog.findViewById(R.id.popup_add_drink_edit_glasses_button) as ImageButton
-//
-//        layoutManager = LinearLayoutManager(dialog.context)
-//        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
-//        popupAddDrink.layoutManager = layoutManager
-//        adapter = DrinksDialogRecyclerAdapter(DrinkTypes.glasses, this, this)
-//        popupAddDrink.adapter = adapter
-//
-//        dialog.show()
-//        val lp = WindowManager.LayoutParams()
-//        lp.copyFrom(dialog.window?.attributes)
-//        lp.width = WindowManager.LayoutParams.MATCH_PARENT
-//        dialog.window?.attributes = lp
-//
-//        popupEditGlassesButton.setOnClickListener {
-//            Toast.makeText(this, "Clicked Add on Home Fragment", Toast.LENGTH_SHORT).show()
-//
-//            dialog.dismiss()
-//            replaceFragment(GlassesFragment())
-//        }
-//
-//        Create a drink
-//        val createDrink = Drinks()
-//        createDrink.image = "water02"
-//        createDrink.volume = 500
-//        saveToDatabase(createDrink)
-//
-//    }
-//}

@@ -1,7 +1,8 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Mizuwo Drink Water</string>
 
-    <string name="main_unit">ml</string>
+    <string name="main_unit_ml">ml</string>
+    <string name="main_unit_percentage">%</string>
     <string name="goal_weight">kg</string>
 
     // Bottom Navigation Menu
@@ -38,7 +39,9 @@
     <string name="home_edit_activity">Edit Today\'s Activity</string>
 
     // Recycler View List Item
+
     <style name="description_edit_button">Edit this entry</style>
+
     <style name="description_delete_button">Delete this entry</style>
 
     // Drinks Fragment
@@ -53,6 +56,7 @@
     <string name="goal_calculate">Calculate</string>
     <string name="goal_enter_goal">Or enter your own daily goal, or adjust as you\'de like</string>
     <string name="goal_current_goal">Your current goal is</string>
+    <string name="goal_random_weight">62</string>
 
     // Glasses Fragment
     <string name="set_glass">Glasses</string>
@@ -79,5 +83,8 @@
     <string name="change_drink_image">Drink Image</string>
     <string name="change_drink_volume">250 ml</string>
     <string name="change_drink_time">8:00</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
