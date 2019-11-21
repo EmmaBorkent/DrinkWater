@@ -13,13 +13,13 @@
 
         <TextView
             android:id="@+id/fragment_home_title"
-            style="@style/Headline1"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="@string/home_fragment_title"
+            style="@style/Title"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,11 +51,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
-
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/corners_rounded_shade"
-            android:elevation="2dp"
+            style="@style/whiteBox"
+
             app:layout_constraintBottom_toTopOf="@id/guideline50"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -241,6 +240,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/drinks_recyclerview_small"
+                    tools:listitem="@layout/list_item_drinks_fragment"
 
                     android:layout_width="match_parent"
                     android:layout_height="0dp"

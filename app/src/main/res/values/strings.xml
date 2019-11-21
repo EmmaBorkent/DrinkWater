@@ -3,7 +3,7 @@
 
     <string name="main_unit_ml">ml</string>
     <string name="main_unit_percentage">%</string>
-    <string name="goal_weight">kg</string>
+    <string name="goal_weight_unit">kg</string>
 
     // Bottom Navigation Menu
     <string name="bottom_menu_today">Home</string>
@@ -27,8 +27,6 @@
     <string name="glass_250">250</string>
     <string name="glass_500">500</string>
     <string name="main_goal">goal</string>
-    <string name="main_goal_start_amount">2000</string>
-    <string name="main_button_set_goal">Set Goal</string>
     <string name="percentage_unit">%</string>
     <string name="home_progress">Daily Progress Bar</string>
     <string name="home_today_date">%1$s %2$s</string>
@@ -50,13 +48,18 @@
     <string name="drinks_yesterday">Yesterday</string>
 
     // Goal Fragment
-    <string name="goal_title">Goal</string>
-    <string name="goal_text">Calculate your daily goal</string>
-    <string name="goal_enter_weight_text">To calculate your daily goal, enter your weight</string>
-    <string name="goal_calculate">Calculate</string>
-    <string name="goal_enter_goal">Or enter your own daily goal, or adjust as you\'de like</string>
-    <string name="goal_current_goal">Your current goal is</string>
+    <string name="goal_title">Doel</string>
+    <string name="goal_text">Bereken hoeveel je elke dag moet drinken</string>
+    <string name="goal_enter_weight_text">Vul hier je gewicht in en klik op de knop</string>
+    <string name="goal_calculate">Berekenen</string>
+    <string name="goal_enter_goal">Maar je kan ook zelf een doel invullen, of je doel naar wens aanpassen</string>
     <string name="goal_random_weight">62</string>
+    <string name="main_goal_start_amount">2000</string>
+    <string name="main_button_set_goal">Zet je Doel</string>
+    <string name="goal_weight">Gewicht</string>
+    <string name="goal_extra">Extra</string>
+    <string name="goal_your_calculated_goal_is">Berekend doel is</string>
+    <string name="goal_your_goal_is">Je doel is</string>
 
     // Glasses Fragment
     <string name="set_glass">Glasses</string>

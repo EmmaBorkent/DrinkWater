@@ -18,6 +18,14 @@
         <item name="tint">@color/colorAccentLight</item>
     </style>
 
+    <style name="addRemoveButton" parent="Widget.Design.FloatingActionButton">
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:tint">@color/colorAccentLight</item>
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
     // This is double, but I do not yet understand how to do this better ...
     // I just need the text styles and need to be able to combine them with button styles
     <style name="plainTextButton" parent="Headline3">
@@ -63,8 +71,31 @@
 <!--        <item name="android:background">@color/appleGreen</item>-->
 <!--    </style>-->
 
+    <style name="whiteBox">
+        <item name="android:background">@drawable/corners_rounded_shade</item>
+        <item name="android:elevation">2dp</item>
+    </style>
+
 
     // Text Styles
+
+    <style name="Title">
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textColor">@color/textColorPrimaryDark</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MainText">
+        <item name="android:fontFamily">@font/open_sans</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="MainTextNumbers">
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
     <style name="primaryFontFamily">
         <item name="android:fontFamily">@font/montserrat</item>
