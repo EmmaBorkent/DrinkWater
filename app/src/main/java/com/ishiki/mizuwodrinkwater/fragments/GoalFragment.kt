@@ -25,30 +25,30 @@ class GoalFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        goalCalculate.setOnClickListener {
-            val weight = goalWeightInput.text.toString()
+//        goalCalculate.setOnClickListener {
+//            val weight = goalWeightInput.text.toString()
+//
+//            if (weight.isNotEmpty()) {
+//                goal = weight.toInt() * 33
+//                goalInput.setText(goal.toString())
+//            } else {
+//                val toast = Toast.makeText(MainActivity(), "Please enter your weight to calculate your daily goal",
+//                    Toast.LENGTH_SHORT)
+//                toast.show()
+//            }
+//        }
 
-            if (weight.isNotEmpty()) {
-                goal = weight.toInt() * 33
-                goalInput.setText(goal.toString())
-            } else {
-                val toast = Toast.makeText(MainActivity(), "Please enter your weight to calculate your daily goal",
-                    Toast.LENGTH_SHORT)
-                toast.show()
-            }
-        }
-
-        goalButtonSetGoal.setOnClickListener {
-            val setGoalIntent = Intent(MainActivity(), MainActivity::class.java)
-
-            if (goalInput.text.isNotEmpty()) {
-                goal = goalInput.text.toString().toInt()
-//            DrinksToday.sharedPreferences!!.edit().putInt(DAILY_GOAL, goal).apply()
-                startActivity(setGoalIntent)
-            } else {
-                val toast = Toast.makeText(MainActivity(), "Please enter or calculate your daily goal", Toast.LENGTH_SHORT)
-                toast.show()
-            }
-        }
+//        goalButtonSetGoal.setOnClickListener {
+//            val setGoalIntent = Intent(MainActivity(), MainActivity::class.java)
+//
+//            if (goalInput.text.isNotEmpty()) {
+//                goal = goalInput.text.toString().toInt()
+////            DrinksToday.sharedPreferences!!.edit().putInt(DAILY_GOAL, goal).apply()
+//                startActivity(setGoalIntent)
+//            } else {
+//                val toast = Toast.makeText(MainActivity(), "Please enter or calculate your daily goal", Toast.LENGTH_SHORT)
+//                toast.show()
+//            }
+//        }
     }
 }
