@@ -38,24 +38,6 @@ class AddDrinksDialogActivity : AppCompatActivity() {
         val width = displayMetrics.widthPixels*0.9
         dialog.layoutParams.width = width.toInt()
 
-//        val dialogWidth = windowManager.defaultDisplay.getMetrics(DisplayMetrics())
-//        val width = displ
-//        dialog.layoutParams.width = windowManager.defaultDisplay
-//
-//        dialog.display.width
-
-//        val layoutParams = view.layoutParams
-//        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
-//        view.layoutParams = layoutParams
-
-
-
-//        val glassesList2 = arrayListOf(
-//            Glasses("water01", 250),
-//            Glasses("water02", 500),
-//            Glasses("water03", 150)
-//        )
-
         activity_drink_dialog_edit_button.setOnClickListener {
             Log.d("AddDrinksDialogActivity", "Clicked Edit Button")
             val glassesFragmentIntent = Intent(applicationContext, MainActivity::class.java)

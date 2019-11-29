@@ -99,7 +99,7 @@
     <ImageButton
             android:id="@+id/popup_save_button"
             app:srcCompat="@drawable/ic_003_check"
-            android:contentDescription="@string/popup_save_button"
+            android:contentDescription="@string/save_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@android:color/transparent"

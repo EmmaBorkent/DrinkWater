@@ -5,13 +5,16 @@ import java.util.*
 
 class Drinks {
 
-    var id: Int = 0
+    var id: Long = 0
     lateinit var image: String
     var volume: Int = 0
     var time: Long = 0
 
     companion object {
-        var goal: Int = 2500
+        var weight = 62
+        var extra = 0
+        var calculatedGoal = 62 * 33
+        var totalGoal = (62 * 33) + 0
     }
 
     fun showHumanDate(time: Long): String {

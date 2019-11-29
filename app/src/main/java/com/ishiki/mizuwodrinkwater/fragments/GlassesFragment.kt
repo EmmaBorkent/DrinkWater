@@ -112,30 +112,3 @@ class GlassesFragment : Fragment() {
         }
     }
 }
-
-//    private fun showItems() {
-//
-//        dbHandler = DrinksDatabaseHandler(context!!.applicationContext)
-//
-//        glassesList = ArrayList()
-//        glassesList.reverse()
-//        glassListItem = ArrayList()
-//
-//        layoutManager = GridLayoutManager(context!!.applicationContext, 2)
-//        glasses_recycler_view.layoutManager = layoutManager
-//        adapter = GlassesAdapterOLD2(glassListItem, context!!.applicationContext)
-//        glasses_recycler_view.adapter = adapter
-//
-//        glassesList = dbHandler.readAllDrinks()
-//
-//        for (i in glassesList.iterator()) {
-//            val drink = Drinks(i.image, i.volume)
-////            drink.image =
-////            drink.volume =
-//
-//            glassListItem.add(drink)
-//        }
-//
-//        adapter.notifyDataSetChanged()
-//
-//    }

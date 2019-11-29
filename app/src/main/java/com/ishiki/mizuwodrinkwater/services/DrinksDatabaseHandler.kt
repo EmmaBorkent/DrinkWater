@@ -45,7 +45,7 @@ class DrinksDatabaseHandler(context: Context) :
         Log.d("DrinksDatabaseHandler", "Created New Drink")
     }
 
-    fun readDrink(id: Int): Drinks {
+    fun readDrink(id: Long): Drinks {
         val db: SQLiteDatabase = writableDatabase
         val cursor = db.query(
             TABLE_NAME,
@@ -79,7 +79,7 @@ class DrinksDatabaseHandler(context: Context) :
         if (cursor.moveToFirst()) {
             do {
                 val drink = Drinks()
-                drink.id = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+                drink.id = cursor.getLong(cursor.getColumnIndex(KEY_ID))
                 drink.image = cursor.getString(cursor.getColumnIndex(KEY_DRINK_IMAGE))
                 drink.volume = cursor.getInt(cursor.getColumnIndex(KEY_DRINK_VOLUME))
                 drink.time = cursor.getLong(cursor.getColumnIndex(KEY_DRINK_TIME))
@@ -105,7 +105,7 @@ class DrinksDatabaseHandler(context: Context) :
         if (cursor.moveToFirst()) {
             do {
                 val drink = Drinks()
-                drink.id = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+                drink.id = cursor.getLong(cursor.getColumnIndex(KEY_ID))
                 drink.image = cursor.getString(cursor.getColumnIndex(KEY_DRINK_IMAGE))
                 drink.volume = cursor.getInt(cursor.getColumnIndex(KEY_DRINK_VOLUME))
                 drink.time = cursor.getLong(cursor.getColumnIndex(KEY_DRINK_TIME))
@@ -130,7 +130,7 @@ class DrinksDatabaseHandler(context: Context) :
         return db.update(TABLE_NAME, values, "$KEY_ID=?", arrayOf(drink.id.toString()))
     }
 
-    fun deleteDrink(id: Int) {
+    fun deleteDrink(id: Long) {
         val db = writableDatabase
         db.delete(TABLE_NAME, "$KEY_ID=?", arrayOf(id.toString()))
         db.close()

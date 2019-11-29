@@ -2,7 +2,6 @@ package com.ishiki.mizuwodrinkwater.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ishiki.mizuwodrinkwater.R
@@ -77,8 +76,6 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(HomeFragment())
         glassesAddButton.show()
         glassesAddButton.setOnClickListener {
-            Toast.makeText(this, "Clicked FAB on Home Fragment",
-                Toast.LENGTH_SHORT).show()
             val drinksDialogIntent = Intent(applicationContext, AddDrinksDialogActivity::class.java)
             startActivity(drinksDialogIntent)
         }

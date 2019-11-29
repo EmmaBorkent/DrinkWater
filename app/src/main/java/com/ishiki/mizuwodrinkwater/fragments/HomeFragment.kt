@@ -1,6 +1,8 @@
 package com.ishiki.mizuwodrinkwater.fragments
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
@@ -15,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.ishiki.mizuwodrinkwater.R
+import com.ishiki.mizuwodrinkwater.activities.ChangeDrinkDialogActivity
 import com.ishiki.mizuwodrinkwater.adapters.DrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
@@ -36,6 +39,7 @@ class HomeFragment : Fragment() {
     private val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private var state = "percent"
+    private var sharedPreferences: SharedPreferences? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,12 +48,6 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
-
-    //    fun Group.setAllOnClickListener(listener: View.OnClickListener?) {
-//        referencedIds.forEach { id ->
-//            rootView.findViewById<View>(id).setOnClickListener(listener)
-//        }
-//    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -60,44 +58,24 @@ class HomeFragment : Fragment() {
             showHumanDate)
         fragment_home_today_date.text = todayDateText
 
-//        fragment_home_volume_text.text = dailyTotal().toString()
-        fragment_home_goal_text_button.text = Drinks.goal.toString()
+        sharedPreferences = activity?.getSharedPreferences(
+            getString(R.string.shared_preferences_file), 0
+        )
+
+        if (sharedPreferences != null) {
+            val goal = sharedPreferences!!.getInt("goal", Drinks.totalGoal)
+            fragment_home_goal_text_button.text = goal.toString()
+        } else {
+            fragment_home_goal_text_button.text = Drinks.totalGoal.toString()
+        }
 
         setPercentage()
-//        val percentage = dailyTotal() * 100 / Drinks.goal
-//        fragment_home_goal_main_view.text = percentage.toString()
-
-//        fragment_home_goal_main_view.setOnClickListener {
-////
-//        }
-
-
-//        val group = R.id.fragment_home_main_click_view
-//
-//        fragment_home_main_click_view.post {
-//            group.setAllOnClickListener(object : View.OnClickListener {
-//                override fun onClick(v: View) {
-//                    val text = (v as Button).text
-//                    Toast.makeText(this@MainActivity, text, Toast.LENGTH_SHORT).show()
-//                }
-//            })
-//        }
-
-//        fragment_home_main_click_view.setAllOnClickListener(View.OnClickListener {
-//            Toast.makeText(context,"What am I clicking?!", Toast.LENGTH_SHORT).show()
-//        })
-
-//        fragment_home_main_click_view.setOnClickListener {
-//            switchPercentageVolume()
-//            Toast.makeText(context,"Test Bigger Click View", Toast.LENGTH_SHORT).show()
-//        }
 
         fragment_home_notifications.setOnClickListener {
             Toast.makeText(context,"Notificaties", Toast.LENGTH_SHORT).show()
         }
 
         fragment_home_change_main_display.setOnClickListener {
-            //            Toast.makeText(context, "Verander Display Weergave", Toast.LENGTH_SHORT).show()
             switchPercentageVolume()
         }
 
@@ -158,7 +136,7 @@ class HomeFragment : Fragment() {
         // Get display height to calculate peekHeight for the Bottom Sheet
         val displayMetrics = DisplayMetrics()
         activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
-        // This might go wrong with screens with different pixel densities!
+        // This might go wrong with screens with different pixel densities
         val halfScreenHeight = displayMetrics.heightPixels*0.41
         bottomSheetBehavior.peekHeight = halfScreenHeight.toInt()
 
@@ -211,7 +189,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setPercentage() {
-        val percentage = dailyTotal() * 100 / Drinks.goal
+        val percentage = dailyTotal() * 100 / Drinks.totalGoal
         fragment_home_goal_main_view.text = percentage.toString()
         val unit = context?.getString(R.string.main_unit_percentage)
         fragment_home_percentage_unit.text = "$unit"
@@ -253,6 +231,13 @@ class HomeFragment : Fragment() {
         adapter = DrinksRecyclerAdapter(drinksList, context!!.applicationContext,
             bottomSheetBehavior) { item, position ->
             Log.d("adapter", "the item ${item.image} has position $position")
+            val changeDrinkIntent = Intent(context, ChangeDrinkDialogActivity::class.java)
+            // Don't use these intents, instead use ID
+//            changeDrinkIntent.putExtra("DRINK_IMAGE", item.image)
+//            changeDrinkIntent.putExtra("DRINK_VOLUME", item.volume)
+            // Use ID to read from data base in the other activity
+            changeDrinkIntent.putExtra("DRINK_ID", item.id)
+            startActivity(changeDrinkIntent)
         }
         drinks_recyclerview_small.adapter = adapter
 
