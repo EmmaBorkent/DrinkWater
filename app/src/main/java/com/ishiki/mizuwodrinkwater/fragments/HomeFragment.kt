@@ -243,9 +243,6 @@ class HomeFragment : Fragment() {
             bottomSheetBehavior) { item, position ->
             Log.d("adapter", "the item ${item.image} has position $position")
             val changeDrinkIntent = Intent(context, ChangeDrinkDialogActivity::class.java)
-            // Don't use these intents, instead use ID
-//            changeDrinkIntent.putExtra("DRINK_IMAGE", item.image)
-//            changeDrinkIntent.putExtra("DRINK_VOLUME", item.volume)
             // Use ID to read from data base in the other activity
             changeDrinkIntent.putExtra("DRINK_ID", item.id)
             startActivity(changeDrinkIntent)

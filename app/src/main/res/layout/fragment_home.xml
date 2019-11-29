@@ -73,7 +73,7 @@
 
                 <Button
                     android:id="@+id/fragment_home_goal_main_view"
-                    android:text="@string/home_total"
+                    android:text="@string/zero"
                     style="@style/plainTextButton.Big"
 
                     android:layout_width="wrap_content"

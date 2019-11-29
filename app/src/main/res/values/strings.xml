@@ -12,6 +12,8 @@
     <string name="weight_unit">kg</string>
     <string name="unit_time">8:00</string>
 
+
+    <string name="zero">0</string>
     <string name="glass_150">150</string>
     <string name="glass_250">250</string>
     <string name="glass_500">500</string>
@@ -39,7 +41,6 @@
 
     // Home Fragment
     <string name="home_title">Hi, Emma!</string>
-    <string name="home_total">0</string>
     <string name="home_basic">%1$d</string>
     <string name="home_today_date">%1$s %2$s</string>
     <string name="home_notification">Notificaties</string>
@@ -50,9 +51,16 @@
 
 
     // Drinks Fragment
-    <string name="drinks_title">Gedronken</string>
-    <string name="drinks_today">Vandaag</string>
-    <string name="drinks_yesterday">Gisteren</string>
+    <string name="drinks_title">Geschiedenis</string>
+    <string name="drinks_week">Deze week</string>
+
+    <string name="monday">Maandag</string>
+    <string name="tuesday">Dinsdag</string>
+    <string name="wednesday">Woensdag</string>
+    <string name="thursday">Donderdag</string>
+    <string name="friday">Vrijdag</string>
+    <string name="saturday">Zaterdag</string>
+    <string name="sunday">Zondag</string>
 
 
     // Goal Fragment
@@ -72,5 +80,5 @@
     // Fragment Reminders
     <string name="reminders_title">Notificaties</string>
 
-    
+
 </resources>
