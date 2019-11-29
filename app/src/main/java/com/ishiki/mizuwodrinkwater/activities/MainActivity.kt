@@ -2,6 +2,7 @@ package com.ishiki.mizuwodrinkwater.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ishiki.mizuwodrinkwater.R

@@ -21,6 +21,7 @@ import com.ishiki.mizuwodrinkwater.activities.ChangeDrinkDialogActivity
 import com.ishiki.mizuwodrinkwater.adapters.DrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -77,7 +78,11 @@ class HomeFragment : Fragment() {
         }
 
         fragment_home_notifications.setOnClickListener {
-            Toast.makeText(context,"Notificaties", Toast.LENGTH_SHORT).show()
+            val remindersFragment = RemindersFragment()
+            val fragmentTransaction: FragmentTransaction = fragmentManager!!.beginTransaction()
+            fragmentTransaction.replace(R.id.fragmentContainer, remindersFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
 
         fragment_home_change_main_display.setOnClickListener {
