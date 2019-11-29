@@ -20,10 +20,7 @@ import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.activities.ChangeDrinkDialogActivity
 import com.ishiki.mizuwodrinkwater.adapters.DrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
-import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
-import com.ishiki.mizuwodrinkwater.services.HOME_TODAY
-import com.ishiki.mizuwodrinkwater.services.UNIT_PERCENTAGE
-import com.ishiki.mizuwodrinkwater.services.UNIT_VOLUME
+import com.ishiki.mizuwodrinkwater.services.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,7 +35,7 @@ class HomeFragment : Fragment() {
     @SuppressLint("SimpleDateFormat")
     private val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
-    private var state = "percent"
+    private lateinit var state: String
     private var sharedPreferences: SharedPreferences? = null
 
     override fun onCreateView(
@@ -65,11 +62,19 @@ class HomeFragment : Fragment() {
         if (sharedPreferences != null) {
             val goal = sharedPreferences!!.getInt("goal", Drinks.totalGoal)
             fragment_home_goal_text_button.text = goal.toString()
+            state = sharedPreferences!!.getString(PREFS_STATE, UNIT_PERCENTAGE)!!
+            Log.d("STATE", "SharedPrefs state is $state")
         } else {
             fragment_home_goal_text_button.text = Drinks.totalGoal.toString()
+            state = UNIT_PERCENTAGE
+            Log.d("STATE", "No SharedPrefs, state is $state")
         }
 
-        setPercentage()
+        // Find state and set percentage or volume according to setting
+        when (state) {
+            UNIT_PERCENTAGE -> setPercentage()
+            UNIT_VOLUME -> setVolume()
+        }
 
         fragment_home_notifications.setOnClickListener {
             Toast.makeText(context,"Notificaties", Toast.LENGTH_SHORT).show()
@@ -166,6 +171,10 @@ class HomeFragment : Fragment() {
                 } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
                     home_fragment_display_activity.startAnimation(animationCounterClockwise)
                     home_fragment_edit_activity.visibility = View.VISIBLE
+                    when (state) {
+                        UNIT_PERCENTAGE -> setPercentage()
+                        UNIT_VOLUME -> setVolume()
+                    }
 
                     home_fragment_display_activity.setOnClickListener {
                         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -193,7 +202,9 @@ class HomeFragment : Fragment() {
         fragment_home_goal_main_view.text = percentage.toString()
         val unit = context?.getString(R.string.main_unit_percentage)
         fragment_home_percentage_unit.text = "$unit"
+        fragment_home_change_main_display.text = resources.getString(R.string.main_unit_ml)
         state = UNIT_PERCENTAGE
+        sharedPreferences!!.edit().putString(PREFS_STATE, state).apply()
         Log.d("STATE", "The state is $state")
     }
 
@@ -202,20 +213,20 @@ class HomeFragment : Fragment() {
         fragment_home_goal_main_view.text = volume.toString()
         val unit = context?.getString(R.string.main_unit_ml)
         fragment_home_percentage_unit.text = "$unit"
+        fragment_home_change_main_display.text = resources.getString(R.string.main_unit_percentage)
         state = UNIT_VOLUME
+        sharedPreferences!!.edit().putString(PREFS_STATE, state).apply()
         Log.d("STATE", "The state is $state")
     }
 
     private fun switchPercentageVolume() {
         if (state == UNIT_PERCENTAGE) {
             setVolume()
-            fragment_home_change_main_display.text = resources.getString(R.string.main_unit_percentage)
-            Log.d("STATE", "The state is $state")
+            Log.d("STATE", "Changed state to $state")
 
         } else if (state == UNIT_VOLUME) {
             setPercentage()
-            fragment_home_change_main_display.text = resources.getString(R.string.main_unit_ml)
-            Log.d("STATE", "The state is $state")
+            Log.d("STATE", "Changed state to $state")
         }
 
         // when state is percentage or volume change text of unit!

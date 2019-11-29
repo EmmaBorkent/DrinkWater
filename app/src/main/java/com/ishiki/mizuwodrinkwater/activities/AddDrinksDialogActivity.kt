@@ -88,6 +88,7 @@ class AddDrinksDialogActivity : AppCompatActivity() {
             drink.image = glass.image
             drink.volume = glass.volume
             dbHandler.createDrink(drink)
+            // Change this to fragment transaction?
             val homeFragmentIntent = Intent(applicationContext, MainActivity::class.java)
             homeFragmentIntent.putExtra("loadFragment", R.id.today)
             startActivity(homeFragmentIntent)

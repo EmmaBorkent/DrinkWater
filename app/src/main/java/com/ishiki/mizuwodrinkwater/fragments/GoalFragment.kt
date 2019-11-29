@@ -72,7 +72,7 @@ class GoalFragment : Fragment() {
         }
 
         // Short version
-//      DrinksToday.sharedPreferences!!.edit().putInt(DAILY_GOAL, goal).apply()
+//      sharedPreferences!!.edit().putInt(DAILY_GOAL, goal).apply()
     }
 
     private fun addWeight() {

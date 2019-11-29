@@ -31,3 +31,6 @@ const val EXTRA_POSITION = "position"
 
 // Home Fragment
 const val HOME_TODAY = "Vandaag"
+
+// Shared Preferences
+const val PREFS_STATE = "state"
