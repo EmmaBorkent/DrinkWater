@@ -21,7 +21,8 @@
             style="@style/Title"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <TextView
             android:id="@+id/fragment_home_today_date"
@@ -45,7 +46,8 @@
             android:src="@drawable/ic_bell"
             app:layout_constraintBottom_toBottomOf="@id/fragment_home_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/fragment_home_title" />
+            app:layout_constraintTop_toTopOf="@id/fragment_home_title"
+            />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
