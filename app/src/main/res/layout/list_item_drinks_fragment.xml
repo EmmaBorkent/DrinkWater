@@ -18,7 +18,7 @@
         android:layout_marginTop="16dp"
 
         android:layout_marginBottom="16dp"
-        android:contentDescription="@string/drink_list_image"
+        android:contentDescription="@string/drink_image"
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
 
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="@string/basic_amount"
+        android:text="@string/home_basic"
         app:layout_constraintBottom_toTopOf="@+id/drinks_list_item_time"
         app:layout_constraintStart_toEndOf="@+id/drinks_list_item_image"
         app:layout_constraintTop_toTopOf="@+id/drinks_list_item_image"
@@ -45,7 +45,7 @@
 
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/main_unit_ml"
+        android:text="@string/unit_ml"
         app:layout_constraintBottom_toBottomOf="@+id/drinks_list_item_volume"
         app:layout_constraintStart_toEndOf="@+id/drinks_list_item_volume"
         app:layout_constraintTop_toTopOf="@+id/drinks_list_item_volume" />
@@ -56,7 +56,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
 
-        android:contentDescription="@string/drink_list_delete_button"
+        android:contentDescription="@string/delete_button"
 
         android:src="@drawable/ic_drinks_list_item_delete_button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -70,7 +70,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
 
-        android:contentDescription="@string/drink_list_edit_button"
+        android:contentDescription="@string/edit_button"
         android:src="@drawable/ic_drinks_list_item_edit_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
@@ -82,7 +82,7 @@
         android:layout_width="wrap_content"
 
         android:layout_height="wrap_content"
-        android:text="@string/drinks_list_item_time"
+        android:text="@string/unit_time"
         app:layout_constraintBottom_toBottomOf="@+id/drinks_list_item_image"
         app:layout_constraintStart_toStartOf="@id/drinks_list_item_volume" />
 

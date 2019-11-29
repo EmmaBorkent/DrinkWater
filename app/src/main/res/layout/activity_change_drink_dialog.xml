@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/change_drink_image"
         app:srcCompat="@drawable/water01"
-        android:contentDescription="@string/drink_list_image"
+        android:contentDescription="@string/drink_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/montserrat"
-            android:text="@string/main_unit_ml"
+            android:text="@string/unit_ml"
             android:textAlignment="center"
             android:textSize="24sp"
             android:layout_margin="16dp"
@@ -85,7 +85,7 @@
         android:paddingEnd="16dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:text="@string/change_drink_time"
+        android:text="@string/unit_time"
         android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
 
 

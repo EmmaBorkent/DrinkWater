@@ -77,7 +77,7 @@
                 android:id="@+id/goal_weight_unit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/goal_weight_unit"
+                android:text="@string/weight_unit"
                 style="@style/MainTextNumbers"
 
                 android:layout_margin="16dp"
@@ -152,7 +152,7 @@
                 android:id="@+id/goal_extra_unit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/main_unit_ml"
+                android:text="@string/unit_ml"
                 style="@style/MainTextNumbers"
 
                 android:layout_margin="16dp"
@@ -219,7 +219,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
 
-                android:text="@string/main_unit_ml"
+                android:text="@string/unit_ml"
                 app:layout_constraintBottom_toBottomOf="@id/goal_calculated"
                 app:layout_constraintStart_toEndOf="@id/goal_calculated"
                 app:layout_constraintTop_toTopOf="@id/goal_calculated" />
@@ -258,7 +258,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@string/main_unit_ml"
+                android:text="@string/unit_ml"
 
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@id/goal_total"

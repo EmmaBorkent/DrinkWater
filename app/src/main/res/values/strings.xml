@@ -1,93 +1,76 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+
+    // App
     <string name="app_name">Mizuwo Drink Water</string>
-
-    <string name="main_unit_ml">ml</string>
-    <string name="main_unit_percentage">%</string>
-    <string name="goal_weight_unit">kg</string>
-
-    // Bottom Navigation Menu
-    <string name="bottom_menu_today">Home</string>
-    <string name="bottom_menu_drinks">Drinks</string>
-    <string name="bottom_menu_glasses">Glasses</string>
-    <string name="bottom_menu_goal">Goal</string>
-
-    // SharedPreferences
     <string name="shared_preferences_file">com.ishiki.mizuwodrinkwater.prefs</string>
 
-    // Home Fragment
-    <string name="main_title">Home</string>
-    <string name="home_fragment_title">Hi, Emma!</string>
-    <string name="main_text">Tap the image to change the glass</string>
-    <string name="main_text_2">Tap GOAL to change the daily goal</string>
-    <string name="main_drank">Total</string>
-    <string name="main_total">0</string>
-    <string name="main_add">+</string>
-    <string name="basic_amount">%1$d</string>
+
+    // Units
+    <string name="unit_ml">ml</string>
+    <string name="unit_percentage">%</string>
+    <string name="weight_unit">kg</string>
+    <string name="unit_time">8:00</string>
+
     <string name="glass_150">150</string>
     <string name="glass_250">250</string>
     <string name="glass_500">500</string>
-    <string name="main_goal">goal</string>
-    <string name="percentage_unit">%</string>
-    <string name="home_progress">Daily Progress Bar</string>
+
+
+    // Buttons
+    <string name="edit_button">Bewerk</string>
+    <string name="save_button">Opslaan</string>
+    <string name="cancle_button">Annuleren</string>
+    <string name="delete_button">Verwijderen</string>
+
+
+    // Images
+    <string name="drink_image">Afbeelding Glas</string>
+    <string name="arrow_left">Left Arrow</string>
+    <string name="arrow_right">Right Arrow</string>
+
+
+    // Bottom Navigation Menu
+    <string name="bottom_menu_home">Start</string>
+    <string name="bottom_menu_drinks">Gedronken</string>
+    <string name="bottom_menu_glasses">Glazen</string>
+    <string name="bottom_menu_goal">Doel</string>
+
+
+    // Home Fragment
+    <string name="home_title">Hi, Emma!</string>
+    <string name="home_total">0</string>
+    <string name="home_basic">%1$d</string>
     <string name="home_today_date">%1$s %2$s</string>
-    <string name="home_notification">Notification Icon</string>
-    <string name="home_change_display">Change Display Icon</string>
+    <string name="home_notification">Notificaties</string>
+    <string name="home_change_display">Verander weergave</string>
     <string name="home_activity">Activiteit</string>
-    <string name="home_display_activity">Display Today\'s Activity</string>
-    <string name="home_edit_activity">Edit Today\'s Activity</string>
+    <string name="home_display_activity">Geef de aciviteit van vandaag weer</string>
+    <string name="home_edit_activity">Pas de activiteit van vandaag aan</string>
 
-    // Recycler View List Item
-
-    <style name="description_edit_button">Edit this entry</style>
-
-    <style name="description_delete_button">Delete this entry</style>
 
     // Drinks Fragment
-    <string name="history_title">Drinks</string>
-    <string name="drinks_today">Today</string>
-    <string name="drinks_yesterday">Yesterday</string>
+    <string name="drinks_title">Gedronken</string>
+    <string name="drinks_today">Vandaag</string>
+    <string name="drinks_yesterday">Gisteren</string>
+
 
     // Goal Fragment
     <string name="goal_title">Doel</string>
-    <string name="goal_text">Bereken hoeveel je elke dag moet drinken</string>
-    <string name="goal_enter_weight_text">Vul hier je gewicht in en klik op de knop</string>
-    <string name="goal_calculate">Berekenen</string>
-    <string name="goal_enter_goal">Maar je kan ook zelf een doel invullen, of je doel naar wens aanpassen</string>
-    <string name="goal_random_weight">62</string>
-    <string name="main_goal_start_amount">2000</string>
-    <string name="main_button_set_goal">Zet je Doel</string>
+    <string name="goal_start_amount">2000</string>
     <string name="goal_weight">Gewicht</string>
     <string name="goal_extra">Extra</string>
     <string name="goal_your_calculated_goal_is">Berekend doel is</string>
     <string name="goal_your_goal_is">Je doel is</string>
 
+
     // Glasses Fragment
-    <string name="set_glass">Glasses</string>
-    <string name="set_glass_text">These are your customized glasses</string>
-    <string name="add_glass">Add a Glass</string>
-    <string name="drink_list_image">Drink List Image</string>
-    <string name="drink_list_delete_button">Drink List Delete Button</string>
-    <string name="drink_list_edit_button">Drink List Edit Button</string>
+    <string name="glasses_title">Glazen</string>
+    <string name="glasses_text">Dit zijn je aangepaste glazen</string>
 
-    // Create Glass Fragment
-    <string name="create_glass">CREATE GLASS</string>
-    <string name="custom_text">Choose your own glass style and volume</string>
-    <string name="custom_image">Set custom glass image</string>
-    <string name="custom_left">Left Arrow</string>
-    <string name="custom_right">Right Arrow</string>
 
-    // Edit Glass Popup Dialog
-    <string name="save_button">Save</string>
-    <string name="popup_delete_button">Cancle</string>
-    <string name="drinks_list_item_time">time</string>
-    <string name="edit_glasses">Edit Glasses</string>
+    // Fragment Reminders
+    <string name="reminders_title">Notificaties</string>
 
-    // Change Drink Dialog Activity
-    <string name="change_drink_image">Drink Image</string>
-    <string name="change_drink_volume">250 ml</string>
-    <string name="change_drink_time">8:00</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    
 </resources>

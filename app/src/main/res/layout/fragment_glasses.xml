@@ -13,7 +13,7 @@
 
         <TextView
                 android:id="@+id/glasses_title"
-                android:text="@string/set_glass"
+                android:text="@string/glasses_title"
                 android:fontFamily="@font/julius_sans_one"
                 android:textSize="42sp"
                 android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
 
         <TextView
                 android:id="@+id/glasses_text"
-                android:text="@string/set_glass_text"
+                android:text="@string/glasses_text"
                 android:fontFamily="@font/montserrat"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"

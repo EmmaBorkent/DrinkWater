@@ -200,9 +200,9 @@ class HomeFragment : Fragment() {
     private fun setPercentage() {
         val percentage = dailyTotal() * 100 / Drinks.totalGoal
         fragment_home_goal_main_view.text = percentage.toString()
-        val unit = context?.getString(R.string.main_unit_percentage)
+        val unit = context?.getString(R.string.unit_percentage)
         fragment_home_percentage_unit.text = "$unit"
-        fragment_home_change_main_display.text = resources.getString(R.string.main_unit_ml)
+        fragment_home_change_main_display.text = resources.getString(R.string.unit_ml)
         state = UNIT_PERCENTAGE
         sharedPreferences!!.edit().putString(PREFS_STATE, state).apply()
         Log.d("STATE", "The state is $state")
@@ -211,9 +211,9 @@ class HomeFragment : Fragment() {
     private fun setVolume() {
         val volume: Int = dailyTotal()
         fragment_home_goal_main_view.text = volume.toString()
-        val unit = context?.getString(R.string.main_unit_ml)
+        val unit = context?.getString(R.string.unit_ml)
         fragment_home_percentage_unit.text = "$unit"
-        fragment_home_change_main_display.text = resources.getString(R.string.main_unit_percentage)
+        fragment_home_change_main_display.text = resources.getString(R.string.unit_percentage)
         state = UNIT_VOLUME
         sharedPreferences!!.edit().putString(PREFS_STATE, state).apply()
         Log.d("STATE", "The state is $state")

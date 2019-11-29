@@ -13,7 +13,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:contentDescription="@string/custom_image"
+            android:contentDescription="@string/drink_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -31,7 +31,7 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintTop_toTopOf="@+id/popup_image"
             app:layout_constraintBottom_toBottomOf="@+id/popup_image"
-            android:contentDescription="@string/custom_left"
+            android:contentDescription="@string/arrow_left"
             />
 
 
@@ -47,7 +47,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintTop_toTopOf="@+id/popup_image"
             app:layout_constraintBottom_toBottomOf="@+id/popup_image"
-            android:contentDescription="@string/custom_right"
+            android:contentDescription="@string/arrow_right"
             />
 
     <EditText
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/montserrat"
-            android:text="@string/main_unit_ml"
+            android:text="@string/unit_ml"
             android:textAlignment="center"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/change_drink_volume_input"
@@ -84,7 +84,7 @@
     <ImageButton
             android:id="@+id/popup_delete_button"
             app:srcCompat="@drawable/ic_drinks_list_item_delete_button"
-            android:contentDescription="@string/popup_delete_button"
+            android:contentDescription="@string/cancle_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@android:color/transparent"

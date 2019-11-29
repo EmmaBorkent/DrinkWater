@@ -21,7 +21,7 @@
             android:id="@+id/popup_add_drink_edit_glasses_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/edit_glasses"
+            android:contentDescription="@string/edit_button"
             app:srcCompat="@drawable/ic_drinks_list_item_edit_button"
             android:background="@android:color/transparent"
             app:layout_constraintTop_toTopOf="parent"
