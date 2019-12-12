@@ -34,3 +34,9 @@ const val HOME_TODAY = "Vandaag"
 
 // Shared Preferences
 const val PREFS_STATE = "state"
+
+// Reminders Fragment
+const val REMINDERS_ON_OFF = "reminders_on_off"
+const val REMINDERS_RADIO = "reminders_radio_button"
+const val FROM_TIME = "from_time"
+const val TO_TIME = "to_time"
