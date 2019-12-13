@@ -3,6 +3,8 @@ package com.ishiki.mizuwodrinkwater.fragments
 import android.app.TimePickerDialog
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +12,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.services.FROM_TIME
-import com.ishiki.mizuwodrinkwater.services.REMINDERS_ON_OFF
-import com.ishiki.mizuwodrinkwater.services.REMINDERS_RADIO
-import com.ishiki.mizuwodrinkwater.services.TO_TIME
+import com.ishiki.mizuwodrinkwater.services.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_reminders.*
 import java.time.LocalTime
@@ -96,6 +95,24 @@ class RemindersFragment : Fragment() {
                 reminders_time_to_select.text.toString())
         }
 
+
+//        var howOften: Int = reminders_input.text.toString().toInt()
+//
+//        reminders_how_often_text.addTextChangedListener(object: TextWatcher {
+//            override fun afterTextChanged(s: Editable?) {
+//                howOften = reminders_input.text.toString().toInt()
+//                println("How often = $howOften")
+//            }
+//
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//            }
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//            }
+//
+//        })
     }
 
     private fun setRemindersOnOff() {
