@@ -16,21 +16,14 @@ import com.ishiki.mizuwodrinkwater.services.REMINDERS_RADIO
 import com.ishiki.mizuwodrinkwater.services.TO_TIME
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_reminders.*
-import java.text.SimpleDateFormat
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
-import java.util.*
 
 @Suppress("UNUSED_ANONYMOUS_PARAMETER")
 class RemindersFragment : Fragment() {
 
     private var sharedPreferences: SharedPreferences? = null
-    private var timeFrom = "7:00 AM"
-    private var timeTo   = "9:00 PM"
-    private val timeFromParsed: LocalTime = LocalTime.parse(timeFrom, DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT))
-    private val timeToParsed: LocalTime = LocalTime.parse(timeTo, DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT))
-    private val timeFormat = SimpleDateFormat("HH:mm", Locale.GERMAN)
+    private val timeFormat = DateTimeFormatter.ofPattern("HH:mm")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,9 +38,11 @@ class RemindersFragment : Fragment() {
 
         activity?.glassesAddButton?.hide()
 
-        sharedPreferences = activity?.getSharedPreferences(
-            getString(R.string.shared_preferences_file), 0
-        )
+        val timeFrom: String
+        val timeTo: String
+
+        sharedPreferences = activity?.getSharedPreferences(getString(R.string.shared_preferences_file),
+            0)
 
         if (sharedPreferences != null) {
             val isChecked = sharedPreferences!!.getBoolean(REMINDERS_ON_OFF, false)
@@ -57,12 +52,11 @@ class RemindersFragment : Fragment() {
             val radioButton = sharedPreferences!!.getInt(REMINDERS_RADIO, 0)
             reminders_radio_group.check(radioButton)
 
-            val fromTime = sharedPreferences!!.getString(FROM_TIME,
-                "00:00")
-            val toTime = sharedPreferences!!.getString(TO_TIME,
-                getString(R.string.reminders_time_to_time))
-            reminders_time_from_select.text = fromTime
-            reminders_time_to_select.text = toTime
+            timeFrom = sharedPreferences!!.getString(FROM_TIME, "07:00")!!
+            timeTo = sharedPreferences!!.getString(TO_TIME, "21:00")!!
+            reminders_time_from_select.text = timeFrom
+            reminders_time_to_select.text = timeTo
+            println("timeFrom: $timeFrom")
         }
 
         reminders_back_arrow_left.setOnClickListener {
@@ -82,7 +76,7 @@ class RemindersFragment : Fragment() {
             // checkedId is the RadioButton selected
             when (checkedId) {
                 R.id.reminders_radio_behind -> {
-
+                    TODO("Create Function")
                 }
                 R.id.reminders_radio_always -> {
 
@@ -93,11 +87,13 @@ class RemindersFragment : Fragment() {
         }
 
         reminders_time_from_select.setOnClickListener {
-            createTimePicker(activity!!, FROM_TIME, reminders_time_from_select, timeFromParsed)
+            createTimePicker(activity!!, FROM_TIME, reminders_time_from_select,
+                reminders_time_from_select.text.toString())
         }
 
         reminders_time_to_select.setOnClickListener {
-            createTimePicker(activity!!, TO_TIME, reminders_time_to_select, timeToParsed)
+            createTimePicker(activity!!, TO_TIME, reminders_time_to_select,
+                reminders_time_to_select.text.toString())
         }
 
     }
@@ -118,17 +114,19 @@ class RemindersFragment : Fragment() {
         sharedPreferences!!.edit().putBoolean(REMINDERS_ON_OFF, reminders_on_off.isChecked).apply()
     }
 
-    private fun createTimePicker(activity: FragmentActivity, const: String, textView: TextView, parsedTime: LocalTime) {
+    private fun createTimePicker(activity: FragmentActivity, const: String, textView: TextView,
+                                 time: String) {
+
+        // Parse time String to LocalTime
+        val parsedTime: LocalTime = LocalTime.parse(time)
+
         // Create time picker
         val timePicker = TimePickerDialog(activity,
             TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-                // If we change the time in time picker we'll get the callback in OnTimeSetListener
-                // Do something with the time chosen by the user
-                val selectedTime = Calendar.getInstance()
-                selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
-                selectedTime.set(Calendar.MINUTE, minute)
 
-                val formatted = timeFormat.format(selectedTime.time)
+                // Do something with the time chosen by the user
+                val selectedTime: LocalTime = LocalTime.of(hourOfDay, minute)
+                val formatted = timeFormat.format(selectedTime)
                 sharedPreferences?.edit()?.putString(const, formatted)?.apply()
                 textView.text = formatted
 
