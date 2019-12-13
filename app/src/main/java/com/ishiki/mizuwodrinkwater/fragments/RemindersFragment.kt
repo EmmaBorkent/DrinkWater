@@ -1,10 +1,12 @@
 package com.ishiki.mizuwodrinkwater.fragments
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.app.TimePickerDialog
+import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_reminders.*
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 @Suppress("UNUSED_ANONYMOUS_PARAMETER")
 class RemindersFragment : Fragment() {
@@ -121,14 +124,50 @@ class RemindersFragment : Fragment() {
                 reminders_when_container.visibility = View.VISIBLE
                 reminders_time_container.visibility = View.VISIBLE
                 reminders_how_often_container.visibility = View.VISIBLE
+                setAlarm()
             }
             false -> {
                 reminders_when_container.visibility = View.INVISIBLE
                 reminders_time_container.visibility = View.INVISIBLE
                 reminders_how_often_container.visibility = View.INVISIBLE
+                cancelAlarm()
             }
         }
         sharedPreferences!!.edit().putBoolean(REMINDERS_ON_OFF, reminders_on_off.isChecked).apply()
+    }
+
+    private fun setAlarm() {
+        // TESTING REPEATING LOCAL NOTIFICATIONS ------------------------------------------
+
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, 12)
+        calendar.set(Calendar.MINUTE, 50)
+
+        val alarmIntent = Intent(activity!!.applicationContext, NotificationReceiver::class.java)
+        val pendingAlarmIntent = PendingIntent
+            .getBroadcast(activity!!.applicationContext, 1, alarmIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val alarmManager = activity?.getSystemService(Context.ALARM_SERVICE)
+                as AlarmManager
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
+            AlarmManager.INTERVAL_HOUR, pendingAlarmIntent)
+
+        println("Alarm is set at ${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}")
+
+        // --------------------------------------------------------------------------------
+    }
+
+    private fun cancelAlarm() {
+        val alarmManager = activity?.getSystemService(Context.ALARM_SERVICE)
+                as AlarmManager
+        val alarmIntent = Intent(activity!!.applicationContext, NotificationReceiver::class.java)
+        val pendingAlarmIntent = PendingIntent
+            .getBroadcast(activity!!.applicationContext, 1, alarmIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT)
+        alarmManager.cancel(pendingAlarmIntent)
+        println("Alarm is canceled")
     }
 
     private fun createTimePicker(activity: FragmentActivity, const: String, textView: TextView,

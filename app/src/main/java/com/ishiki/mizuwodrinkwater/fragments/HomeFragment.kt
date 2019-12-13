@@ -1,14 +1,11 @@
 package com.ishiki.mizuwodrinkwater.fragments
 
 import android.annotation.SuppressLint
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
+import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
@@ -16,7 +13,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -24,11 +20,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.ishiki.mizuwodrinkwater.R
 import com.ishiki.mizuwodrinkwater.activities.ChangeDrinkDialogActivity
-import com.ishiki.mizuwodrinkwater.activities.MainActivity
 import com.ishiki.mizuwodrinkwater.adapters.DrinksRecyclerAdapter
 import com.ishiki.mizuwodrinkwater.model.Drinks
 import com.ishiki.mizuwodrinkwater.services.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -45,12 +39,6 @@ class HomeFragment : Fragment() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private lateinit var state: String
     private var sharedPreferences: SharedPreferences? = null
-
-    lateinit var notificationManager: NotificationManager
-    lateinit var notificationChannel: NotificationChannel
-    lateinit var builder: Notification.Builder
-    val channelId = "com.ishiki.mizuwodrinkwater.fragments"
-    val description = "Water Reminder Notification"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -98,38 +86,9 @@ class HomeFragment : Fragment() {
             fragmentTransaction.commit()
         }
 
-        // TESTING NOTIFICATIONS ------------------------------------------------------------------
-
-        notificationManager = activity?.getSystemService(Context.NOTIFICATION_SERVICE)
-                as NotificationManager
-
-
         fragment_home_change_main_display.setOnClickListener {
-
-            val intent = Intent(activity!!.applicationContext, MainActivity()::class.java)
-            val pendingIntent = PendingIntent.getActivity(context, 0, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT)
-
-            notificationChannel = NotificationChannel(channelId, description,
-                NotificationManager.IMPORTANCE_DEFAULT)
-            notificationChannel.enableLights(true)
-            notificationChannel.lightColor = Color.WHITE
-
-            notificationManager.createNotificationChannel(notificationChannel)
-            builder = Notification.Builder(context, channelId)
-                .setContentTitle("Water Drink Reminder")
-                .setContentText("Drink Wat Water!")
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentIntent(pendingIntent)
-
-            notificationManager.notify(0, builder.build())
-
-            // Turn on this function again, the original functionality
-            // temporarily using this button to check notifications are working
-//            switchPercentageVolume()
+            switchPercentageVolume()
         }
-
-        // TESTIN UNTIL HERE ----------------------------------------------------------------------
 
         fragment_home_goal_text_button.setOnClickListener {
             // Don't use intent, it is slow.
