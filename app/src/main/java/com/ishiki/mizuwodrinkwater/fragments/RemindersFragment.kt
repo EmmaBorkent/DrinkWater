@@ -135,10 +135,12 @@ class RemindersFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private fun setAlarm() {
 
+        val timeFrom = sharedPreferences!!.getString(FROM_TIME, "07:00")!!
+        val parsedTime: LocalTime = LocalTime.parse(timeFrom)
+
         val calendar = Calendar.getInstance()
-        //TODO: put here the starting time of day
-        calendar.set(Calendar.HOUR_OF_DAY, 8)
-        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.HOUR_OF_DAY, parsedTime.hour)
+        calendar.set(Calendar.MINUTE, parsedTime.minute)
 
         val alarmIntent = Intent(activity!!.applicationContext, NotificationReceiver::class.java)
         val pendingAlarmIntent = PendingIntent
@@ -171,8 +173,8 @@ class RemindersFragment : Fragment(), AdapterView.OnItemSelectedListener {
         println("Alarm interval is $interval")
 
         Log.i("ALARM", "Alarm is turned on")
-//        println("Alarm is set at ${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)} " +
-//                "with interval $interval")
+        println("Alarm is set at ${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)} " +
+                "with interval $interval")
     }
 
     private fun cancelAlarm() {
@@ -200,6 +202,7 @@ class RemindersFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 val formatted = timeFormat.format(selectedTime)
                 sharedPreferences?.edit()?.putString(const, formatted)?.apply()
                 textView.text = formatted
+                setAlarm()
 
             }, parsedTime.hour, parsedTime.minute, true)
 
