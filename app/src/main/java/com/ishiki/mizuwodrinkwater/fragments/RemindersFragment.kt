@@ -7,9 +7,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -22,7 +25,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Suppress("UNUSED_ANONYMOUS_PARAMETER")
-class RemindersFragment : Fragment() {
+class RemindersFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private var sharedPreferences: SharedPreferences? = null
     private val timeFormat = DateTimeFormatter.ofPattern("HH:mm")
@@ -43,6 +46,16 @@ class RemindersFragment : Fragment() {
         val timeFrom: String
         val timeTo: String
 
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(context!!, R.array.interval_array,
+            android.R.layout.simple_spinner_item).also { arrayAdapter ->
+            // Specify the layout to use when the list of choices appears
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            reminders_spinner.adapter = arrayAdapter
+        }
+        reminders_spinner.onItemSelectedListener = this
+
         sharedPreferences = activity?.getSharedPreferences(getString(R.string.shared_preferences_file),
             0)
 
@@ -58,7 +71,10 @@ class RemindersFragment : Fragment() {
             timeTo = sharedPreferences!!.getString(TO_TIME, "21:00")!!
             reminders_time_from_select.text = timeFrom
             reminders_time_to_select.text = timeTo
-            println("timeFrom: $timeFrom")
+//            println("timeFrom: $timeFrom")
+
+            val position = sharedPreferences!!.getInt(REMINDERS_SPINNER, 0)
+            reminders_spinner.setSelection(position)
         }
 
         reminders_back_arrow_left.setOnClickListener {
@@ -78,7 +94,7 @@ class RemindersFragment : Fragment() {
             // checkedId is the RadioButton selected
             when (checkedId) {
                 R.id.reminders_radio_behind -> {
-                    TODO("Create Function")
+
                 }
                 R.id.reminders_radio_always -> {
 
@@ -97,25 +113,6 @@ class RemindersFragment : Fragment() {
             createTimePicker(activity!!, TO_TIME, reminders_time_to_select,
                 reminders_time_to_select.text.toString())
         }
-
-
-//        var howOften: Int = reminders_input.text.toString().toInt()
-//
-//        reminders_how_often_text.addTextChangedListener(object: TextWatcher {
-//            override fun afterTextChanged(s: Editable?) {
-//                howOften = reminders_input.text.toString().toInt()
-//                println("How often = $howOften")
-//            }
-//
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//            }
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//            }
-//
-//        })
     }
 
     private fun setRemindersOnOff() {
@@ -137,11 +134,11 @@ class RemindersFragment : Fragment() {
     }
 
     private fun setAlarm() {
-        // TESTING REPEATING LOCAL NOTIFICATIONS ------------------------------------------
 
         val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, 12)
-        calendar.set(Calendar.MINUTE, 50)
+        //TODO: put here the starting time of day
+        calendar.set(Calendar.HOUR_OF_DAY, 8)
+        calendar.set(Calendar.MINUTE, 0)
 
         val alarmIntent = Intent(activity!!.applicationContext, NotificationReceiver::class.java)
         val pendingAlarmIntent = PendingIntent
@@ -150,13 +147,32 @@ class RemindersFragment : Fragment() {
 
         val alarmManager = activity?.getSystemService(Context.ALARM_SERVICE)
                 as AlarmManager
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
-            AlarmManager.INTERVAL_HOUR, pendingAlarmIntent)
 
-        println("Alarm is set at ${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}")
+        var position = 0
+        if (sharedPreferences != null) {
+            position = sharedPreferences!!.getInt(REMINDERS_SPINNER, 0)
+        }
 
-        // --------------------------------------------------------------------------------
+        val interval = when (position) {
+            0 -> { AlarmManager.INTERVAL_HALF_HOUR / 2 }
+            1 -> { AlarmManager.INTERVAL_HALF_HOUR }
+            2 -> { AlarmManager.INTERVAL_HOUR }
+            3 -> { AlarmManager.INTERVAL_HOUR * 2 }
+            4 -> { AlarmManager.INTERVAL_HOUR * 4 }
+            else -> AlarmManager.INTERVAL_HALF_HOUR / 2
+        }
+
+        // Use RTC (Real Time Zone) for alarms that are dependent on current locale
+        // The wake up version is useful if it has a limited window to perform operations
+        // If you simply need a alarm to fire at a particular interval, use elapsed real time ERT,
+        // in general that is the better choice.
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, interval,
+            pendingAlarmIntent)
+        println("Alarm interval is $interval")
+
+        Log.i("ALARM", "Alarm is turned on")
+//        println("Alarm is set at ${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)} " +
+//                "with interval $interval")
     }
 
     private fun cancelAlarm() {
@@ -167,12 +183,11 @@ class RemindersFragment : Fragment() {
             .getBroadcast(activity!!.applicationContext, 1, alarmIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT)
         alarmManager.cancel(pendingAlarmIntent)
-        println("Alarm is canceled")
+        Log.i("ALARM", "Alarm is turned off")
     }
 
     private fun createTimePicker(activity: FragmentActivity, const: String, textView: TextView,
                                  time: String) {
-
         // Parse time String to LocalTime
         val parsedTime: LocalTime = LocalTime.parse(time)
 
@@ -189,5 +204,40 @@ class RemindersFragment : Fragment() {
             }, parsedTime.hour, parsedTime.minute, true)
 
         timePicker.show()
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        // An item was selected. You can retrieve the selected item using
+        // parent.getItemAtPosition(pos)
+
+        sharedPreferences!!.edit().putInt(REMINDERS_SPINNER, position).apply()
+        setAlarm()
+
+//        when (position) {
+//            0 -> {
+//                // 15 min
+//                println("Position is $position")
+//            }
+//            1 -> {
+//                // 30 min
+//                println("Position is $position")
+//            }
+//            2 -> {
+//                // 1 uur
+//                println("Position is $position")
+//            }
+//            3 -> {
+//                // 2 uur
+//                println("Position is $position")
+//            }
+//            4 -> {
+//                // 4 uur
+//                println("Position is $position")
+//            }
+//        }
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        // Another interface callback
     }
 }

@@ -249,7 +249,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     style="@style/whiteBox"
-                    android:visibility="invisible"
+                    android:visibility="visible"
 
                     app:layout_constraintTop_toBottomOf="@+id/reminders_time_container"
                     app:layout_constraintStart_toStartOf="parent"
@@ -278,15 +278,14 @@
                         android:layout_margin="16dp"
 
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/reminders_input"
-                        app:layout_constraintBottom_toBottomOf="@id/reminders_input"
+                        app:layout_constraintTop_toTopOf="@+id/reminders_spinner"
+                        app:layout_constraintBottom_toBottomOf="@id/reminders_spinner"
                         />
 
-
-                    <EditText
-                        android:id="@+id/reminders_input"
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/reminders_spinner"
                         android:text="@string/minutes"
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat"
                         android:importantForAutofill="no"
@@ -309,9 +308,9 @@
                         style="@style/MainText"
                         android:layout_margin="16dp"
 
-                        app:layout_constraintStart_toEndOf="@id/reminders_input"
-                        app:layout_constraintBottom_toBottomOf="@id/reminders_input"
-                        app:layout_constraintTop_toTopOf="@id/reminders_input"
+                        app:layout_constraintStart_toEndOf="@id/reminders_spinner"
+                        app:layout_constraintBottom_toBottomOf="@id/reminders_spinner"
+                        app:layout_constraintTop_toTopOf="@id/reminders_spinner"
                         />
 
 
