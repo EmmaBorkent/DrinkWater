@@ -2,14 +2,10 @@ package com.ishiki.mizuwodrinkwater.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ishiki.mizuwodrinkwater.R
-import com.ishiki.mizuwodrinkwater.fragments.DrinksFragment
-import com.ishiki.mizuwodrinkwater.fragments.GlassesFragment
-import com.ishiki.mizuwodrinkwater.fragments.GoalFragment
-import com.ishiki.mizuwodrinkwater.fragments.HomeFragment
+import com.ishiki.mizuwodrinkwater.fragments.*
 import com.ishiki.mizuwodrinkwater.services.DrinksDatabaseHandler
 import com.ishiki.mizuwodrinkwater.services.EXTRA_CHECK
 import com.ishiki.mizuwodrinkwater.services.EXTRA_GLASS
